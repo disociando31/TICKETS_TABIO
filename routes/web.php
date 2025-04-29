@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ Auth::routes([
     'reset' => false,
     'verify' => false,]);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 
+// Rutas para gestión de usuarios (protegidas por middleware en el controlador)
+Route::resource('usuarios', UserController::class);
 
+// Rutas para perfil de usuario
+Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
+Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
