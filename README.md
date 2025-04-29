@@ -1,66 +1,222 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestión de Roles y Usuarios
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este módulo implementa la gestión de usuarios, roles y permisos para el sistema de tickets de soporte técnico. Utiliza Laravel UI para la autenticación y Spatie Permission para el manejo de roles y permisos.
 
-## About Laravel
+## Características Implementadas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Login y registro de usuarios
+- Gestión de roles (Administrador, Trabajador, Usuario)
+- Permisos basados en roles
+- CRUD completo de usuarios
+- Dashboard básico que muestra opciones según el rol del usuario
+- Generación automática de nombres de usuario
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalación y Configuración
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Instalar dependencias
 
-## Learning Laravel
+```bash
+composer require laravel/ui
+composer require spatie/laravel-permission
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Publicar y ejecutar migraciones de Spatie
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan migrate
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Ejecutar seeders para crear roles y permisos
 
-## Laravel Sponsors
+```bash
+php artisan db:seed --class=RolesYPermisosSeeder
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 4. Configurar el idioma español (opcional)
 
-### Premium Partners
+Para tener todos los mensajes en español:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+composer require laraveles/spanish
+php artisan vendor:publish --tag=lang
+```
 
-## Contributing
+Modificar `config/app.php`:
+```php
+'locale' => 'es',
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Estructura de Roles y Permisos
 
-## Code of Conduct
+### Roles Predefinidos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Usuario**: Rol básico para usuarios regulares
+- **Trabajador**: Personal de soporte técnico
+- **Administrador**: Acceso completo al sistema
 
-## Security Vulnerabilities
+### Permisos
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **gestionar_perfil**: Ver y editar su propio perfil
+- **gestionar_tickets_propios**: Crear y ver sus propios tickets
+- **gestionar_todos_tickets**: Ver y modificar cualquier ticket
+- **asignar_tickets**: Asignar tickets a trabajadores
+- **gestionar_equipos**: CRUD de equipos
+- **gestionar_mantenimientos**: CRUD de mantenimientos
+- **gestionar_reportes**: Ver, generar y exportar reportes
+- **gestionar_usuarios**: CRUD de usuarios
+- **gestionar_roles**: CRUD de roles
 
-## License
+## Creación de Usuarios con Tinker
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Para crear usuarios rápidamente con roles específicos usando Tinker:
+
+```bash
+php artisan tinker
+```
+
+### Crear un usuario administrador
+
+```php
+$admin = new App\Models\User();
+$admin->nombre = 'Administrador';
+$admin->username = 'admin';
+$admin->password = Hash::make('password');
+$admin->telefono = '123456789';
+$admin->idDependencia = 1; // Asegúrate de que esta dependencia exista
+$admin->save();
+$admin->assignRole('Administrador');
+```
+
+### Crear un trabajador
+
+```php
+$trabajador = new App\Models\User();
+$trabajador->nombre = 'Técnico Soporte';
+$trabajador->username = 'soporte';
+$trabajador->password = Hash::make('password');
+$trabajador->telefono = '987654321';
+$trabajador->idDependencia = 1;
+$trabajador->save();
+$trabajador->assignRole('Trabajador');
+```
+
+### Crear un usuario regular
+
+```php
+$usuario = new App\Models\User();
+$usuario->nombre = 'Usuario Regular';
+$usuario->username = 'usuario';
+$usuario->password = Hash::make('password');
+$usuario->telefono = '555444333';
+$usuario->idDependencia = 2; // Otra dependencia
+$usuario->save();
+$usuario->assignRole('Usuario');
+```
+
+## Uso de las Vistas Básicas para Pruebas
+
+### Dashboard
+
+- URL: `/dashboard` o `/`
+- Muestra opciones según el rol del usuario
+
+### Gestión de Usuarios (Solo Admin)
+
+- Listado: `/usuarios`
+- Crear: `/usuarios/create`
+- Ver detalles: `/usuarios/{id}`
+- Editar: `/usuarios/{id}/edit`
+
+### Perfil de Usuario
+
+- Ver/Editar perfil: `/perfil`
+
+## Verificación de Roles en el Código
+
+### En controladores
+
+```php
+// Verificar roles
+if ($user->hasRole('Administrador')) {
+    // Lógica para administradores
+}
+
+// Verificar permisos
+if ($user->hasPermissionTo('gestionar_usuarios')) {
+    // Lógica para quien puede gestionar usuarios
+}
+```
+
+### En vistas (Blade)
+
+```blade
+@role('Administrador')
+    <!-- Contenido solo para administradores -->
+@endrole
+
+@can('gestionar_tickets')
+    <!-- Contenido para usuarios con ese permiso -->
+@endcan
+```
+
+### En rutas
+
+```php
+Route::middleware('role:Administrador')->group(function () {
+    // Rutas solo para administradores
+});
+
+Route::middleware('permission:gestionar_usuarios')->group(function () {
+    // Rutas para quienes pueden gestionar usuarios
+});
+```
+
+## Personalización Adicional
+
+### Modificar los permisos de un rol
+
+```php
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+$rol = Role::findByName('Trabajador');
+$rol->givePermissionTo('nuevo_permiso');
+$rol->revokePermissionTo('permiso_a_quitar');
+```
+
+### Crear un nuevo rol
+
+```php
+$rol = Role::create(['name' => 'Supervisor']);
+$rol->givePermissionTo([
+    'gestionar_tickets_propios',
+    'gestionar_todos_tickets',
+    'gestionar_reportes'
+]);
+```
+
+## Troubleshooting
+
+### Borrar caché de permisos
+
+Si los cambios en permisos no se reflejan inmediatamente:
+
+```bash
+php artisan cache:forget spatie.permission.cache
+```
+
+### Regenerar toda la caché
+
+```bash
+php artisan optimize:clear
+```
+
+### Verificar roles asignados a un usuario
+
+```bash
+php artisan tinker
+$user = App\Models\User::find(1);
+$user->getRoleNames(); // Ver roles
+$user->getAllPermissions(); // Ver permisos
+```
