@@ -1,0 +1,195 @@
+/***
+ * Gov.co (https://www.gov.co) - Gobierno de Colombia
+ * - Componente: barra accesibilidad
+ * - Version: 4.0.0
+ */
+
+/* --- ELIMINACIÓN DE LA FUENTE DE ICONOS --- */
+@font-face {
+    font-family: "govco-font";
+     src: url("../assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+  /*  font-weight: normal;
+    font-style: normal; */
+}
+
+/* --- MANTIENE LAS OTRAS DEFINICIONES DE FUENTE --- */
+@font-face {
+    font-family: 'WorkSans-Medium';
+    src: url('/assets/fonts/Work_Sans/static/WorkSans-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'WorkSans-Regular';
+    src: url('../assets/fonts/Work_Sans/static/WorkSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'WorkSans-SemiBold';
+    src: url('../assets/fonts/Work_Sans/static/WorkSans-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+/* --- ESTILOS GENERALES --- */
+.content-example-barra {
+  margin-left:auto ;
+  margin-right: auto;
+  }
+
+.barra-accesibilidad-letra{
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.barra-accesibilidad-letra .titulo-barra-accesibilidad{
+color: #000;
+font-family: Montserrat-SemiBold;
+font-size: 20px;
+margin: 0px;
+}
+
+.barra-accesibilidad-letra .descripcion-barra-accesibilidad{
+  color: #4B4B4B;
+  font-family: WorkSans-Regular;
+  font-size: 16px;
+  margin: 0px;
+}
+
+/* --- ESTILOS DE LA BARRA DE ACCESIBILIDAD --- */
+.barra-accesibilidad-govco {
+    height: 143px;
+    width: 48px;
+    position: fixed;
+    right: 0;
+    top: 35%;
+    background-color: #004884 !important;
+    border-radius: 10px 0px 0px 10px;
+    opacity: 1;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 12px;
+    padding-bottom: 20px;
+    align-items: center;
+    display: flex; /* Para centrar los elementos internos */
+    flex-direction: column; /* Apila los botones verticalmente */
+    justify-content: space-evenly; /* Espacio uniforme entre los botones */
+}
+
+.barra-accesibilidad-govco button
+{
+  line-height: inherit;
+  display: flex; /* Para centrar imagen dentro del botón */
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  padding: 5px; /* Espacio alrededor de la imagen */
+  flex-direction: column; /* Para apilar imagen y texto si es necesario en el futuro */
+}
+
+/* --- ESTILOS DE LOS BOTONES --- */
+.barra-accesibilidad-govco .icon-contraste,
+.barra-accesibilidad-govco .icon-reducir,
+.barra-accesibilidad-govco .icon-aumentar {
+    background: #004884;
+    width: 48px;
+    height: 40px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    padding: 0; /* Elimina el padding para que no afecte el tamaño de la imagen */
+}
+
+/* --- ESTILOS DE LAS IMÁGENES DENTRO DE LOS BOTONES --- */
+.barra-accesibilidad-govco button img {
+    height: 24px; /* Ajusta el tamaño vertical de la imagen */
+    width: 24px; /* Ajusta el tamaño horizontal de la imagen */
+}
+
+/* --- OCULTA LOS TÍTULOS INICIALMENTE --- */
+.barra-accesibilidad-govco #titlecontraste,
+.barra-accesibilidad-govco #titledisminuir,
+.barra-accesibilidad-govco #titleaumentar {
+    display: none;
+}
+
+/* --- MUESTRA LOS TÍTULOS EN HOVER (COMO ESTABA ANTES) --- */
+.barra-accesibilidad-govco button:hover #titlecontraste,
+.barra-accesibilidad-govco button:hover #titledisminuir,
+.barra-accesibilidad-govco button:hover #titleaumentar {
+    display: block;
+    text-align: left;
+    position: absolute;
+    background: #3366CC;
+    color: #fff;
+    line-height: normal !important;
+    font-family: WorkSans-Medium !important;
+    font-size: 14px;
+    margin-top: -8px;
+    opacity: 1;
+    width: 172px;
+    height: 40px;
+    border-radius: 10px 0px 0px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 12px;
+    visibility: visible;
+    margin-left: -135px;
+}
+
+/* --- ELIMINA LOS ESTILOS QUE DEPENDÍAN DE LA FUENTE ::after --- */
+.icon-contraste::after,
+.icon-reducir::after,
+.icon-aumentar::after {
+    content: none !important;
+}
+
+/* --- ESTILO PARA EL BOTÓN ACTIVO --- */
+.active-barra-accesibilidad-govco {
+    background-color: #3366CC !important;
+}
+
+/* --- ESTILOS PARA MODO OSCURO Y CLARO (SIN CAMBIOS) --- */
+.modo_oscuro-govco {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+}
+
+.modo_oscuro-govco .titulo-barra-accesibilidad{
+  font-family: Montserrat-SemiBold;
+  font-size: 20px;
+  margin: 0px;
+}
+
+.modo_oscuro-govco .descripcion-barra-accesibilidad{
+    font-family: WorkSans-Regular;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.modo_claro-govco {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+}
+
+.modo_claro-govco  .titulo-barra-accesibilidad{
+    color: #000;
+    font-family: Montserrat-SemiBold;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.modo_claro-govco  .descripcion-barra-accesibilidad{
+    color: #4B4B4B;
+    font-family: WorkSans-Regular;
+    font-size: 16px;
+    margin: 0px;
+}
