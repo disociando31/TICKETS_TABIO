@@ -22,15 +22,28 @@ Auth::routes([
     'reset' => false,
     'verify' => false,]);
 
-Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+// Ruta de dashboard
+Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('home');
 
-// Rutas para usuarios
-Route::resource('usuarios', UserController::class);
+// Rutas para usuarios (protegidas por permiso)
+Route::middleware(['auth', 'permission.active:gestionar_usuarios'])
+    ->group(function () {
+        Route::resource('usuarios', UserController::class);
+    });
 
-// Rutas para perfil de usuario
-Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
-Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
+// Rutas para roles (protegidas por permiso)
+Route::middleware(['auth', 'permission.active:gestionar_roles'])
+    ->group(function () {
+        Route::resource('roles', RoleController::class)->except(['destroy']);
+        Route::patch('/roles/{id}/toggle-estado', [RoleController::class, 'toggleEstado'])
+             ->name('roles.toggle-estado');
+    });
 
-// Rutas para roles
-Route::resource('roles', RoleController::class)->except(['destroy']);
-Route::patch('/roles/{id}/toggle-estado', [RoleController::class, 'toggleEstado'])->name('roles.toggle-estado');
+// Rutas para perfil (solo requieren autenticación)
+Route::middleware(['auth',  'permission.active:gestionar_perfil'])
+    ->group(function () {
+        Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
+        Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
+    });
