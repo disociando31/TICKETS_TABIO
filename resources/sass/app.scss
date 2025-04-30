@@ -6,3 +6,104 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+@import 'components/accessibility';
+@import 'components/gov';
+
+/* Login Card */
+.card {
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    background: #2a2b38; /* Fondo oscuro */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Login Title */
+.card-header {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffeba7; /* Color amarillo */
+    background: none;
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+/* Input Fields */
+.field {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #ffeba7; /* Fondo oscuro para los inputs */
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+}
+
+.input-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+    fill: #ffeba7; /* Color amarillo para los íconos */
+}
+
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #ffffff; /* Texto gris claro */
+    font-size: 1rem;
+}
+
+/* Placeholder Focus */
+.field input:focus::placeholder {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Cambiar el color de las etiquetas de los campos */
+label {
+    color: #ffeba7; /* Cambia el color del texto a amarillo */
+    font-weight: bold; /* Opcional: hace el texto más destacado */
+}
+
+/* Login Button */
+.btn-primary {
+    margin: 1rem auto;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    background-color: #ffeba7; /* Fondo amarillo */
+    color: #2a2b38; /* Texto oscuro */
+    box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #17182b; /* Fondo oscuro al pasar el mouse */
+    color: #ffeba7; /* Texto amarillo */
+    box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}
+
+/* Forgot Password Link */
+.btn-link {
+    color: #f5f5f5;
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: color 0.3s ease-out;
+}
+
+.btn-link:hover {
+    color: #ffeba7; /* Color amarillo al pasar el mouse */
+}
+
+
+

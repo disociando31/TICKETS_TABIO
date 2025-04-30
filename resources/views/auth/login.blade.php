@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
+
 @section('content')
+@include('partials.accessibility')
+@include('partials.gov')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -42,9 +45,11 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <div>
                             </div>
                         </div>
                     </form>
@@ -52,5 +57,8 @@
             </div>
         </div>
     </div>
+</div>
+
+
 </div>
 @endsection
