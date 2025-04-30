@@ -7,8 +7,6 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-@import 'components/accessibility';
-@import 'components/gov';
 
 /* Login Card */
 .card {
@@ -104,6 +102,497 @@ label {
 .btn-link:hover {
     color: #ffeba7; /* Color amarillo al pasar el mouse */
 }
+
+
+/* Estilos para la barra superior de Gov.co */
+/** 
+ * Gov.co (https://www.gov.co) - Gobierno de Colombia
+ * - Componente: barra accesibilidad
+ * - Version: 4.0.0
+ */
+
+/* Fuente iconografica */
+@font-face {
+    font-family: "govco-font";
+    src: url("../assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* WorkSans-SemiBold */
+@font-face {
+    font-family: 'WorkSans-Medium';
+    src: url('../assets/fonts/Work_Sans/static/WorkSans-Medium.ttf');
+}
+
+/* WorkSans-Regular */
+@font-face {
+    font-family: 'WorkSans-Regular';
+    src: url('../assets/fonts/Work_Sans/static/WorkSans-Regular.ttf');
+}
+
+/* WorkSans-SemiBold */
+@font-face {
+    font-family: 'WorkSans-SemiBold';
+    src: url('../assets/fonts/Work_Sans/static/WorkSans-SemiBold.ttf');
+}
+
+/* Montserrat-SemiBold */
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: url('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+html {
+    font-size: 100%; /* 100% = 16px */
+}
+
+.barra-superior-govco {
+    background-color: #3366cc;
+    width: 100%;
+    height: 3rem;
+    padding-left: 4.375rem;
+}
+
+.barra-superior-govco a {
+    content: url("https://cdn.www.gov.co/assets/images/logo.svg");
+    height: 1.875rem;
+    width: 8.5rem;
+}
+
+.barra-superior-govco a:focus-visible {
+    outline: max(0.125rem, 0.15em) solid #FFFFFF;
+    border-radius: 0.313rem;
+}
+
+.barra-superior-govco .idioma-icon-barra-superior-govco {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 0.313rem;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    padding: 0;
+    border: 0.125rem solid #FFFFFF;
+    font-size: 10px;
+    position: absolute;
+    right: 5.375rem;
+}
+
+.barra-superior-govco .idioma-icon-barra-superior-govco:hover {
+    background-color: #004884;
+}
+
+.barra-superior-govco .idioma-icon-barra-superior-govco:focus {
+    outline: max(0.125rem, 0.15em) solid #FFFFFF;
+    outline-offset: max(0.188rem, 0.15em);
+}
+
+.barra-superior-govco .idioma-icon-barra-superior-govco::before {
+    font-family: "govco-font";
+    content: '\ec56';
+    color: #3366CC;
+    font-size: 14px;
+}
+
+.barra-superior-govco .idioma-icon-barra-superior-govco:hover::before {
+    color: #FFFFFF;
+}
+
+@media (max-width: 991px) {
+    .barra-superior-govco {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .barra-superior-govco .idioma-icon-barra-superior-govco {
+        right: 1rem;
+    }
+}
+.barra-superior-govco img {
+    max-height: 32px;
+    width: auto;
+}
+
+.barra-superior-govco span {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.content-example-barra {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.barra-accesibilidad-letra {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.barra-accesibilidad-letra .titulo-barra-accesibilidad {
+    color: #000;
+    font-family: Montserrat-SemiBold;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.barra-accesibilidad-letra .descripcion-barra-accesibilidad {
+    color: #4B4B4B;
+    font-family: WorkSans-Regular;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.barra-accesibilidad-govco {
+    height: 143px;
+    width: 48px;
+    position: fixed;
+    right: 0;
+    top: 35%;
+    background-color: #004884 !important;
+    border-radius: 10px 0px 0px 10px;
+    opacity: 1;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 12px;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.barra-accesibilidad-govco button {
+    line-height: inherit;
+}
+
+.barra-accesibilidad-govco .icon-contraste {
+    background: #004884;
+    text-align: center;
+    width: 48px;
+    height: 40px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.barra-accesibilidad-govco .icon-contraste::after {
+    background: #fff;
+    content: "\e803";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #004884;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.barra-accesibilidad-govco #titlecontraste {
+    text-align: left;
+    position: absolute;
+    background: #3366CC;
+    color: #fff;
+    line-height: normal !important;
+    font-family: WorkSans-Medium !important;
+    font-size: 14px;
+    margin-top: -8px;
+    opacity: 0;
+    width: 172px;
+    height: 40px;
+    border-radius: 10px 0 0 10px;
+    padding: 10px 10px 12px;
+}
+
+.barra-accesibilidad-govco button:hover #titlecontraste {
+    opacity: 1;
+    visibility: visible;
+    margin-left: -135px;
+}
+
+.icon-contraste:hover::after {
+    background: #fff;
+    content: "\e803";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.icon-contraste:focus #titlecontraste {
+    font-family: WorkSans-Medium !important;
+    opacity: 1;
+    line-height: normal !important;
+    visibility: visible;
+    margin-left: -136px;
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+.icon-contraste:focus::after {
+    background: #fff;
+    content: "\e803";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.barra-accesibilidad-govco .icon-aumentar {
+    background: #004884;
+    text-align: center;
+    width: 48px;
+    height: 40px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.barra-accesibilidad-govco .icon-aumentar::after {
+    background: #fff;
+    content: "\ec29";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #004884;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.barra-accesibilidad-govco #titleaumentar {
+    text-align: left;
+    position: absolute;
+    background: #3366CC;
+    color: #fff;
+    line-height: normal !important;
+    font-family: WorkSans-Medium !important;
+    font-size: 14px;
+    margin-top: -8px;
+    opacity: 0;
+    width: 172px;
+    height: 40px;
+    border-radius: 10px 0 0 10px;
+    padding: 10px 10px 12px;
+}
+
+.barra-accesibilidad-govco button:hover #titleaumentar {
+    opacity: 1;
+    visibility: visible;
+    margin-left: -135px;
+}
+
+.icon-aumentar:hover::after {
+    background: #fff;
+    content: "\ec29";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.icon-aumentar:focus #titleaumentar {
+    font-family: WorkSans-Medium !important;
+    opacity: 1;
+    line-height: normal !important;
+    visibility: visible;
+    margin-left: -136px;
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+.icon-aumentar:focus::after {
+    background: #fff;
+    content: "\ec29";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+/* Estilos para el botón de reducir */
+.barra-accesibilidad-govco .icon-reducir {
+    background: #004884;
+    text-align: center;
+    width: 48px;
+    height: 40px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.barra-accesibilidad-govco .icon-reducir::after {
+    background: #fff;
+    content: "\ec2a";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #004884;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.barra-accesibilidad-govco #titledisminuir {
+    text-align: left;
+    position: absolute;
+    background: #3366CC;
+    color: #fff;
+    line-height: normal !important;
+    font-family: WorkSans-Medium !important;
+    font-size: 14px;
+    margin-top: -8px;
+    opacity: 0;
+    width: 172px;
+    height: 40px;
+    border-radius: 10px 0 0 10px;
+    padding: 10px 10px 12px;
+}
+
+.barra-accesibilidad-govco button:hover #titledisminuir {
+    opacity: 1;
+    visibility: visible;
+    margin-left: -135px;
+}
+
+.icon-reducir:hover::after {
+    background: #fff;
+    content: "\ec2a";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.icon-reducir:focus #titledisminuir {
+    font-family: WorkSans-Medium !important;
+    opacity: 1;
+    line-height: normal !important;
+    visibility: visible;
+    margin-left: -136px;
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+.icon-reducir:focus::after {
+    background: #fff;
+    content: "\ec2a";
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+/* Transiciones suaves para el cambio de tamaño de texto */
+body {
+    transition: font-size 0.3s ease;
+}
+
+.active-barra-accesibilidad-govco {
+    background-color: #3366CC !important;
+}
+
+.active-barra-accesibilidad-govco.icon-aumentar::after,
+.active-barra-accesibilidad-govco.icon-reducir::after,
+.active-barra-accesibilidad-govco.icon-contraste::after {
+    background: #fff;
+    font-family: "govco-font";
+    line-height: 0;
+    height: 24px;
+    width: 24px;
+    color: #3366CC;
+    padding: 4px;
+    border-radius: 5px;
+    opacity: 1;
+    position: relative;
+}
+
+.active-barra-accesibilidad-govco.icon-aumentar::after {
+    content: "\ec29";content: "A";
+}
+
+.active-barra-accesibilidad-govco.icon-reducir::after {
+    content: "\ec2a";content: "R";
+}
+
+.active-barra-accesibilidad-govco.icon-contraste::after {
+    content: "\ec2a";content: "C";
+    font-family: initial;
+}
+
+.modo_oscuro-govco,
+.modo_claro-govco {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+body.modo_oscuro-govco {
+    background-color: #000;
+    color: #fff;
+}
+
+body.modo_claro-govco {
+    background-color: #fff;
+    color: #000;
+}
+
+.modo_oscuro-govco .titulo-barra-accesibilidad,
+.modo_claro-govco .titulo-barra-accesibilidad {
+    font-family: Montserrat-SemiBold;
+    font-size: 20px;
+    margin: 0;
+}
+
+.modo_claro-govco .titulo-barra-accesibilidad {
+    color: #000;
+}
+
+.modo_oscuro-govco .descripcion-barra-accesibilidad,
+.modo_claro-govco .descripcion-barra-accesibilidad {
+    font-family: WorkSans-Regular;
+    font-size: 16px;
+    margin: 0;
+}
+
+.modo_claro-govco .descripcion-barra-accesibilidad {
+    color: #4B4B4B;
+}
+
 
 
 
