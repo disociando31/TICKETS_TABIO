@@ -15,8 +15,14 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $rol = $user->getRoleNames()->first() ?? 'Sin Rol';
+        $rol = $user->getRoleNames()->first() ?? 'Sin rol';
         
-        return view('home', compact('rol'));
+        // Verificar si el usuario tiene al menos un rol activo
+        $hasActiveRoles = $user->roles()->where('estado', true)->exists();
+        
+        return view('home', [
+            'rol' => $rol,
+            'rolDesactivado' => !$hasActiveRoles
+        ]);
     }
 }

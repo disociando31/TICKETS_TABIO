@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Dependencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
+use App\Models\Role; // Cambiamos por nuestro modelo personalizado
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,11 +20,12 @@ class UserController extends Controller
         // Todos deben estar autenticados
         $this->middleware('auth');
         
-        // Solo administradores pueden ver el listado y crear/editar/eliminar usuarios
-        $this->middleware('role:Administrador')->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        // Usar middleware de permisos con roles activos
+        $this->middleware('permission.active:gestionar_usuarios')
+             ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
         
         // Para ver su propio perfil
-        $this->middleware('permission:gestionar_perfil')->only(['show']);
+        $this->middleware('permission.active:gestionar_perfil')->only(['show']);
     }
 
     /**
@@ -47,7 +48,7 @@ class UserController extends Controller
     public function create()
     {
         $dependencias = Dependencia::all();
-        $roles = Role::all();
+        $roles = Role::where('estado', true)->get(); // Solo roles activos
         
         return view('usuarios.create', compact('dependencias', 'roles'));
     }
@@ -67,7 +68,12 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'telefono' => 'nullable|string|max:20',
             'idDependencia' => 'required|exists:dependencias,idDependencia',
-            'rol' => 'required|exists:roles,name'
+            'rol' => [
+                'required',
+                Rule::exists('roles', 'name')->where(function ($query) {
+                    $query->where('estado', true); // Verificar que el rol esté activo
+                }),
+            ]
         ]);
 
         // Crear usuario
@@ -113,8 +119,8 @@ class UserController extends Controller
     {
         $usuario = User::findOrFail($id);
         $dependencias = Dependencia::all();
-        $roles = Role::all();
-        $userRoles = $usuario->getRoleNames()->toArray();; // Método de Spatie para obtener nombres de roles
+        $roles = Role::where('estado', true)->get(); // Solo roles activos
+        $userRoles = $usuario->getRoleNames()->toArray();
         
         return view('usuarios.edit', compact('usuario', 'dependencias', 'roles', 'userRoles'));
     }
@@ -142,7 +148,12 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
             'telefono' => 'nullable|string|max:20',
             'idDependencia' => 'required|exists:dependencias,idDependencia',
-            'rol' => 'required|exists:roles,name'
+            'rol' => [
+                'required',
+                Rule::exists('roles', 'name')->where(function ($query) {
+                    $query->where('estado', true); // Verificar que el rol esté activo
+                }),
+            ]
         ]);
 
         // Actualizar usuario
