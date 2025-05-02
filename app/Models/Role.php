@@ -1,44 +1,21 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-/**
- * Class Role
- * 
- * @property int $idRol
- * @property int $Rol
- * @property string $Estado
- * 
- * @property Collection|Usuario[] $usuarios
- *
- * @package App\Models
- */
-class Role extends Model
+class Role extends SpatieRole
 {
-	protected $table = 'roles';
-	protected $primaryKey = 'idRol';
-	public $incrementing = false;
-	public $timestamps = false;
+    // Añadir el campo 'estado' a los fillable
+    protected $fillable = ['name', 'guard_name', 'estado'];
+    
+    /**
+     * Obtiene solo los roles activos
+     */
+    public function scopeActivos($query)
+    {
+        return $query->where('estado', true);
+    }
 
-	protected $casts = [
-		'idRol' => 'int',
-		'Rol' => 'int'
-	];
-
-	protected $fillable = [
-		'Rol',
-		'Estado'
-	];
-
-	public function usuarios()
-	{
-		return $this->hasMany(Usuario::class, 'idRol');
-	}
 }
