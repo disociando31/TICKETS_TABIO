@@ -76,5 +76,7 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('js/accessibility.js') }}"></script>
 </body>
 </html>

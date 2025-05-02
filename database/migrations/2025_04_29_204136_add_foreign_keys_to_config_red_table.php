@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dependencias', function (Blueprint $table) {
-            $table->increments('idDependencia');
-            $table->string('dependencia');
-            $table->char('Estado', 1)->default('A');
-            $table->timestamps();
+        Schema::table('config_red', function (Blueprint $table) {
+            $table->foreign(['idEquipo'], 'FK_ConfigRed_Equipos')->references(['idEquipo'])->on('equipos')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dependencias');
+        Schema::table('config_red', function (Blueprint $table) {
+            $table->dropForeign('FK_ConfigRed_Equipos');
+        });
     }
 };

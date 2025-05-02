@@ -1,0 +1,54 @@
+/* Fuente iconografica */
+@font-face {
+    font-family: "govco-font";
+    src: url("../assets/icons/fonts/govco-font-icons.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  html {
+    font-size: 100%; /* 100% = 16px */
+  }
+  
+  .barra-superior-govco {
+    background-color: #3366cc;
+    width: 100%;
+    height: 3rem;
+    padding-left: 4.375rem;
+  }
+  
+  .barra-superior-govco a {
+    content: url(https://cdn.www.gov.co/assets/images/logo.svg);
+    height: 1.875rem;
+    width: 8.5rem;
+  }
+  
+  .barra-superior-govco a:focus-visible {
+    outline: max(0.125rem, 0.15em) solid #FFFFFF;
+    border-radius: 0.313rem;
+  }
+  
+  .barra-superior-govco .idioma-icon-barra-superior-govco {
+    height: 0; /* Elimina la altura */
+    width: 0; /* Elimina el ancho */
+    background-color: transparent; /* Elimina el fondo */
+    border: none; /* Elimina el borde */
+    padding: 0; /* Elimina el padding */
+    margin: 0; /* Elimina el margen */
+    overflow: hidden; /* Oculta cualquier contenido interno */
+    position: absolute; /* Si es necesario, ajusta la posición */
+    right: 0; /* Asegúrate de que no afecte el diseño */
+    top: 50%; /* Centra verticalmente si es necesario */
+    transform: translateY(-50%);
+  }
+
+  .barra-superior-govco .idioma-icon-barra-superior-govco::before {
+    content: ''; /* Elimina cualquier contenido generado */
+  }
+
+  @media (max-width: 991px) {
+    .barra-superior-govco {
+      justify-content: center;
+      padding: 0;
+    }
+  }
