@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('soportes', function (Blueprint $table) {
-            $table->integer('idSoporte')->primary();
-            $table->integer('idTicket')->nullable()->index('fk_soportes_tickets');
-            $table->integer('idTipoEquipo')->index('fk_soportes_tiposequipo');
-            $table->integer('idTipoSoporte')->index('fk_soportes_tipos_soporte');
-            $table->integer('idTipoMantenimiento')->index('fk_soportes_tiposmantenimiento');
+            $table->increments('idSoporte');
+            $table->unsignedInteger('idTicket')->nullable()->index('fk_soportes_tickets');
+            $table->unsignedInteger('idTipoEquipo')->index('fk_soportes_tiposequipo');
+            $table->unsignedInteger('idTipoSoporte')->index('fk_soportes_tipos_soporte');
+            $table->unsignedInteger('idTipoMantenimiento')->index('fk_soportes_tiposmantenimiento');
         });
     }
 

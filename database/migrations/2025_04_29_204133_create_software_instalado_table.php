@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('software_instalado', function (Blueprint $table) {
-            $table->integer('idSoftwareInstalado', true);
-            $table->integer('idEquipo')->index('fk_softwareinstalado_equipos');
+            $table->increments('idSoftwareInstalado');
+            $table->unsignedInteger('idEquipo')->index('fk_softwareinstalado_equipos');
             $table->string('SistemaOperativo');
             $table->string('LicSuiteOfimatica');
             $table->string('SuiteOfimatica');

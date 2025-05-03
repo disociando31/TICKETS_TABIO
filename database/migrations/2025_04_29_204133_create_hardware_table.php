@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('hardware', function (Blueprint $table) {
-            $table->integer('idHardware', true);
-            $table->integer('idEquipo')->index('fk_hardware_equipos');
+            $table->increments('idHardware');
+            $table->unsignedInteger('idEquipo')->index('fk_hardware_equipos');
             $table->string('NumeroPlaca');
             $table->string('ModeloCPU');
             $table->string('SerialCPU');

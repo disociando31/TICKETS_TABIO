@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gestion_solicitudes', function (Blueprint $table) {
-            $table->integer('idGestion')->primary();
-            $table->integer('idSolicitud')->index('fk_gestion_solicitudes_solicitudes');
-            $table->integer('idUsuario')->index('fk_gestion_solicitudes_usuarios');
+            $table->increments('idGestion');
+            $table->unsignedInteger('idSolicitud')->index('fk_gestion_solicitudes_solicitudes');
+            $table->unsignedInteger('idUsuario')->index('fk_gestion_solicitudes_usuarios');
             $table->string('Cambios')->nullable();
         });
     }

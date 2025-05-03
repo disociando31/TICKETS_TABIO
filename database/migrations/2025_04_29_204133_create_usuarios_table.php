@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios', function (Blueprint $table) {
-            $table->integer('idUsuario')->primary();
-            $table->integer('idRol')->index('fk_personas_roles');
-            $table->integer('idDependencia')->index('fk_personas_dependencias');
-            $table->string('Nombre');
-            $table->string('Username');
-            $table->string('Password');
-            $table->string('Telefono');
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('idUsuario');
+            $table->unsignedInteger('idDependencia');
+            $table->string('nombre', 255);
+            $table->string('username', 255);
+            $table->string('password', 255);
+            $table->string('telefono', 255);
+            $table->timestamps();
+
+            $table->foreign('idDependencia')->references('idDependencia')->on('dependencias');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('users');
     }
 };

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('usuarios', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreign(['idDependencia'], 'FK_Personas_Dependencias')->references(['idDependencia'])->on('dependencias')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['idRol'], 'FK_Personas_Roles')->references(['idRol'])->on('roles')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('usuarios', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('FK_Personas_Dependencias');
-            $table->dropForeign('FK_Personas_Roles');
         });
     }
 };

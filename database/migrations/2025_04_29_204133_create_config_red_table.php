@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('config_red', function (Blueprint $table) {
-            $table->integer('idConfigRed', true);
-            $table->integer('idEquipo')->index('fk_configred_equipos');
+            $table->increments('idConfigRed');
+            $table->unsignedInteger('idEquipo')->index('fk_configred_equipos');
             $table->string('MAC');
             $table->string('IP');
         });

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->integer('idTicket')->primary();
+            $table->increments('idTicket');
             $table->enum('Estado', ['Abierto', 'Cerrado']);
-            $table->integer('idUsuario')->index('fk_tickets_usuarios');
+            $table->unsignedInteger('idUsuario')->index('fk_tickets_usuarios');
             $table->enum('Prioridad', ['prioritario', 'urgente', 'regular']);
             $table->enum('Tipo', ['servicio', 'soporte']);
-            $table->integer('idEquipo')->nullable()->index('fk_tickets_equipos');
+            $table->unsignedInteger('idEquipo')->nullable()->index('fk_tickets_equipos');
             $table->string('Descripcion');
             $table->date('FechaCreacion');
             $table->date('FechaCierre')->nullable();

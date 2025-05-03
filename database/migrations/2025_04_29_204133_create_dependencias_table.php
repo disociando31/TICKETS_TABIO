@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dependencias', function (Blueprint $table) {
-            $table->integer('idDependencia')->primary();
-            $table->integer('Dependencia');
+            $table->increments('idDependencia');
+            $table->string('Dependencia');
             $table->char('Estado', 1)->default('A');
         });
     }

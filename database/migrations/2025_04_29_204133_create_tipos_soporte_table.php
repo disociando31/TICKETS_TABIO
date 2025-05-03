@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tipos_soporte', function (Blueprint $table) {
-            $table->integer('idTipoSoporte', true);
+            $table->increments('idTipoSoporte');
             $table->string('TipoSoporte');
             $table->char('Estado', 1)->default('A');
         });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->foreign(['idEquipo'], 'FK_Tickets_Equipos')->references(['idEquipo'])->on('equipos')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['idUsuario'], 'FK_Tickets_Usuarios')->references(['idUsuario'])->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['idUsuario'], 'FK_Tickets_Usuarios')->references(['idUsuario'])->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
