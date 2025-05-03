@@ -20,11 +20,7 @@
     <link href="{{ asset('css/accessibility.css') }}" rel="stylesheet">
 </head>
 <body>
-    <!-- Barra superior Gov.co -->
-    <nav class="navbar navbar-expand-lg barra-superior-govco" aria-label="Barra superior">
-        <a href="https://www.gov.co/" target="_blank" aria-label="Portal del Estado Colombiano - GOV.CO"></a>
-        <button class="idioma-icon-barra-superior-govco float-right" aria-label="Button to change the language of the page to English"></button>
-    </nav>
+    @include('partials.gov') <!-- Incluye la barra de GOV.CO aquí -->
 
     <div id="para-mirar">
         <!-- Barra de Accesibilidad Gov.co -->
@@ -38,13 +34,12 @@
                 </button>
                 <button id="botonaumentar" class="icon-aumentar" onclick="aumentarTamanio()">
                     <span id="titleaumentar">Aumentar letra</span>
-
                 </button>
             </div>
         </div>
 
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+      {{--      <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
@@ -96,7 +91,7 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> --}}
 
             <main class="py-4">
                 @yield('content')
