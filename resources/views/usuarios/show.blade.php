@@ -9,7 +9,7 @@
         <p><strong>Nombre:</strong> {{ $usuario->nombre }}</p>
         <p><strong>Username:</strong> {{ $usuario->username }}</p>
         <p><strong>Teléfono:</strong> {{ $usuario->telefono ?? 'No especificado' }}</p>
-        <p><strong>Dependencia:</strong> {{ $usuario->dependencia->dependencia ?? 'No especificada' }}</p>
+        <p><strong>Dependencia:</strong> {{ $usuario->dependencia->Dependencia ?? 'No especificada' }}</p>
         <p><strong>Rol:</strong> {{ $usuario->getRoleNames()->first() ?? 'Sin rol asignado' }}</p>
     </div>
     

@@ -50,7 +50,7 @@
                 @foreach($dependencias as $dependencia)
                     <option value="{{ $dependencia->idDependencia }}" 
                         {{ old('idDependencia', $usuario->idDependencia) == $dependencia->idDependencia ? 'selected' : '' }}>
-                        {{ $dependencia->dependencia }}
+                        {{ $dependencia->Dependencia }}
                     </option>
                 @endforeach
             </select>
