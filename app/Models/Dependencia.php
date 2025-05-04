@@ -1,27 +1,50 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Dependencia
+ * 
+ * @property int $idDependencia
+ * @property int $Dependencia
+ * @property string $Estado
+ * 
+ * @property Collection|Equipo[] $equipos
+ * @property Collection|Usuario[] $usuarios
+ *
+ * @package App\Models
+ */
 class Dependencia extends Model
 {
-    protected $table = 'dependencias';
-    protected $primaryKey = 'idDependencia';
-    public $incrementing = true;
-    protected $keyType = 'int';
+	protected $table = 'dependencias';
+	protected $primaryKey = 'idDependencia';
+	public $incrementing = false;
+	public $timestamps = false;
 
-    protected $fillable = [
-        'dependencia',
-        'Estado',
-    ];
+	protected $casts = [
+		'idDependencia' => 'int',
+		'Dependencia' => 'string'
+	];
 
-    /**
-     * Get the usuarios associated with the dependencia.
-     */
-    public function usuarios(): HasMany
-    {
-        return $this->hasMany(User::class, 'idDependencia', 'idDependencia');
-    }
+	protected $fillable = [
+		'Dependencia',
+		'Estado'
+	];
+
+	public function equipos()
+	{
+		return $this->hasMany(Equipo::class, 'idDependencia');
+	}
+
+	public function usuarios()
+	{
+		return $this->hasMany(Usuario::class, 'idDependencia');
+	}
 }
