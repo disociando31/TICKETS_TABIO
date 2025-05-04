@@ -8,6 +8,9 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'components/gov';
 @import 'components/accesibility';
+@import 'components/usuarios';
+@import 'views/usuarios/index.blade';
+
 
 
 /* Login Card */
@@ -112,5 +115,7 @@ label {
 .btn-link:hover {
     color: #ffeba7; /* Color amarillo al pasar el mouse */
 }
+@import 'components/usuarios';
+
 
 
