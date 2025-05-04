@@ -47,3 +47,4 @@ Route::middleware(['auth',  'permission.active:gestionar_perfil'])
         Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
         Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
     });
+
