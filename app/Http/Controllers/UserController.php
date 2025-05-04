@@ -33,11 +33,41 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Solo administradores pueden llegar aquí debido al middleware
-        $usuarios = User::with('dependencia')->paginate(10);
-        return view('usuarios.index', compact('usuarios'));
+    // Iniciar la consulta
+    $query = User::with('dependencia', 'roles');
+    
+    // Filtrar por rol si se proporciona
+    if ($request->has('role') && $request->role != '') {
+        $query->whereHas('roles', function($q) use ($request) {
+            $q->where('id', $request->role)
+              ->where('estado', true); // Solo roles activos
+        });
+    }
+    
+    // Filtrar por dependencia si se proporciona
+    if ($request->has('dependencia') && $request->dependencia != '') {
+        $query->where('idDependencia', $request->dependencia);
+    }
+    
+    // Buscar por nombre o username
+    if ($request->has('search') && $request->search != '') {
+        $searchTerm = $request->search;
+        $query->where(function($q) use ($searchTerm) {
+            $q->where('nombre', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('username', 'LIKE', "%{$searchTerm}%");
+        });
+    }
+    
+    // Ejecutar la consulta con paginación
+    $usuarios = $query->paginate(10)->appends($request->all());
+    
+    // Obtener listas para los filtros
+    $roles = Role::where('estado', true)->get();
+    $dependencias = Dependencia::all();
+    
+    return view('usuarios.index', compact('usuarios', 'roles', 'dependencias'));
     }
 
     /**
@@ -134,46 +164,55 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = User::findOrFail($id);
-        
-        // Validación
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'username' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('users', 'username')->ignore($id, 'idUsuario')
-            ],
-            'password' => 'nullable|string|min:8|confirmed',
-            'telefono' => 'nullable|string|max:20',
-            'idDependencia' => 'required|exists:dependencias,idDependencia',
-            'rol' => [
-                'required',
-                Rule::exists('roles', 'name')->where(function ($query) {
-                    $query->where('estado', true); // Verificar que el rol esté activo
-                }),
-            ]
-        ]);
+    $usuario = User::findOrFail($id);
+    
+    // Validación
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'username' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('users', 'username')->ignore($id, 'idUsuario')
+        ],
+        'password' => 'nullable|string|min:8|confirmed',
+        'telefono' => 'nullable|string|max:20',
+        'idDependencia' => 'required|exists:dependencias,idDependencia',
+        'rol' => [
+            'required',
+            Rule::exists('roles', 'name')->where(function ($query) {
+                $query->where('estado', true); // Verificar que el rol esté activo
+            }),
+        ]
+    ]);
 
-        // Actualizar usuario
-        $usuario->nombre = $request->nombre;
-        $usuario->username = $request->username;
-        $usuario->telefono = $request->telefono;
-        $usuario->idDependencia = $request->idDependencia;
-        
-        // Actualizar contraseña solo si se proporciona
-        if ($request->filled('password')) {
-            $usuario->password = Hash::make($request->password);
+    // Verificar si se está quitando el rol de administrador al último admin
+    if ($usuario->hasRole('Administrador') && $request->rol !== 'Administrador') {
+        $adminCount = User::role('Administrador')->count();
+        if ($adminCount <= 1) {
+            return back()->withErrors(['rol' => 'Debe haber al menos un administrador en el sistema.'])
+                        ->withInput();
         }
-        
-        $usuario->save();
+    }
 
-        // Sincronizar roles (quitar todos los roles anteriores y asignar el nuevo)
-        $usuario->syncRoles([$request->rol]);
+    // Actualizar usuario
+    $usuario->nombre = $request->nombre;
+    $usuario->username = $request->username;
+    $usuario->telefono = $request->telefono;
+    $usuario->idDependencia = $request->idDependencia;
+    
+    // Actualizar contraseña solo si se proporciona
+    if ($request->filled('password')) {
+        $usuario->password = Hash::make($request->password);
+    }
+    
+    $usuario->save();
 
-        return redirect()->route('usuarios.index')
-            ->with('success', 'Usuario actualizado correctamente.');
+    // Sincronizar roles (quitar todos los roles anteriores y asignar el nuevo)
+    $usuario->syncRoles([$request->rol]);
+
+    return redirect()->route('usuarios.index')
+        ->with('success', 'Usuario actualizado correctamente.');
     }
 
     /**
