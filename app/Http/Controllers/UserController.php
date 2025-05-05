@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Dependencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role; // Cambiamos por nuestro modelo personalizado
+use App\Models\Role; 
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,7 +77,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $dependencias = Dependencia::all();
+        // Solo mostrar dependencias activas (Estado = 'A')
+        $dependencias = Dependencia::where('Estado', 'A')->get();
         $roles = Role::where('estado', true)->get(); // Solo roles activos
         
         return view('usuarios.create', compact('dependencias', 'roles'));
@@ -148,7 +149,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
-        $dependencias = Dependencia::all();
+        
+        // Solo mostrar dependencias activas (Estado = 'A')
+        $dependencias = Dependencia::where('Estado', 'A')->get();
         $roles = Role::where('estado', true)->get(); // Solo roles activos
         $userRoles = $usuario->getRoleNames()->toArray();
         
