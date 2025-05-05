@@ -9,7 +9,8 @@
 @import 'components/gov';
 @import 'components/accessibility';
 @import '../sass/dashboard.scss';
-
+@import 'components/usuarios';
+@import 'views/usuarios/index.blade';
 
 /* Login Card */
 .card {
@@ -113,3 +114,8 @@ label {
 .btn-link:hover {
     color: #ffeba7; /* Color amarillo al pasar el mouse */
 }
+
+@import 'components/usuarios';
+
+
+
