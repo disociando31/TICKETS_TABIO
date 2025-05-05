@@ -347,8 +347,6 @@ body {
 .modo_oscuro-govco,
 .modo_claro-govco {
     width: 100%;
-    align-items: center;
-    text-align: center;
 }
 
 body.modo_oscuro-govco {
@@ -359,6 +357,12 @@ body.modo_oscuro-govco {
 body.modo_claro-govco {
     background-color: #fff;
     color: #000;
+}
+
+// Si necesitas centrar elementos específicos dentro de estos modos, usa clases específicas
+.modo_oscuro-govco .centered-content,
+.modo_claro-govco .centered-content {
+    text-align: center;
 }
 
 .modo_oscuro-govco .titulo-barra-accesibilidad,

@@ -17,14 +17,14 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
     <!-- Estilos de accesibilidad Gov.co -->
-    <link href="{{ asset('css/accessibility.css') }}" rel="stylesheet">
+    
 </head>
 <body>
-    @include('partials.gov') <!-- Incluye la barra de GOV.CO aquí -->
-
+    
+    @include('partials.accessibility')
     <div id="para-mirar">
         <!-- Barra de Accesibilidad Gov.co -->
-        <div class="content-example-barra">
+        {{-- <div class="content-example-barra">
             <div class="barra-accesibilidad-govco">
                 <button id="botoncontraste" class="icon-contraste" onclick="cambiarContexto()">
                     <span id="titlecontraste">Contraste</span>
@@ -36,7 +36,7 @@
                     <span id="titleaumentar">Aumentar letra</span>
                 </button>
             </div>
-        </div>
+        </div> --}}
 
         <div id="app">
       {{--      <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -100,7 +100,7 @@
     </div>
     
     <!-- Scripts de accesibilidad -->
-    <script src="{{ asset('js/accessibility-gov.js') }}"></script>
+   
     <script>
         window.addEventListener("load", function() {
             initTopBar();
