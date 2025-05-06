@@ -13,24 +13,45 @@ class EquipoSeeder extends Seeder
     public function run(): void
     {
         $equipo = Equipo::create([
-            'nombre' => 'Equipo de Prueba',
-            'descripcion' => 'Equipo de pruebas funcionales',
+            'NombreEquipo' => 'Equipo 1',
+            'idEquipo' => 1,
+            'idDependencia' => 1, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
         ]);
 
         $equipo->configRed()->create([
-            'ip' => '192.168.0.101',
-            'mac' => '00:1B:44:11:3A:B7',
+            'idConfigRed' => 1,
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
         ]);
 
         $equipo->hardware()->create([
-            'procesador' => 'Intel Core i5',
-            'ram' => '8 GB',
-            'disco' => '500 GB SSD',
+            'idHardware' => 1,
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'CPU',
+            'NumeroPlaca' => '987654321',
+            'ModeloCPU' => 'i7-9700K',
+            'SerialCPU' => 'ABC123456',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16GB',
+            'HDD' => '1TB',
+            'Monitor' => 'Dell 24"',
+            'SerialMonitor' => 'MON123456',
+            'Teclado' => 'Logitech K120',
+            'SerialTeclado' => 'KEY123456',
+            'Mouse' => 'Logitech M100',
+            'SerialMouse' => 'MOU123456',
         ]);
 
         $equipo->softwareInstalado()->create([
-            'sistema_operativo' => 'Windows 10',
-            'programas' => 'Office, Chrome, VS Code',
+            'idSoftwareInstalado' => 1,
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
         ]);
     }
 }

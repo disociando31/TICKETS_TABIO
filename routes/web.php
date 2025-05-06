@@ -47,4 +47,8 @@ Route::middleware(['auth',  'permission.active:gestionar_perfil'])
         Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
         Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
     });
-
+Route::middleware(['auth', 'permission.active:gestionar_equipos'])
+    ->group(function () {
+        Route::resource('equipos', App\Http\Controllers\EquipoController::class);
+        Route::get('equipos/{id}/configRed', [App\Http\Controllers\EquipoController::class, 'configRed'])->name('equipos.configRed');
+    });
