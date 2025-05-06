@@ -8,9 +8,12 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'components/gov';
 @import 'components/accessibility';
-@import '../sass/dashboard.scss';
-@import 'components/usuarios';
-@import 'views/usuarios/index.blade';
+@import 'Dash/home';
+@import 'usersviews/usuarios.scss';
+@import 'usersviews/index.blade.scss';
+
+
+
 
 /* Login Card */
 .card {
@@ -115,7 +118,6 @@ label {
     color: #ffeba7; /* Color amarillo al pasar el mouse */
 }
 
-@import 'components/usuarios';
 
 
 

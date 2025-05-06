@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contrastButton) {
         contrastButton.addEventListener('click', () => {
             const body = document.body;
+            
 
             // Alternar entre modo oscuro y claro
             if (body.classList.contains('modo_oscuro-govco')) {
