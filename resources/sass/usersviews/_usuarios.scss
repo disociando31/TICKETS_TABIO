@@ -35,7 +35,7 @@
         .error-container {
             background-color: #fee2e2;
             border-left: 4px solid #ef4444;
-            color: #991b1b;
+            color: #F42F63;
             padding: 1rem;
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
@@ -118,13 +118,13 @@
             }
 
             a {
-                background-color: #ef4444;
+                background-color: #FFAB00;
                 color: white;
                 text-decoration: none;
                 flex: 1;
                 
                 &:hover {
-                    background-color: #dc2626;
+                    background-color: #F42F63;
                     transform: translateY(-2px);
                 }
             }

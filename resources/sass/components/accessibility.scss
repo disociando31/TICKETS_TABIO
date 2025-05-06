@@ -517,3 +517,104 @@ margin: 0px;
     background: #fff url('/images/accessibility/Aumentar.png') center no-repeat;
     background-size: 16px;
 }
+// ... existing code ...
+
+/* Volver arriba */
+@font-face {
+  font-family: 'govco-fontv2';
+  src: url('../assets/fonts/govco/govco-fontv2.eot?35076025');
+  src: url('../assets/fonts/govco/govco-fontv2.eot?35076025#iefix') format('embedded-opentype'),
+      url('../assets/fonts/govco/govco-fontv2.woff2?35076025') format('woff2'),
+      url('../assets/fonts/govco/govco-fontv2.woff?35076025') format('woff'),
+      url('../assets/fonts/govco/govco-fontv2.ttf?35076025') format('truetype'),
+      url('../assets/fonts/govco/govco-fontv2.svg?35076025#govco-fontv2') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
+
+// Estilo Boton Volver Arriba
+
+.volver-arriba-govco {
+  color: #FFFFFF;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #3366CC 0% 0% no-repeat padding-box;
+  box-shadow: 4px 4px 6px #00000029;
+  transform: translateX(0);
+  transition: all 300ms;
+  text-align: center;
+  border-width: 0px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .arrow-icon {
+      width: 32px;
+      height: 32px;
+      transition: all 300ms;
+  }
+
+  &:hover {
+      color: white;
+      width: 140px;
+      height: 54px;
+      background: #004884 0% 0% no-repeat padding-box;
+      box-shadow: 4px 4px 6px #00000029;
+      border-radius: 27px 10px 10px 27px;
+      border-width: 0px;
+      text-align: left;
+      padding-left: 12px;
+      gap: 8px;
+
+      .arrow-icon {
+          width: 28px;
+          height: 28px;
+      }
+
+      &::after {
+          content: "Volver arriba";
+          color: white;
+          font-family: 'WorkSans-Medium', sans-serif;
+          font-size: 14px;
+          margin-left: 4px;
+      }
+  }
+
+  &:focus,
+  &:active {
+      color: white;
+      width: 140px;
+      height: 54px;
+      background: #004884 0% 0% no-repeat padding-box;
+      box-shadow: 4px 4px 6px #00000029;
+      border-radius: 27px 10px 10px 27px;
+      border-width: 0px;
+      text-align: left;
+      outline: 7px double black !important;
+      padding-left: 12px;
+      gap: 8px;
+
+      .arrow-icon {
+          width: 28px;
+          height: 28px;
+      }
+
+      &::after {
+          content: "Volver arriba";
+          color: white;
+          font-family: 'WorkSans-Medium', sans-serif;
+          font-size: 14px;
+          margin-left: 4px;
+      }
+  }
+}
