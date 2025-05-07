@@ -45,6 +45,6 @@ class Dependencia extends Model
 
 	public function usuarios()
 	{
-		return $this->hasMany(Usuario::class, 'idDependencia');
+		return $this->hasMany(User::class, 'idDependencia');
 	}
 }

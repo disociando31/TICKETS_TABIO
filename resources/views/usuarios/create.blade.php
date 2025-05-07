@@ -18,33 +18,28 @@
         <form action="{{ route('usuarios.store') }}" method="POST">
             @csrf
             
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="username">Username:</label>
+            <div style="margin-bottom: 10px;">
+                <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username" value="{{ old('username') }}" required>
             </div>
             
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
+            <div style="margin-bottom: 10px;">
+                <label for="password">Contraseña:</label><br>
                 <input type="password" id="password" name="password" required>
             </div>
             
-            <div class="form-group">
-                <label for="password_confirmation">Confirmar Contraseña:</label>
+            <div style="margin-bottom: 10px;">
+                <label for="password_confirmation">Confirmar Contraseña:</label><br>
                 <input type="password" id="password_confirmation" name="password_confirmation" required>
             </div>
             
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
+            <div style="margin-bottom: 10px;">
+                <label for="telefono">Teléfono:</label><br>
                 <input type="text" id="telefono" name="telefono" value="{{ old('telefono') }}">
             </div>
             
-            <div class="form-group">
-                <label for="idDependencia">Dependencia:</label>
+            <div style="margin-bottom: 10px;">
+                <label for="idDependencia">Dependencia:</label><br>
                 <select id="idDependencia" name="idDependencia" required>
                     <option value="">Seleccione una dependencia</option>
                     @foreach($dependencias as $dependencia)
@@ -55,8 +50,8 @@
                 </select>
             </div>
             
-            <div class="form-group">
-                <label for="rol">Rol:</label>
+            <div style="margin-bottom: 10px;">
+                <label for="rol">Rol:</label><br>
                 <select id="rol" name="rol" required>
                     <option value="">Seleccione un rol</option>
                     @foreach($roles as $rol)
@@ -67,7 +62,7 @@
                 </select>
             </div>
             
-            <div class="buttons-container">
+            <div style="margin-top: 20px;">
                 <button type="submit">Guardar Usuario</button>
                 <a href="{{ route('usuarios.index') }}">Cancelar</a>
             </div>
