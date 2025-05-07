@@ -15,21 +15,24 @@ function detectTabKey(e) {
 }
 
 function cambiarContexto() {
+    console.log("Disminuyendo tamaño"); // Para depuración
+    
     var botoncontraste = document.getElementById("botoncontraste");
     var botonaumentar = document.getElementById("botonaumentar");
     var botondisminuir = document.getElementById("botondisminuir");
 
-    if (!botoncontraste.classList.contains("active-barra-accesibilidad-govco")) {
-        botoncontraste.classList.toggle("active-barra-accesibilidad-govco");
+    // Manejo de clases de botones
+    if (!botondisminuir.classList.contains("active-barra-accesibilidad-govco")) {
+        botondisminuir.classList.toggle("active-barra-accesibilidad-govco");
         document.getElementById("titleaumentar").style.display = "";
-        document.getElementById("titledisminuir").style.display = "";
-        document.getElementById("titlecontraste").style.display = "none";
-    }
-    if (botondisminuir.classList.contains("active-barra-accesibilidad-govco")) {
-        botondisminuir.classList.remove("active-barra-accesibilidad-govco");
+        document.getElementById("titledisminuir").style.display = "none";
+        document.getElementById("titlecontraste").style.display = "";
     }
     if (botonaumentar.classList.contains("active-barra-accesibilidad-govco")) {
         botonaumentar.classList.remove("active-barra-accesibilidad-govco");
+    }
+    if (botoncontraste.classList.contains("active-barra-accesibilidad-govco")) {
+        botoncontraste.classList.remove("active-barra-accesibilidad-govco");
     }
 
     // Modificar para cambiar el contraste de toda la página
@@ -71,8 +74,7 @@ function disminuirTamanio() {
         // Verificar si el elemento tiene texto visible
         if (element.textContent && element.textContent.trim() !== '') {
             const tamanioActual = parseFloat(window.getComputedStyle(element).fontSize);
-            if (tamanioActual > 8) { // Límite mínimo de 8px
-                element.style.fontSize = (tamanioActual - 2) + 'px';
+            if (tamanioActual > 8) {                 element.style.fontSize = (tamanioActual - 1) + 'px';
             }
         }
     });
@@ -105,8 +107,7 @@ function aumentarTamanio() {
         // Verificar si el elemento tiene texto visible
         if (element.textContent && element.textContent.trim() !== '') {
             const tamanioActual = parseFloat(window.getComputedStyle(element).fontSize);
-            if (tamanioActual < 32) { // Límite máximo de 32px
-                element.style.fontSize = (tamanioActual + 2) + 'px';
+            if (tamanioActual < 32) {                element.style.fontSize = (tamanioActual + 1) + 'px';
             }
         }
     });

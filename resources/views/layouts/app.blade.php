@@ -20,8 +20,8 @@
     
 </head>
 <body>
+@include('partials.accessibility')
     
-    @include('partials.accessibility')
     @include('partials.gov')
     <div id="para-mirar">
         <!-- Barra de Accesibilidad Gov.co -->

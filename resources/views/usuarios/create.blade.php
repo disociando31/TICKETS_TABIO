@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@include('partials.accessibility')
 @section('content')
 <div class="users-container">
     <div class="container">

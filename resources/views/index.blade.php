@@ -1,3 +1,4 @@
+@include('partials.accessibility')
 <div>
-    <!-- He who is contented is rich. - Laozi -->
+    <!-- He w@include('partials.accessibility')ho is contented is rich. - Laozi -->
 </div>
