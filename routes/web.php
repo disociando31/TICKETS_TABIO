@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DependenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,10 @@ Route::middleware(['auth',  'permission.active:gestionar_perfil'])
         Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
         Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
     });
+
+// Rutas para dependencias
+Route::middleware(['auth', 'role.active:Administrador'])->group(function () {
+    Route::resource('dependencias', DependenciaController::class);
+    Route::patch('/dependencias/{id}/toggle-estado', [DependenciaController::class, 'toggleEstado'])
+         ->name('dependencias.toggle-estado');
+});
