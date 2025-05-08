@@ -13,21 +13,18 @@ class EquipoSeeder extends Seeder
     public function run(): void
     {
         $equipo = Equipo::create([
-            'NombreEquipo' => 'Equipo 1',
-            'idEquipo' => 1,
+            'NombreEquipo' => 'Equipo prueba',
             'idDependencia' => 1, // Asegúrate de que este ID exista en la tabla dependencias
             'FechaAdquisicion' => date('Y-m-d H:i:s'),
         ]);
 
         $equipo->configRed()->create([
-            'idConfigRed' => 1,
             'idEquipo' => $equipo->idEquipo,
             'MAC' => '00:1A:2B:3C:4D:5E',
             'IP' => '12345',
         ]);
 
         $equipo->hardware()->create([
-            'idHardware' => 1,
             'idEquipo' => $equipo->idEquipo,
             'ModeloCPU' => 'CPU',
             'NumeroPlaca' => '987654321',
@@ -44,8 +41,7 @@ class EquipoSeeder extends Seeder
             'SerialMouse' => 'MOU123456',
         ]);
 
-        $equipo->softwareInstalado()->create([
-            'idSoftwareInstalado' => 1,
+        $equipo->software_instalados()->create([
             'idEquipo' => $equipo->idEquipo,
             'SistemaOperativo' => 'Windows 10',
             'LicSuiteOfimatica' => 'ABC123456',
