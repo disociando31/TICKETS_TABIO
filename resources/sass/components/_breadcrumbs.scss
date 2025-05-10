@@ -1,0 +1,56 @@
+.breadcrumbs-govco {
+    background-color: #FFFFFF;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #E5E7EB;
+
+    .breadcrumbs-list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        align-items: center;
+    }
+
+    .breadcrumb-item {
+        display: flex;
+        align-items: center;
+        color: #3366CC;
+        font-size: 0.875rem;
+
+        &:not(:last-child)::after {
+            content: "›";
+            margin: 0 0.5rem;
+            color: #6B7280;
+        }
+
+        a {
+            color: #3366CC;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #254EDB;
+                text-decoration: underline;
+            }
+
+            i {
+                font-size: 1rem;
+            }
+        }
+
+        &.active {
+            color: #6B7280;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .breadcrumbs-list {
+            font-size: 0.75rem;
+        }
+    }
+}
