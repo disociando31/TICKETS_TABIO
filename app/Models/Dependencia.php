@@ -30,7 +30,7 @@ class Dependencia extends Model
 
 	protected $casts = [
 		'idDependencia' => 'int',
-		'Dependencia' => 'int'
+		'Dependencia' => 'string'
 	];
 
 	protected $fillable = [
