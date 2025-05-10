@@ -1,8 +1,6 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
-@import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
@@ -11,6 +9,9 @@
 @import 'Dash/home';
 @import 'usersviews/usuarios';
 @import 'usersviews/index.blade.scss';
+@import 'usersviews/vistaCrearUsuario';
+@import 'usersviews/vistaDetallesUsuario';
+@import 'usersviews/vistaPerfil';
 
 
 
@@ -22,7 +23,7 @@
     margin: 2rem auto;
     padding: 2rem;
     text-align: center;
-    background: #71c1cf; /* Fondo oscuro */
+    background: #5881D5; /* Fondo oscuro */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -117,6 +118,7 @@ label {
 .btn-link:hover {
     color: #ffeba7; /* Color amarillo al pasar el mouse */
 }
+@import 'usersviews/vistaCrearUsuario';
 
 
 

@@ -302,3 +302,32 @@ background-color: #fff;
       }
   }
 }
+
+.modo_oscuro-govco {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.modo_oscuro-govco * {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+/* Mantener colores específicos para elementos interactivos en modo oscuro */
+.modo_oscuro-govco a {
+    color: #66b3ff !important;
+}
+
+.modo_oscuro-govco button,
+.modo_oscuro-govco input,
+.modo_oscuro-govco select,
+.modo_oscuro-govco textarea {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border-color: #4d4d4d !important;
+}
+
+/* Preservar alineación de texto original */
+.modo_oscuro-govco * {
+    text-align: inherit;
+}
