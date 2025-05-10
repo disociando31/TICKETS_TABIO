@@ -54,4 +54,5 @@ Route::middleware(['auth', 'permission.active:gestionar_equipos'])
         Route::get('equipos/{id}/hardware', [App\Http\Controllers\EquipoController::class, 'hardware'])->name('equipos.hardware');
         Route::get('equipos/{id}/software_instalados', [App\Http\Controllers\EquipoController::class, 'software_instalados'])->name('equipos.software_instalados');
         Route::get('equipos/{id}/tickets', [App\Http\Controllers\EquipoController::class, 'tickets'])->name('equipos.tickets');
+        
     });

@@ -48,29 +48,28 @@ public function store(Request $request)
 
     return redirect()->route('equipos.index')->with('success', 'Equipo creado exitosamente.');
 }
-public function update(Request $request, $id)
+
+public function configRed($id)
 {
-    $equipo = Equipo::findOrFail($id);
+    $equipo = Equipo::with('configRed')->findOrFail($id);
+    return view('equipos.configRed', compact('equipo'));
+}
 
-    $equipo->update($request->only(['idDependencia', 'NombreEquipo', 'FechaAdquisicion']));
+public function hardware($id)
+{
+    $equipo = Equipo::with('hardware')->findOrFail($id);
+    return view('equipos.hardware', compact('equipo'));
+}
 
-    // Puedes optar por borrar y volver a crear los elementos relacionados (más sencillo)
-    $equipo->configRed()->delete();
-    $equipo->hardware()->delete();
-    $equipo->software_instalados()->delete();
+public function software_instalados($id)
+{
+    $equipo = Equipo::with('software_instalados')->findOrFail($id);
+    return view('equipos.software_instalados', compact('equipo'));
+}
 
-    if ($request->has('configRed')) {
-        $equipo->configRed()->createMany($request->input('configRed'));
-    }
-
-    if ($request->has('hardware')) {
-        $equipo->hardware()->createMany($request->input('hardware'));
-    }
-
-    if ($request->has('software_instalados')) {
-        $equipo->software_instalados()->createMany($request->input('software_instalados'));
-    }
-
-    return redirect()->route('equipos.index')->with('success', 'Equipo actualizado correctamente.');
+public function tickets($id)
+{
+    $equipo = Equipo::with('tickets')->findOrFail($id);
+    return view('equipos.tickets', compact('equipo'));
 }
 }
