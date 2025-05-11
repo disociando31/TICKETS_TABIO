@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DependenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,9 @@ Route::middleware(['auth', 'permission.active:gestionar_equipos'])
         Route::get('equipos/{id}/tickets', [App\Http\Controllers\EquipoController::class, 'tickets'])->name('equipos.tickets');
         
     });
+// Rutas para dependencias
+Route::middleware(['auth', 'role.active:Administrador'])->group(function () {
+    Route::resource('dependencias', DependenciaController::class);
+    Route::patch('/dependencias/{id}/toggle-estado', [DependenciaController::class, 'toggleEstado'])
+         ->name('dependencias.toggle-estado');
+});
