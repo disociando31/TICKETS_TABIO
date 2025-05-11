@@ -48,7 +48,15 @@ Route::middleware(['auth',  'permission.active:gestionar_perfil'])
         Route::get('/perfil', [UserController::class, 'editarPerfil'])->name('perfil');
         Route::put('/perfil', [UserController::class, 'actualizarPerfil'])->name('perfil.update');
     });
-
+Route::middleware(['auth', 'permission.active:gestionar_equipos'])
+    ->group(function () {
+        Route::resource('equipos', App\Http\Controllers\EquipoController::class);
+        Route::get('equipos/{id}/configRed', [App\Http\Controllers\EquipoController::class, 'configRed'])->name('equipos.configRed');
+        Route::get('equipos/{id}/hardware', [App\Http\Controllers\EquipoController::class, 'hardware'])->name('equipos.hardware');
+        Route::get('equipos/{id}/software_instalados', [App\Http\Controllers\EquipoController::class, 'software_instalados'])->name('equipos.software_instalados');
+        Route::get('equipos/{id}/tickets', [App\Http\Controllers\EquipoController::class, 'tickets'])->name('equipos.tickets');
+        
+    });
 // Rutas para dependencias
 Route::middleware(['auth', 'role.active:Administrador'])->group(function () {
     Route::resource('dependencias', DependenciaController::class);
