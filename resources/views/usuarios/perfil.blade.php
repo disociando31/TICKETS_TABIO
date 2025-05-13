@@ -1,17 +1,20 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <h1>Mi Perfil</h1>
+@include('partials.accessibility')
+<div class="perfil-container">
+    <div class="header">
+        <h1>Mi Perfil</h1>
+        <p class="subtitle">Gestiona tu información personal</p>
+    </div>
     
     @if (session('success'))
-        <div style="color: green; margin-bottom: 15px;">
-            {{ session('success') }}
+        <div class="success-container">
+            <p>{{ session('success') }}</p>
         </div>
     @endif
     
     @if ($errors->any())
-        <div style="color: red; margin-bottom: 15px;">
+        <div class="error-container">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -19,40 +22,54 @@
             </ul>
         </div>
     @endif
-    
-    <form action="{{ route('perfil.update') }}" method="POST">
-        @csrf
-        @method('PUT')
-        
-        <div style="margin-bottom: 10px;">
-            <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $usuario->nombre) }}" required>
-        </div>
-        
-        <div style="margin-bottom: 10px;">
-            <label for="telefono">Teléfono:</label><br>
-            <input type="text" id="telefono" name="telefono" value="{{ old('telefono', $usuario->telefono) }}">
-        </div>
-        
-        <div style="margin-bottom: 10px;">
-            <label for="password_actual">Contraseña Actual (requerida para cambiar contraseña):</label><br>
-            <input type="password" id="password_actual" name="password_actual">
-        </div>
-        
-        <div style="margin-bottom: 10px;">
-            <label for="password">Nueva Contraseña (dejar en blanco para no cambiar):</label><br>
-            <input type="password" id="password" name="password">
-        </div>
-        
-        <div style="margin-bottom: 10px;">
-            <label for="password_confirmation">Confirmar Nueva Contraseña:</label><br>
-            <input type="password" id="password_confirmation" name="password_confirmation">
-        </div>
-        
-        <div style="margin-top: 20px;">
-            <button type="submit">Actualizar Perfil</button>
-            <a href="{{ route('home') }}">Volver al Dashboard</a>
-        </div>
-    </form>
+
+    <div class="profile-content">
+        <form action="{{ route('perfil.update') }}" method="POST">
+            @csrf
+            @method('PUT')
+            
+            <div class="form-section">
+                <h2>Información Personal</h2>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $usuario->nombre) }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono" value="{{ old('telefono', $usuario->telefono) }}">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Cambiar Contraseña</h2>
+                <div class="form-group">
+                    <label for="password_actual">Contraseña Actual:</label>
+                    <input type="password" id="password_actual" name="password_actual">
+                    <small>Requerida para cambiar la contraseña</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Nueva Contraseña:</label>
+                    <input type="password" id="password" name="password">
+                    <small>Dejar en blanco si no desea cambiar la contraseña</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password_confirmation">Confirmar Nueva Contraseña:</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation">
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Actualizar Perfil
+                </button>
+                <a href="{{ route('home') }}" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver al Dashboard
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

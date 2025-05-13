@@ -1,14 +1,21 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
-@import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
-@import 'components/accessibility';
 @import 'components/gov';
+@import 'components/breadcrumbs';
+@import 'components/accessibility';
+@import 'Dash/home';
+@import 'usersviews/usuarios';
+@import 'usersviews/index.blade.scss';
+@import 'usersviews/vistaCrearUsuario';
+@import 'usersviews/vistaDetallesUsuario';
+@import 'usersviews/vistaPerfil';
+
+
+
 
 /* Login Card */
 .card {
@@ -17,7 +24,7 @@
     margin: 2rem auto;
     padding: 2rem;
     text-align: center;
-    background: #2a2b38; /* Fondo oscuro */
+    background: #5881D5; /* Fondo oscuro */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -26,11 +33,19 @@
 .card-header {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #ffeba7; /* Color amarillo */
+    color: #10162e; /* Color amarillo */
     background: none;
     border-bottom: none;
     margin-bottom: 1rem;
 }
+
+/*.login-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #264653; 
+    margin-bottom: 2rem ;
+}*/
 
 /* Input Fields */
 .field {
@@ -39,7 +54,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background-color: #ffeba7; /* Fondo oscuro para los inputs */
+    background-color: #ffffff; /* Fondo oscuro para los inputs */
     border-radius: 4px;
     padding: 0.5rem 1rem;
 }
@@ -55,7 +70,7 @@
     border: none;
     outline: none;
     width: 100%;
-    color: #ffffff; /* Texto gris claro */
+    color: #10162e; /* Texto gris claro */
     font-size: 1rem;
 }
 
@@ -67,7 +82,7 @@
 
 /* Cambiar el color de las etiquetas de los campos */
 label {
-    color: #ffeba7; /* Cambia el color del texto a amarillo */
+    color: #10162e; /* Cambia el color del texto a amarillo */
     font-weight: bold; /* Opcional: hace el texto más destacado */
 }
 
@@ -80,15 +95,15 @@ label {
     font-size: 1rem;
     text-transform: uppercase;
     padding: 0.6rem 1.2rem;
-    background-color: #ffeba7; /* Fondo amarillo */
-    color: #2a2b38; /* Texto oscuro */
+    background-color: #effcff; /* Fondo amarillo */
+    color: #10162e; /* Texto oscuro */
     box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
     transition: all 0.3s ease-in-out;
 }
 
 .btn-primary:hover {
     background-color: #17182b; /* Fondo oscuro al pasar el mouse */
-    color: #ffeba7; /* Texto amarillo */
+    color: #ffffff; /* Texto amarillo */
     box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
 }
 
@@ -104,6 +119,8 @@ label {
 .btn-link:hover {
     color: #ffeba7; /* Color amarillo al pasar el mouse */
 }
+@import 'usersviews/vistaCrearUsuario';
+
 
 
 
