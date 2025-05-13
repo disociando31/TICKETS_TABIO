@@ -22,4 +22,6 @@ Auth::routes([
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/tipos-soporte', [TipoSoporteController::class, 'index'])->name('tipos-soporte.index');
+
 
