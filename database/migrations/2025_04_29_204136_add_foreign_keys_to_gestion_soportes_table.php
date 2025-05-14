@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('gestion_soportes', function (Blueprint $table) {
             $table->foreign(['idSoporte'], 'FK_Gestion_Soportes_Soportes')->references(['idSoporte'])->on('soportes')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['idUsuario'], 'FK_Gestion_Soportes_Usuarios')->references(['idUsuario'])->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('gestion_soportes', function (Blueprint $table) {
             $table->dropForeign('FK_Gestion_Soportes_Soportes');
-            $table->dropForeign('FK_Gestion_Soportes_Usuarios');
         });
     }
 };

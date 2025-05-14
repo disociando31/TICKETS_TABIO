@@ -9,33 +9,19 @@
     
     class TicketController extends Controller
     {
-        /**
-         * Muestra un listado de los tickets.
-         *
-         * @return \Illuminate\Http\Response
-         */
+
         public function index()
         {
             $tickets = Ticket::with('usuario')->get(); // Carga ansiosamente el usuario
             return view('tickets.index', compact('tickets'));
         }
-    
-        /**
-         * Muestra el formulario para crear un nuevo ticket.
-         *
-         * @return \Illuminate\Http\Response
-         */
+
         public function create()
         {
             return view('tickets.create');
         }
     
-        /**
-         * Almacena un ticket recién creado en el almacenamiento.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @return \Illuminate\Http\Response
-         */
+
         public function store(Request $request)
         {
             $request->validate([
@@ -56,35 +42,19 @@
             return redirect()->route('tickets.index')->with('success', 'Ticket creado exitosamente.');
         }
     
-        /**
-         * Muestra el ticket especificado.
-         *
-         * @param  \App\Models\Ticket  $ticket
-         * @return \Illuminate\Http\Response
-         */
+      
         public function show(Ticket $ticket)
         {
             return view('tickets.show', compact('ticket'));
         }
     
-        /**
-         * Muestra el formulario para editar el ticket especificado.
-         *
-         * @param  \App\Models\Ticket  $ticket
-         * @return \Illuminate\Http\Response
-         */
+        
         public function edit(Ticket $ticket)
         {
             return view('tickets.edit', compact('ticket'));
         }
     
-        /**
-         * Actualiza el ticket especificado en el almacenamiento.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @param  \App\Models\Ticket  $ticket
-         * @return \Illuminate\Http\Response
-         */
+        
         public function update(Request $request, Ticket $ticket)
         {
             $request->validate([
@@ -103,12 +73,6 @@
             return redirect()->route('tickets.index')->with('success', 'Ticket actualizado exitosamente.');
         }
     
-        /**
-         * Elimina el ticket especificado del almacenamiento.
-         *
-         * @param  \App\Models\Ticket  $ticket
-         * @return \Illuminate\Http\Response
-         */
         public function destroy(Ticket $ticket)
         {
             $ticket->delete();

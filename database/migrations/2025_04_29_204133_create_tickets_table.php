@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('Descripcion');
             $table->date('FechaCreacion');
             $table->date('FechaCierre')->nullable();
+            $table->unsignedInteger('idGestor')->nullable()->index('fk_tickets_gestores');
+
         });
     }
 

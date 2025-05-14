@@ -9,34 +9,18 @@ use Illuminate\Validation\ValidationException;
 
 class SoporteController extends Controller
 {
-    /**
-     * Muestra una lista de todos los soportes.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $soportes = Soporte::all();
         return view('soportes.index', compact('soportes')); // Asume que tienes una vista en 'resources/views/soportes/index.blade.php'
     }
 
-    /**
-     * Muestra el formulario para crear un nuevo soporte.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         // Aquí podrías pasar datos necesarios para el formulario, como listas de selección.
         return view('soportes.create'); // Asume que tienes una vista en 'resources/views/soportes/create.blade.php'
     }
 
-    /**
-     * Guarda un nuevo soporte en la base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try {
@@ -58,36 +42,17 @@ class SoporteController extends Controller
         }
     }
 
-    /**
-     * Muestra los detalles de un soporte específico.
-     *
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
-     */
     public function show(Soporte $soporte)
     {
         return view('soportes.show', compact('soporte')); // Asume que tienes una vista en 'resources/views/soportes/show.blade.php'
     }
 
-    /**
-     * Muestra el formulario para editar un soporte existente.
-     *
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Soporte $soporte)
     {
         // Aquí podrías pasar datos necesarios para el formulario de edición.
         return view('soportes.edit', compact('soporte')); // Asume que tienes una vista en 'resources/views/soportes/edit.blade.php'
     }
 
-    /**
-     * Actualiza un soporte existente en la base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Soporte $soporte)
     {
         try {
@@ -109,12 +74,6 @@ class SoporteController extends Controller
         }
     }
 
-    /**
-     * Elimina un soporte de la base de datos.
-     *
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Soporte $soporte)
     {
         try {

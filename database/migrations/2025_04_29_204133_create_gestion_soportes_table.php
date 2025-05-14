@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('gestion_soportes', function (Blueprint $table) {
             $table->increments('idGestion');
             $table->unsignedInteger('idSoporte')->index('fk_gestion_soportes_soportes');
-            $table->unsignedInteger('idUsuario')->index('fk_gestion_soportes_usuarios');
             $table->string('Cambios')->nullable();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('gestion_solicitudes', function (Blueprint $table) {
             $table->foreign(['idSolicitud'], 'FK_Gestion_Solicitudes_Solicitudes')->references(['idSolicitud'])->on('solicitudes')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['idUsuario'], 'FK_Gestion_Solicitudes_Usuarios')->references(['idUsuario'])->on('users')->onUpdate('restrict')->onDelete('restrict');
+
         });
     }
 
@@ -24,7 +24,6 @@ return new class extends Migration
     {
         Schema::table('gestion_solicitudes', function (Blueprint $table) {
             $table->dropForeign('FK_Gestion_Solicitudes_Solicitudes');
-            $table->dropForeign('FK_Gestion_Solicitudes_Usuarios');
         });
     }
 };
