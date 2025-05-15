@@ -1,11 +1,11 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('soportes', function (Blueprint $table) {
             $table->increments('idSoporte');
-            $table->unsignedInteger('idTicket')->nullable()->index('fk_soportes_tickets');
-            $table->unsignedInteger('idTipoEquipo')->index('fk_soportes_tiposequipo');
-            $table->unsignedInteger('idTipoSoporte')->index('fk_soportes_tipos_soporte');
-            $table->unsignedInteger('idTipoMantenimiento')->index('fk_soportes_tiposmantenimiento');
+            $table->unsignedInteger('idTicket')->index('fk_soportes_tickets');
+            $table->enum('TipoEquipo', ['Impresora', 'Scanner', 'Monitor', 'CPU', 'Otro']);
+            $table->enum('TipoSoporte', ['Solicitud', 'Diagnostico', 'Baja', 'Otro']);
+            $table->enum('TipoMantenimiento', ['Preventivo', 'Correctivo']);
+            $table->unsignedInteger('idEquipo')->index('fk_soportes_equipos');
+        
         });
     }
 
