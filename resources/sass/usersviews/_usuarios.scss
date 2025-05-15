@@ -159,3 +159,201 @@
         }
     }
 }
+
+// Estilos para la vista de listado de usuarios
+.usuarios-container {
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.usuarios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+
+    h1 {
+        color: #ffffff;  // Cambiado a color blanco
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 0;
+    }
+}
+
+.usuarios-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-crear-usuario {
+    background-color: #1e40af;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background-color: #1e3a8a;
+        transform: translateY(-2px);
+    }
+}
+
+.usuarios-filters {
+    margin: 2rem 0;
+
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 24px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #FFFFFF;
+            
+            &:focus {
+                outline: none;
+                border: 2px solid #3366CC;
+                border-radius: 24px;
+                box-shadow: 0 0 0 2px rgba(51, 102, 204, 0.1);
+            }
+
+            &::placeholder {
+                color: #6B7280;
+            }
+        }
+
+        .search-button {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            &:hover {
+                color: #3366CC;
+            }
+
+            i {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    .filter-group {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .filter-dropdown {
+        padding: 8px 12px;
+        border: 2px solid #E5E7EB;
+        border-radius: 8px;
+        background-color: #FFFFFF;
+        min-width: 200px;
+        
+        &:focus {
+            outline: none;
+            border-color: #3366CC;
+            box-shadow: 0 0 0 2px rgba(51, 102, 204, 0.1);
+        }
+    }
+
+    .btn-filtrar {
+        padding: 8px 24px;
+        background: #3366CC;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: #254EDB;
+        }
+    }
+}
+
+.usuarios-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    
+    th {
+        background-color: #f8fafc;
+        color: #1e40af;
+        font-weight: 600;
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    td {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+        color: #1f2937;
+    }
+    
+    tr:hover {
+        background-color: #f8fafc;
+    }
+}
+
+.usuario-actions {
+    display: flex;
+    gap: 0.5rem;
+    
+    .btn-editar {
+        background-color: #0ea5e9;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        
+        &:hover {
+            background-color: #0284c7;
+        }
+    }
+    
+    .btn-eliminar {
+        background-color: #ef4444;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        
+        &:hover {
+            background-color: #dc2626;
+        }
+    }
+}

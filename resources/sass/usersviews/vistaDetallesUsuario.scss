@@ -1,0 +1,157 @@
+.detalles-usuario-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    .header {
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        padding: 2rem;
+        text-align: center;
+
+        h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .detalles-content {
+        padding: 2rem;
+
+        .info-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-section {
+            .detalle-item {
+                margin-bottom: 1.5rem;
+                background: white;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s ease;
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
+
+                label {
+                    display: block;
+                    color: #6b7280;
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    margin-bottom: 0.5rem;
+                }
+
+                .valor {
+                    color: #1f2937;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+
+                    .rol-badge {
+                        display: inline-block;
+                        background: white;
+                        color: #1f2937;
+                        padding: 0;
+                        border-radius: 0;
+                        font-size: 1.1rem;
+                        font-weight: 500;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+
+        .rol-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+    }
+
+    .actions-container {
+        display: flex;
+        gap: 1rem;
+        padding: 2rem;
+        background: #f8fafc;
+        border-top: 1px solid #e5e7eb;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            
+            i {
+                font-size: 1rem;
+            }
+            
+            &.btn-editar {
+                background: linear-gradient(135deg, #3b82f6, #2563eb);
+                color: white;
+                flex: 1;
+                justify-content: center;
+                
+                &:hover {
+                    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+                }
+            }
+            
+            &.btn-volver {
+                background: #64748b;
+                color: white;
+                flex: 1;
+                justify-content: center;
+                
+                &:hover {
+                    background: #475569;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 6px rgba(71, 85, 105, 0.2);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        margin: 1rem;
+
+        .detalles-content {
+            padding: 1rem;
+
+            .info-card {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        .actions-container {
+            flex-direction: column;
+            padding: 1rem;
+        }
+    }
+}

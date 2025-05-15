@@ -1,0 +1,231 @@
+.crear-usuario-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0;  // Cambiado de 2rem a 0
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;  // Añadido para contener el header
+
+    .header {
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        padding: 2rem;
+        margin: 0;  // Eliminados los márgenes negativos
+        border-radius: 0;  // Eliminado el border radius
+        
+        h1 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+    }
+
+    form {
+        padding: 2rem;  // Movido el padding al formulario
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+            display: block;
+            color: #374151;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            
+            &:focus {
+                outline: none;
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            }
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+    }
+
+    .error-container {
+        background-color: #fee2e2;
+        border-left: 4px solid #ef4444;
+        color: #991b1b;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+        animation: slideIn 0.3s ease-out;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin-bottom: 0.5rem;
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .buttons-container {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+
+        button, a {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            
+            &[type="submit"] {
+                background-color: #2563eb;
+                color: white;
+                border: none;
+                
+                &:hover {
+                    background-color: #1d4ed8;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+
+        a {
+            background-color: #64748b;
+            color: white;
+            text-decoration: none;
+            
+            &:hover {
+                background-color: #475569;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        margin: 1rem;
+        padding: 1.5rem;
+
+        .buttons-container {
+            flex-direction: column;
+            
+            button, a {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+// Estilos para la sección de permisos
+.permisos-section {
+    margin-top: 2rem;
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+
+    .permisos-header {
+        margin-bottom: 1.5rem;
+        
+        h3 {
+            color: #1e40af;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    }
+
+    .permisos-group {
+        margin-bottom: 2rem;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .permisos-group-header {
+            margin-bottom: 1rem;
+            
+            h4 {
+                color: #374151;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+
+        .permisos-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .permiso-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+
+            &:hover {
+                border-color: #3b82f6;
+                transform: translateY(-1px);
+            }
+
+            input[type="checkbox"] {
+                width: 1.25rem;
+                height: 1.25rem;
+                border-radius: 0.25rem;
+                border: 2px solid #d1d5db;
+                cursor: pointer;
+
+                &:checked {
+                    background-color: #3b82f6;
+                    border-color: #3b82f6;
+                }
+            }
+
+            label {
+                cursor: pointer;
+                color: #374151;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
