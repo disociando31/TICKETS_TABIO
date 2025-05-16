@@ -129,3 +129,70 @@
         border: 1px solid #fecaca;
     }
 }
+
+.acciones-grupo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-editar, .btn-ver, .btn-eliminar {
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-ver {
+    background-color: #42a5f5;
+}
+
+.btn-ver:hover {
+    background-color: #2196f3;
+}
+
+.btn-editar {
+    background-color: #ffa726;
+}
+
+.btn-editar:hover {
+    background-color: #fb8c00;
+}
+
+.btn-eliminar {
+    background-color: #ef5350;
+}
+
+.btn-eliminar:hover {
+    background-color: #e53935;
+}
+
+.usuario-estado {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.activo {
+    background-color: #66bb6a;
+    color: white;
+}
+
+.inactivo {
+    background-color: #ef5350;
+    color: white;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.form-inline button {
+    border: none;
+    cursor: pointer;
+}

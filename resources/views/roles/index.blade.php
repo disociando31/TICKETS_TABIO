@@ -67,7 +67,7 @@
                                         @method('PATCH')
                                         <button type="submit" 
                                                 class="btn-estado {{ $rol->estado ? 'btn-desactivar' : 'btn-activar' }}"
-                                                onclick="return confirm('¿Está seguro de {{ $rol->estado ? 'desactivar' : 'activar' }} este rol?')">
+                                                onclick="return confirm(`¿Está seguro de ${this.innerHTML.includes('Desactivar') ? 'desactivar' : 'activar'} este rol?`)">
                                             {{ $rol->estado ? 'Desactivar' : 'Activar' }}
                                         </button>
                                     </form>
