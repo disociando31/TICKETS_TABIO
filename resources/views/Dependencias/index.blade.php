@@ -60,7 +60,7 @@
                                     @method('PATCH')
                                     <button type="submit" 
                                             class="btn-editar"
-                                            onclick="return confirm('¿Está seguro de {{ $dependencia->Estado == 'A' ? 'desactivar' : 'activar' }} esta dependencia?')">
+                                            onclick="return confirm(`¿Está seguro de ${this.innerHTML.includes('Desactivar') ? 'desactivar' : 'activar'} esta dependencia?`)">
                                         <i class="fas fa-power-off"></i>
                                         {{ $dependencia->Estado == 'A' ? 'Desactivar' : 'Activar' }}
                                     </button>
@@ -85,4 +85,12 @@
         </table>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+function confirmarCambioEstado(accion) {
+    return confirm(`¿Está seguro de ${accion} esta dependencia?`);
+}
+</script>
 @endsection

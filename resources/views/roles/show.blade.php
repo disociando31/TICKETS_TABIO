@@ -51,7 +51,7 @@
                     @method('PATCH')
                     <button type="submit" 
                             class="btn-secondary"
-                            onclick="return confirmarCambioEstado('{{ $rol->estado ? 'desactivar' : 'activar' }}')">
+                            onclick="return confirm(`¿Está seguro de ${this.innerHTML.includes('Desactivar') ? 'desactivar' : 'activar'} este rol?`)">
                         <i class="fas fa-power-off"></i> {{ $rol->estado ? 'Desactivar' : 'Activar' }}
                     </button>
                 </form>
