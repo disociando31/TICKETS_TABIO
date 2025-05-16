@@ -35,7 +35,7 @@
                         <li><a href="{{ route('roles.index') }}">Gestionar Roles</a></li>
                         <li><a href="{{ route('roles.create') }}">Crear Rol</a></li>
                         <li><a href="{{ route('dependencias.index') }}">Gestionar Dependencias</a></li>
-                        <li><a href="{{ route('dependencias.create') }}">Crear dependencia</a></li>
+                        <li><a href="{{ route('dependencias.create') }}">Crear Dependencia</a></li>
                     @endif
                     
                     @if(auth()->user()->hasPermissionTo('gestionar_perfil'))
@@ -52,7 +52,8 @@
                         <li><a href="#">Asignar Tickets</a></li>
                     @endif
                     @if(auth()->user()->hasPermissionTo('gestionar_equipos'))
-                        <li><a href="#">Gestionar Equipos</a></li>
+                        <li><a href="{{ route('equipos.index') }}">Gestionar Equipos</a></li>
+                        <li><a href="{{ route('equipos.create') }}">Crear Equipo</a></li>
                     @endif
                     @if(auth()->user()->hasPermissionTo('gestionar_reportes'))
                         <li><a href="#">Reportes</a></li>

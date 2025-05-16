@@ -1,0 +1,60 @@
+.acciones-grupo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-ver, .btn-editar, .btn-config, 
+.btn-hardware, .btn-software, .btn-tickets, 
+.btn-eliminar {
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+    i {
+        font-size: 1rem;
+    }
+}
+
+.btn-ver { background-color: #42a5f5; }
+.btn-editar { background-color: #ffa726; }
+.btn-config { background-color: #66bb6a; }
+.btn-hardware { background-color: #ab47bc; }
+.btn-software { background-color: #7e57c2; }
+.btn-tickets { background-color: #26a69a; }
+.btn-eliminar { background-color: #ef5350; }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+}
+
+.acciones-cell {
+    min-width: 200px;
+}
