@@ -35,11 +35,9 @@
                         <li><a href="{{ route('roles.index') }}">Gestionar Roles</a></li>
                         <li><a href="{{ route('roles.create') }}">Crear Rol</a></li>
                         <li><a href="{{ route('dependencias.index') }}">Gestionar Dependencias</a></li>
-                    @endif
-                    @if(auth()->user()->hasPermissionTo('gestionar_dependencias'))
-                        <li><a href="{{ route('dependencias.index') }}">Gestionar Dependencias</a></li>
                         <li><a href="{{ route('dependencias.create') }}">Crear dependencia</a></li>
                     @endif
+                    
                     @if(auth()->user()->hasPermissionTo('gestionar_perfil'))
                         <li><a href="{{ route('perfil') }}">Editar mi perfil</a></li>
                     @endif
