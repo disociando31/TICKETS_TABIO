@@ -90,10 +90,9 @@ class TicketController extends Controller
         $ticket->load(['usuario', 'gestor']);
         return view('tickets.edit', compact('ticket'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
+/**
+ * Update the specified resource in storage.
+ */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         // Guardar valores originales para detectar cambios
@@ -107,8 +106,17 @@ class TicketController extends Controller
             $ticket->Tipo = $request->Tipo;
             $ticket->Prioridad = $request->Prioridad;
         } else {
-            // Admin o Trabajador actualiza todo
-            $ticket->fill($request->validated());
+            // Admin o Trabajador
+            // Cargamos los campos básicos
+            $ticket->Tipo = $request->Tipo;
+            $ticket->Prioridad = $request->Prioridad;
+            $ticket->Estado = $request->Estado;
+            $ticket->Descripcion = $request->Descripcion;
+            
+            // Solo los administradores pueden cambiar el gestor
+            if (Auth::user()->hasRole('Administrador') && $request->filled('idGestor')) {
+                $ticket->idGestor = $request->idGestor;
+            }
             
             // Si se cierra el ticket, registrar fecha de cierre
             if ($request->Estado == Ticket::ESTADO_CERRADO && $oldEstado != Ticket::ESTADO_CERRADO) {
@@ -137,8 +145,8 @@ class TicketController extends Controller
             $ticket->registrarCambio($prefijo . "Cambio de estado: {$oldEstado} -> {$ticket->Estado}");
         }
         
-        // Registrar reasignación
-        if ($oldGestorId != $ticket->idGestor) {
+        // Registrar reasignación - solo si es administrador
+        if ($oldGestorId != $ticket->idGestor && Auth::user()->hasRole('Administrador')) {
             $nuevoGestor = User::find($ticket->idGestor);
             $oldGestor = $oldGestorId ? User::find($oldGestorId) : null;
             
@@ -159,7 +167,7 @@ class TicketController extends Controller
         }
         
         return redirect()->route('tickets.index')
-                       ->with('success', 'Ticket actualizado correctamente.');
+                    ->with('success', 'Ticket actualizado correctamente.');
     }
 
     /**
