@@ -15,9 +15,8 @@ return new class extends Migration
             $table->increments('idTicket');
             $table->enum('Estado', ['Abierto', 'Cerrado']);
             $table->unsignedInteger('idUsuario')->index('fk_tickets_usuarios');
-            $table->enum('Prioridad', ['prioritario', 'urgente', 'regular']);
-            $table->enum('Tipo', ['servicio', 'soporte']);
-            $table->unsignedInteger('idEquipo')->nullable()->index('fk_tickets_equipos');
+            $table->enum('Prioridad', ['Prioritario', 'Urgente', 'Regular']);
+            $table->enum('Tipo', ['Solicitud de servicio', 'Soporte']);
             $table->string('Descripcion');
             $table->date('FechaCreacion');
             $table->date('FechaCierre')->nullable();

@@ -15,19 +15,19 @@ class EnsureUserHasActiveRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+        public function handle(Request $request, Closure $next)
     {
         // Si no está autenticado, dejamos que el middleware de auth lo maneje
         if (!Auth::check()) {
             return $next($request);
         }
-
+        
         $user = Auth::user();
         
-        // Verificar si el usuario tiene al menos un rol activo
-        $hasActiveRoles = $user->roles()->where('estado', true)->exists();
+        // En lugar de usar el query builder, obtén los roles directamente
+        $activeRoles = collect($user->roles)->where('estado', true);
         
-        if (!$hasActiveRoles) {
+        if ($activeRoles->isEmpty()) {
             // Para solicitudes JSON/Ajax, devolver un error 403
             if ($request->expectsJson()) {
                 return response()->json([

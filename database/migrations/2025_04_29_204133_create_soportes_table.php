@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->enum('TipoEquipo', ['Impresora', 'Scanner', 'Monitor', 'CPU', 'Otro']);
             $table->enum('TipoSoporte', ['Solicitud', 'Diagnostico', 'Baja', 'Otro']);
             $table->enum('TipoMantenimiento', ['Preventivo', 'Correctivo']);
-            $table->unsignedInteger('idEquipo')->index('fk_soportes_equipos');
+            $table->unsignedInteger('idEquipo')->nullable()->index('fk_soportes_equipos');
+
         
         });
     }
