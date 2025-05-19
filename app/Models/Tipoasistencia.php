@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Tiposasistencia extends Model
+class Tipoasistencia extends Model
 {
 	protected $table = 'tiposasistencia';
 	protected $primaryKey = 'idTipoAsistencia';
@@ -38,6 +38,6 @@ class Tiposasistencia extends Model
 
 	public function solicitudes()
 	{
-		return $this->hasMany(Solicitude::class, 'idTipoAsistencia');
+		return $this->hasMany(Solicitud::class, 'idTipoAsistencia');
 	}
 }

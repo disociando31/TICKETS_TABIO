@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 
+// If the model file does not exist, create it with:
+// php artisan make:model Solicitud
+
 class SolicitudController extends Controller
 {
     /**
@@ -71,7 +74,7 @@ class SolicitudController extends Controller
     public function edit(Solicitud $solicitud)
     {
         $tickets = \App\Models\Ticket::all();
-        $tiposAsistencia = \App\Models\TipoAsistencia::all();
+        $tiposAsistencia = \App\Models\Tipoasistencia::all();
         return view('solicitudes.edit', compact('solicitud', 'tickets', 'tiposAsistencia'));
     }
 

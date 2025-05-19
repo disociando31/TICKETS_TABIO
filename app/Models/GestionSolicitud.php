@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class GestionSolicitude extends Model
+class GestionSolicitud extends Model
 {
 	protected $table = 'gestion_solicitudes';
 	protected $primaryKey = 'idGestion';
@@ -42,7 +42,7 @@ class GestionSolicitude extends Model
 
 	public function solicitude()
 	{
-		return $this->belongsTo(Solicitude::class, 'idSolicitud');
+		return $this->belongsTo(Solicitud::class, 'idSolicitud');
 	}
 
 	public function usuario()

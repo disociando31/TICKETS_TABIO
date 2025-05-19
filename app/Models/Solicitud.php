@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Solicitude extends Model
+class Solicitud extends Model
 {
 	protected $table = 'solicitudes';
 	protected $primaryKey = 'idSolicitud';
@@ -51,11 +51,11 @@ class Solicitude extends Model
 
 	public function tiposasistencium()
 	{
-		return $this->belongsTo(Tiposasistencium::class, 'idTipoAsistencia');
+		return $this->belongsTo(Tipoasistencia::class, 'idTipoAsistencia');
 	}
 
 	public function gestion_solicitudes()
 	{
-		return $this->hasMany(GestionSolicitude::class, 'idSolicitud');
+		return $this->hasMany(GestionSolicitud::class, 'idSolicitud');
 	}
 }
