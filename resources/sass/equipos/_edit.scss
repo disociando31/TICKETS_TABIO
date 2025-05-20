@@ -1,3 +1,4 @@
+// Reutilizamos los mismos estilos de _create.scss
 .crear-usuario-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -58,19 +59,18 @@
         }
     }
 
-    .section-title {
+    .form-section {
         background: #f8f9fa;
         padding: 1.5rem;
         border-radius: 8px;
         margin-bottom: 2rem;
 
-        h2 {
+        h3 {
             color: #333;
-            font-size: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        button {
+        .btn-add {
             background: #28a745;
             color: white;
             border: none;
@@ -93,22 +93,45 @@
         border-radius: 6px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         margin-bottom: 1rem;
+        display: grid;
+        gap: 1rem;
         position: relative;
+    }
 
-        button[onclick*="remove"] {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
+    .config-red-item {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            &:hover {
-                background: #c82333;
-            }
+    .hardware-item {
+        grid-template-columns: repeat(3, 1fr);
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .software-item {
+        grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .btn-remove {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background: #c82333;
         }
     }
 
@@ -117,7 +140,7 @@
         display: flex;
         gap: 1rem;
 
-        button, .btn-cancel {
+        .btn-submit, .btn-cancel {
             padding: 0.75rem 1.5rem;
             border-radius: 4px;
             font-size: 1rem;
@@ -129,7 +152,7 @@
             min-width: 120px;
         }
 
-        button[type="submit"] {
+        .btn-submit {
             background: #007bff;
             color: white;
             border: none;
