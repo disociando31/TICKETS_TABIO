@@ -53,7 +53,7 @@
                     @endif
                     @if(auth()->user()->hasPermissionTo('gestionar_equipos'))
                         <li><a href="{{ route('equipos.index') }}">Gestionar Equipos</a></li>
-                        <li><a href="{{ route('equipos.create') }}">Crear Equipo</a></li>
+
                     @endif
                     @if(auth()->user()->hasPermissionTo('gestionar_reportes'))
                         <li><a href="#">Reportes</a></li>

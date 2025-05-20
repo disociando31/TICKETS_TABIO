@@ -22,13 +22,14 @@
     @endif
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="usuarios-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre Equipo</th>
                     <th>Dependencia</th>
                     <th>Fecha Adquisición</th>
+                    <th>Hardware</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -37,9 +38,20 @@
                     <tr>
                         <td>{{ $equipo->idEquipo }}</td>
                         <td>{{ $equipo->NombreEquipo }}</td>
-                        <td>{{ $equipo->dependencia->Dependencia }}</td>
+                        <td>{{ $equipo->dependencia->Dependencia ?? 'No asignada' }}</td>
                         <td>{{ $equipo->FechaAdquisicion }}</td>
-                        <td class="acciones-cell">
+                        <td>
+                            @if($equipo->hardware && $equipo->hardware->count() > 0)
+                                @foreach($equipo->hardware as $hw)
+                                    <div class="hardware-info">
+                                        <small>{{ $hw->Procesador ?? 'No especificado' }}</small>
+                                    </div>
+                                @endforeach
+                            @else
+                                <span class="no-data">Sin hardware registrado</span>
+                            @endif
+                        </td>
+                        <td>
                             <div class="acciones-grupo">
                                 <a href="{{ route('equipos.show', $equipo->idEquipo) }}" 
                                    class="btn-ver">
@@ -70,20 +82,6 @@
                                    class="btn-tickets">
                                     <i class="fas fa-ticket-alt"></i> Tickets
                                 </a>
-
-                                @can('gestionar_equipos')
-                                    <form action="{{ route('equipos.destroy', $equipo->idEquipo) }}" 
-                                          method="POST" 
-                                          class="form-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="btn-eliminar"
-                                                onclick="return confirm('¿Está seguro de eliminar este equipo?')">
-                                            <i class="fas fa-trash"></i> Eliminar
-                                        </button>
-                                    </form>
-                                @endcan
                             </div>
                         </td>
                     </tr>
@@ -92,4 +90,3 @@
         </table>
     </div>
 </div>
-@endsection
