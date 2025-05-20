@@ -15,6 +15,9 @@
                 @csrf
                 @method('PUT')
                 
+                <!-- Campo oculto para indicar la acción a realizar -->
+                <input type="hidden" name="action" id="form-action" value="save">
+                
                 <div class="form-group row mb-3">
                     <label for="Tipo" class="col-md-3 col-form-label">Tipo de Ticket</label>
                     <div class="col-md-9">
@@ -38,8 +41,6 @@
                     </div>
                 </div>
 
-                @if(auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Trabajador'))
-                <!-- Solo visible para Admin y Trabajador -->
                 <div class="form-group row mb-3">
                     <label for="Prioridad" class="col-md-3 col-form-label">Prioridad</label>
                     <div class="col-md-9">
@@ -54,6 +55,7 @@
                     </div>
                 </div>
 
+                @if(auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Trabajador'))
                 <div class="form-group row mb-3">
                     <label for="Estado" class="col-md-3 col-form-label">Estado</label>
                     <div class="col-md-9">
@@ -90,7 +92,6 @@
                     </div>
                 </div>
 
-                <!-- Nuevo campo para Cambios/Comentarios -->
                 <div class="form-group row mb-3">
                     <label for="Cambios" class="col-md-3 col-form-label">Comentarios adicionales</label>
                     <div class="col-md-9">
@@ -107,45 +108,51 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-9 offset-md-3">
-                        <button type="submit" class="btn btn-primary">
-                            Actualizar Ticket
+                        <button type="submit" class="btn btn-primary" onclick="document.getElementById('form-action').value='save'">
+                            Guardar
                         </button>
-                        <a href="{{ route('tickets.index') }}" class="btn btn-secondary">
-                            Cancelar
+                        
+                        @if($ticket->Tipo == 'Soporte')
+                            <button type="submit" class="btn btn-success ml-2" onclick="document.getElementById('form-action').value='continue_soporte'">
+                                {{ $ticket->soporte ? 'Continuar a editar Soporte' : 'Continuar a crear Soporte' }}
+                            </button>
+                        @elseif($ticket->Tipo == 'Solicitud de servicio')
+                            <button type="submit" class="btn btn-success ml-2" onclick="document.getElementById('form-action').value='continue_solicitud'">
+                                {{ $ticket->solicitud ? 'Continuar a editar Solicitud' : 'Continuar a crear Solicitud' }}
+                            </button>
+                        @endif
+                        
+                        <a href="{{ route('tickets.index') }}" class="btn btn-secondary ml-2">
+                            Volver al listado
                         </a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- Historial de cambios del ticket -->
-    @if(auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Trabajador'))
+    
+    @if($ticket->gestiones->count() > 0)
     <div class="card mt-4">
         <div class="card-header">Historial de cambios</div>
         <div class="card-body">
-            @if($ticket->gestiones->count() > 0)
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">Fecha/Hora</th>
+                            <th>Cambio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($ticket->gestiones->sortByDesc('idGestion') as $gestion)
                             <tr>
-                                <th>#</th>
-                                <th>Cambio</th>
+                                <td>{{ $gestion->created_at ? $gestion->created_at->format('d/m/Y H:i') : 'N/A' }}</td>
+                                <td>{{ $gestion->Cambios }}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($ticket->gestiones->sortByDesc('idGestion') as $gestion)
-                                <tr>
-                                    <td>{{ $gestion->idGestion }}</td>
-                                    <td>{{ $gestion->Cambios }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @else
-                <p>No hay cambios registrados para este ticket.</p>
-            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     @endif

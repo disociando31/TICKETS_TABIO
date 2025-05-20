@@ -18,9 +18,6 @@ class UpdateTicketRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      */
-    /**
- * Get the validation rules that apply to the request.
- */
     public function rules()
     {
         $user = $this->user();
@@ -30,6 +27,7 @@ class UpdateTicketRequest extends FormRequest
             return [
                 'Prioridad' => 'required|in:Prioritario,Urgente,Regular',
                 'Tipo' => 'required|in:Solicitud de servicio,Soporte',
+                'action' => 'nullable|string|in:save,continue_soporte,continue_solicitud', // Agregado
             ];
         } else if ($user->hasRole('Trabajador')) {
             return [
@@ -38,6 +36,7 @@ class UpdateTicketRequest extends FormRequest
                 'Estado' => 'required|in:Abierto,Cerrado',
                 'Descripcion' => 'required|string|max:255',
                 'Cambios' => 'nullable|string',
+                'action' => 'nullable|string|in:save,continue_soporte,continue_solicitud', // Agregado
                 // No incluimos idGestor en la validación para trabajadores
             ];
         } else {
@@ -49,6 +48,7 @@ class UpdateTicketRequest extends FormRequest
                 'Descripcion' => 'required|string|max:255',
                 'idGestor' => 'nullable|exists:users,idUsuario',
                 'Cambios' => 'nullable|string',
+                'action' => 'nullable|string|in:save,continue_soporte,continue_solicitud', // Agregado
             ];
         }
     }

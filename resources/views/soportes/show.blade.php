@@ -3,22 +3,31 @@
 @section('content')
 <div class="container">
     <div class="row mb-4">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h1>Soporte Técnico #{{ $soporte->idSoporte }}</h1>
             <h5>Ticket #{{ $soporte->ticket->idTicket }}</h5>
         </div>
-        <div class="col-md-4 text-right">
-            @if(auth()->user()->can('update', $soporte))
-                <a href="{{ route('soportes.edit', $soporte) }}" class="btn btn-warning">
-                    Editar Soporte
+        <div class="col-md-6 text-right">
+            <!-- Botones de acción -->
+            <div class="btn-group">
+                @if(auth()->user()->can('update', $soporte->ticket))
+                    <a href="{{ route('tickets.edit', $soporte->ticket) }}" class="btn btn-warning">
+                        Editar Ticket
+                    </a>
+                @endif
+                
+                @if(auth()->user()->can('update', $soporte))
+                    <a href="{{ route('soportes.edit', $soporte) }}" class="btn btn-primary ml-2">
+                        Editar Soporte
+                    </a>
+                @endif
+                
+                <a href="{{ route('tickets.index') }}" class="btn btn-secondary ml-2">
+                    Volver al listado
                 </a>
-            @endif
-            <a href="{{ route('tickets.index') }}" class="btn btn-secondary">
-                Volver al listado
-            </a>
+            </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4">

@@ -22,19 +22,27 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $tickets = Ticket::filtered($request)
-            ->when(Auth::user()->hasRole('Usuario'), function($q) {
-                return $q->where('idUsuario', Auth::id());
-            })
-            ->when(Auth::user()->hasRole('Trabajador'), function($q) {
-                return $q->where(function($subq) {
-                    $subq->where('idUsuario', Auth::id())
-                         ->orWhere('idGestor', Auth::id());
-                });
-            })
-            ->with(['usuario', 'gestor'])
-            ->latest('idTicket')
-            ->paginate(10);
+        $query = Ticket::filtered($request);
+        
+        // Restricción según rol:
+        $user = Auth::user();
+        
+        if ($user->hasRole('Usuario')) {
+            // Usuario normal solo ve sus propios tickets
+            $query->where('idUsuario', $user->idUsuario);
+        } elseif ($user->hasRole('Trabajador') && !$request->filled('creador_nombre')) {
+            // Trabajador ve los que creó y los que tiene asignados
+            // (a menos que se esté filtrando por nombre de creador)
+            $query->where(function($q) use ($user) {
+                $q->where('idUsuario', $user->idUsuario)
+                ->orWhere('idGestor', $user->idUsuario);
+            });
+        }
+        // El admin ve todos (no se aplica filtro adicional)
+        
+        $tickets = $query->with(['usuario', 'gestor'])
+                        ->latest('idTicket')
+                        ->paginate(10);
         
         return view('tickets.index', compact('tickets'));
     }
@@ -90,9 +98,9 @@ class TicketController extends Controller
         $ticket->load(['usuario', 'gestor']);
         return view('tickets.edit', compact('ticket'));
     }
-/**
- * Update the specified resource in storage.
- */
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         // Guardar valores originales para detectar cambios
@@ -101,21 +109,20 @@ class TicketController extends Controller
         $oldEstado = $ticket->Estado;
         $oldGestorId = $ticket->idGestor;
         
+        // Determinar la acción que se va a realizar
+        $action = $request->input('action', 'save');
+        
         // Si es usuario regular, solo actualiza tipo y prioridad
         if (Auth::user()->hasRole('Usuario')) {
             $ticket->Tipo = $request->Tipo;
             $ticket->Prioridad = $request->Prioridad;
         } else {
-            // Admin o Trabajador
-            // Cargamos los campos básicos
-            $ticket->Tipo = $request->Tipo;
-            $ticket->Prioridad = $request->Prioridad;
-            $ticket->Estado = $request->Estado;
-            $ticket->Descripcion = $request->Descripcion;
+            // Admin o Trabajador actualiza todo
+            $ticket->fill($request->validated());
             
             // Solo los administradores pueden cambiar el gestor
-            if (Auth::user()->hasRole('Administrador') && $request->filled('idGestor')) {
-                $ticket->idGestor = $request->idGestor;
+            if (!Auth::user()->hasRole('Administrador')) {
+                $ticket->idGestor = $oldGestorId;
             }
             
             // Si se cierra el ticket, registrar fecha de cierre
@@ -161,15 +168,38 @@ class TicketController extends Controller
             $ticket->registrarCambio($prefijo . $request->Cambios);
         }
         
-        // Si cambió el tipo, redirigir para crear nuevo detalle
+        // Si cambió el tipo, redirigir para crear nuevo detalle independientemente de la acción
         if ($oldTipo != $ticket->Tipo) {
             return $this->redirectToTypeForm($ticket);
         }
         
-        return redirect()->route('tickets.index')
+        // Redireccionar según la acción elegida
+        if ($action === 'continue_soporte' && $ticket->Tipo === Ticket::TIPO_SOPORTE) {
+            if ($ticket->soporte) {
+                // Redirigir a editar soporte existente
+                return redirect()->route('soportes.edit', $ticket->soporte)
                     ->with('success', 'Ticket actualizado correctamente.');
+            } else {
+                // Redirigir a crear nuevo soporte
+                return redirect()->route('soportes.create', $ticket)
+                    ->with('success', 'Ticket actualizado correctamente. Complete los detalles del soporte.');
+            }
+        } else if ($action === 'continue_solicitud' && $ticket->Tipo === Ticket::TIPO_SOLICITUD) {
+            if ($ticket->solicitud) {
+                // Redirigir a editar solicitud existente
+                return redirect()->route('solicitudes.edit', $ticket->solicitud)
+                    ->with('success', 'Ticket actualizado correctamente.');
+            } else {
+                // Redirigir a crear nueva solicitud
+                return redirect()->route('solicitudes.create', $ticket)
+                    ->with('success', 'Ticket actualizado correctamente. Complete los detalles de la solicitud.');
+            }
+        }
+        
+        // Por defecto, redirigir al listado
+        return redirect()->route('tickets.index')
+            ->with('success', 'Ticket actualizado correctamente.');
     }
-
     /**
      * Remove the specified resource from storage.
      */

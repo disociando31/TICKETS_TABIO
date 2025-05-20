@@ -96,6 +96,29 @@ class Ticket extends Model
         return $query
             ->when($request->tipo, fn($q) => $q->where('Tipo', $request->tipo))
             ->when($request->estado, fn($q) => $q->where('Estado', $request->estado))
-            ->when($request->prioridad, fn($q) => $q->where('Prioridad', $request->prioridad));
+            ->when($request->prioridad, fn($q) => $q->where('Prioridad', $request->prioridad))
+            
+            // Filtro por rango de fechas
+            ->when($request->fecha_desde, function($q) use ($request) {
+                return $q->whereDate('FechaCreacion', '>=', $request->fecha_desde);
+            })
+            ->when($request->fecha_hasta, function($q) use ($request) {
+                return $q->whereDate('FechaCreacion', '<=', $request->fecha_hasta);
+            })
+            
+            // Filtro por nombre de usuario creador
+            ->when($request->creador_nombre, function($q) use ($request) {
+                return $q->whereHas('usuario', function($query) use ($request) {
+                    $query->where('nombre', 'like', '%' . $request->creador_nombre . '%');
+                });
+            })
+            
+            // Filtro por usuario asignado
+            ->when($request->asignado, function($q) use ($request) {
+                if ($request->asignado == 'sin_asignar') {
+                    return $q->whereNull('idGestor');
+                }
+                return $q->where('idGestor', $request->asignado);
+            });
     }
 }
