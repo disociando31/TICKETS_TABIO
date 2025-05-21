@@ -954,7 +954,7 @@ class EquipoSeeder extends Seeder
             'SerialCPU' => '2CE40719C3',
             'Procesador' => 'Intel Core i7',
             'RAM' => '4 GB',
-            'HDD' => '465,76 GB',
+            'HDD' => '238,47 GB',
             'Monitor' => null,
             'SerialMonitor' => null,
             'Teclado' => null,
@@ -971,6 +971,748 @@ class EquipoSeeder extends Seeder
             'LicAntivirus' => 'XYZ987654',
             'SuiteOfimatica' => 'Professional',
         ]);
+
+         $equipo26 = Equipo::create([
+            'NombreEquipo' => 'pvdtabio-12',
+            'idDependencia' => 3, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo26->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo26->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProBook 450 G1',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '2CE40718GG',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '238,47 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo26->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo27 = Equipo::create([
+            'NombreEquipo' => 'pvdtabio-13',
+            'idDependencia' => 3, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo27->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo27->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProBook 450 G1',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '2CE4060M0S',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '238,47 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo27->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo28 = Equipo::create([
+            'NombreEquipo' => 'pvdtabio-14',
+            'idDependencia' => 3, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo28->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo28->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProBook 450 G1',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '2CE40718QC',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '238,47 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo28->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo29 = Equipo::create([
+            'NombreEquipo' => 'pvdtabio-16',
+            'idDependencia' => 3, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo29->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo29->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProBook 450 G1',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '2CE4060M06',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '238,47 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo29->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo30 = Equipo::create([
+            'NombreEquipo' => 'pvdtabio-18',
+            'idDependencia' => 3, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo30->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo30->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProBook 450 G1',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '2CE4071B25',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '465,76 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo30->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo31 = Equipo::create([
+            'NombreEquipo' => 'pvdtabio-admin',
+            'idDependencia' => 3, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo31->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo31->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProOne 600 G1 AiO',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'MXL4360QD9',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '238,47 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo31->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo32 = Equipo::create([
+            'NombreEquipo' => 'saara-cooragrop',
+            'idDependencia' => 4, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo32->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo32->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP EliteDesk 800 G1 SFF',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'MXL4330VNT',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '912,89 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo32->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo33 = Equipo::create([
+            'NombreEquipo' => 'saara-portagropecuaria',
+            'idDependencia' => 4, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo33->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo33->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'Aspire A315-57G',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'NXHZSAL00A13909DEF7600',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '238,47 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo33->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo34 = Equipo::create([
+            'NombreEquipo' => 'saara-secresaara',
+            'idDependencia' => 4, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo34->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo34->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'OptiPlex SFF Plus 7010',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '4739G24',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16 GB',
+            'HDD' => '1 408,45 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo34->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo35 = Equipo::create([
+            'NombreEquipo' => 'samb-cooragroamb',
+            'idDependencia' => 4, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo35->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo35->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP EliteDesk 800 G1 SFF',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'MXL433196R',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '1 378,64 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo35->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+        $equipo36 = Equipo::create([
+            'NombreEquipo' => 'samb-secaux',
+            'idDependencia' => 4, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo36->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo36->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProOne 400 G5 20.0-in All-in-One',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '8CG0151K3M',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '8 GB',
+            'HDD' => '447,13 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo36->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo37 = Equipo::create([
+            'NombreEquipo' => 'sdeyt-emprendimiento',
+            'idDependencia' => 5, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo37->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo37->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP Compaq Elite 8300 CMT',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'MXL30903JT',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '8 GB',
+            'HDD' => '912,89 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo37->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo38 = Equipo::create([
+            'NombreEquipo' => 'sdeyt-profturismo',
+            'idDependencia' => 5, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo38->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo38->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'OptiPlex SFF Plus 7010',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '6C69G24',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16 GB',
+            'HDD' => '1 408,45 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo38->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo39 = Equipo::create([
+            'NombreEquipo' => 'sdeyt-termales',
+            'idDependencia' => 5, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo39->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo39->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'OptiPlex SFF Plus 7020',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'CL47G24',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16 GB',
+            'HDD' => '942,69 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo39->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo40 = Equipo::create([
+            'NombreEquipo' => 'sdyt-secsdyt',
+            'idDependencia' => 5, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo40->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo40->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP Compaq Elite 8300 SFF',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'MXL3400QXS',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '4 GB',
+            'HDD' => '912,89 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo40->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo41 = Equipo::create([
+            'NombreEquipo' => 'servidorbase',
+            'idDependencia' => 6, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo41->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo41->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'PowerEdge R230',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '440F0Q2',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16 GB',
+            'HDD' => '1 862,49 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo41->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo42 = Equipo::create([
+            'NombreEquipo' => 'sg_ip_auxadm',
+            'idDependencia' => 7, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo42->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo42->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'HP ProOne 400 G4 20.0-in NT AiO',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '8CG9480B30',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '8 GB',
+            'HDD' => '447,13 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo42->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo43 = Equipo::create([
+            'NombreEquipo' => 'sg-auxadm-sec',
+            'idDependencia' => 7, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo43->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo43->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => '1051-800-0001',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '102SN50691',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16 GB',
+            'HDD' => '476,94 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo43->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo44 = Equipo::create([
+            'NombreEquipo' => 'sg-cf-aj',
+            'idDependencia' => 7, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo44->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo44->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => 'PCSGOB250-A v1',
+            'NumeroPlaca' => null,
+            'SerialCPU' => 'Z327118020006',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '8 GB',
+            'HDD' => '912,89 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo44->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+         $equipo45 = Equipo::create([
+            'NombreEquipo' => 'sg-cf-cf',
+            'idDependencia' => 7, // Asegúrate de que este ID exista en la tabla dependencias
+            'FechaAdquisicion' => date('Y-m-d H:i:s'),
+        ]);
+
+        $equipo45->configRed()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'MAC' => '00:1A:2B:3C:4D:5E',
+            'IP' => '12345',
+        ]);
+
+        $equipo45->hardware()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'ModeloCPU' => '1051-800-0001',
+            'NumeroPlaca' => null,
+            'SerialCPU' => '102SN50693',
+            'Procesador' => 'Intel Core i7',
+            'RAM' => '16 GB',
+            'HDD' => '476,94 GB',
+            'Monitor' => null,
+            'SerialMonitor' => null,
+            'Teclado' => null,
+            'SerialTeclado' => null,
+            'Mouse' => null,
+            'SerialMouse' => null,
+        ]);
+
+        $equipo45->software_instalados()->create([
+            'idEquipo' => $equipo->idEquipo,
+            'SistemaOperativo' => 'Windows 10',
+            'LicSuiteOfimatica' => 'ABC123456',
+            'Antivirus' => 'Norton',
+            'LicAntivirus' => 'XYZ987654',
+            'SuiteOfimatica' => 'Professional',
+        ]);
+
+
 
 
 
