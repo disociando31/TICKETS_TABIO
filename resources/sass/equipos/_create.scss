@@ -1,29 +1,79 @@
-.crear-usuario-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
+.crear-equipo-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 
     .header {
-        margin-bottom: 2rem;
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        padding: 2rem;
+        margin: 0;
+        border-radius: 0;
+        
         h1 {
-            color: #333;
-            font-size: 2rem;
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+    }
+
+    form {
+        padding: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+            display: block;
+            color: #374151;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+   }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            
+            &:focus {
+                outline: none;
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            }
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
         }
     }
 
     .error-container {
-        background-color: #fff3f3;
-        border-left: 4px solid #dc3545;
+        background-color: #fee2e2;
+        border-left: 4px solid #ef4444;
+        color: #991b1b;
         padding: 1rem;
-        margin-bottom: 2rem;
-        
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+        animation: slideIn 0.3s ease-out;
+
         ul {
-            list-style: none;
+            list-style-type: none;
             margin: 0;
             padding: 0;
-            
+
             li {
-                color: #dc3545;
                 margin-bottom: 0.5rem;
                 
                 &:last-child {
@@ -33,120 +83,86 @@
         }
     }
 
-    .form-group {
-        margin-bottom: 1.5rem;
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #495057;
-            font-weight: 500;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 1rem;
-
-            &:focus {
-                border-color: #80bdff;
-                outline: 0;
-                box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-            }
-        }
-    }
-
-    .section-title {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        button {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 1rem;
-
-            &:hover {
-                background: #218838;
-            }
-        }
-    }
-
-    .config-red-item,
-    .hardware-item,
-    .software-item {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 6px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        margin-bottom: 1rem;
-        position: relative;
-
-        button[onclick*="remove"] {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-
-            &:hover {
-                background: #c82333;
-            }
-        }
-    }
-
     .buttons-container {
-        margin-top: 2rem;
         display: flex;
         gap: 1rem;
+        margin-top: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
 
-        button, .btn-cancel {
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+        button, a {
+            width: 300px;
+            padding: 0.875rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
             font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
+            text-transform: uppercase;
+            display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 120px;
-        }
-
-        button[type="submit"] {
-            background: #007bff;
-            color: white;
+            transition: all 0.3s ease;
             border: none;
-
-            &:hover {
-                background: #0056b3;
+            cursor: pointer;
+            
+            i {
+                margin-right: 0.5rem;
             }
-        }
 
-        .btn-cancel {
-            background: #6c757d;
-            color: white;
-            border: none;
+            &.btn-primary {
+                background-color: #2563eb;
+                color: white;
+                
+                &:hover {
+                    background-color: #1d4ed8;
+                    transform: translateY(-2px);
+                }
+            }
 
-            &:hover {
-                background: #545b62;
+            &.btn-secondary {
+                background-color: #dc3545;
+                color: white;
+                text-decoration: none;
+                
+                &:hover {
+                    background-color: #bb2d3b;
+                    transform: translateY(-2px);
+                }
             }
         }
     }
-}
+
+    a {
+            background-color: #64748b;
+            color: white;
+            text-decoration: none;
+            
+            &:hover {
+                background-color: #475569;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        
+
+        .buttons-container {
+            flex-direction: column;
+            
+            button, a {
+                width: 100%;
+            }
+        }
+    }

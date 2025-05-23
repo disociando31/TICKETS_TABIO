@@ -42,22 +42,16 @@
                         <li><a href="{{ route('perfil') }}">Editar mi perfil</a></li>
                     @endif
                     @if(auth()->user()->hasPermissionTo('gestionar_tickets_propios'))
-                        <li><a href="#">Mis Tickets</a></li>
-                        <li><a href="#">Crear Ticket</a></li>
+                        <li><a href="{{ route('tickets.index') }}"> Tickets</a></li>
+                        <li><a href="{{ route('tickets.create') }}">Crear Ticket</a></li>
                     @endif
-                    @if(auth()->user()->hasPermissionTo('gestionar_todos_tickets'))
-                        <li><a href="#">Gestionar Todos los Tickets</a></li>
-                    @endif
-                    @if(auth()->user()->hasPermissionTo('asignar_tickets'))
-                        <li><a href="#">Asignar Tickets</a></li>
-                    @endif
+
                     @if(auth()->user()->hasPermissionTo('gestionar_equipos'))
                         <li><a href="{{ route('equipos.index') }}">Gestionar Equipos</a></li>
+                        <li><a href="{{ route('equipos.create') }}">Crear Equipos</a></li>
 
                     @endif
-                    @if(auth()->user()->hasPermissionTo('gestionar_reportes'))
-                        <li><a href="#">Reportes</a></li>
-                    @endif
+
                 </ul>
             </div>
         @endif

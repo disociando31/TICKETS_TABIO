@@ -9,22 +9,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Tiposasistencia
- * 
- * @property int $idTipoAsistencia
- * @property string $TipoAsistencia
- * @property string $Estado
- * 
- * @property Collection|Solicitude[] $solicitudes
- *
- * @package App\Models
- */
 class Tiposasistencia extends Model
 {
 	protected $table = 'tiposasistencia';
 	protected $primaryKey = 'idTipoAsistencia';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [
@@ -38,6 +27,6 @@ class Tiposasistencia extends Model
 
 	public function solicitudes()
 	{
-		return $this->hasMany(Solicitude::class, 'idTipoAsistencia');
+		return $this->hasMany(Solicitud::class, 'idTipoAsistencia');
 	}
 }

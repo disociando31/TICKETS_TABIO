@@ -17,6 +17,7 @@
 @import 'equipos/create';
 @import 'equipos/index';
 @import 'equipos/edit';
+@import 'hardware';
 
 /* Login Card */
 .card {
@@ -81,3 +82,14 @@ label {
 }
 
 @import 'usersviews/vistaCrearUsuario';
+
+.barra-superior-govco {
+    .btn-link {
+        font-size: 14px;
+        padding: 8px 16px;
+        
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

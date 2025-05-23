@@ -35,7 +35,7 @@
             margin-bottom: 0.5rem;
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #d1d5db;
@@ -47,6 +47,15 @@
                 border-color: #3b82f6;
                 box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
             }
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            width: 100%;
+            max-width: 100%;
+            font-family: inherit;
+            line-height: 1.5;
         }
 
         select {
@@ -226,6 +235,191 @@
                 font-size: 0.875rem;
                 font-weight: 500;
             }
+        }
+    }
+}
+
+    .ticket-info-section {
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        margin: 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+        h3 {
+            color: #2563eb;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+
+            .info-item {
+                &.full-width {
+                    grid-column: 1 / -1;
+                }
+
+                label {
+                    display: block;
+                    color: #6b7280;
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+
+                span {
+                    display: block;
+                    color: #111827;
+                    font-weight: 500;
+                    padding: 0.5rem;
+                    background-color: white;
+                    border-radius: 0.375rem;
+                    border: 1px solid #e5e7eb;
+
+                    &.badge {
+                        display: inline-block;
+                        padding: 0.5rem 1rem;
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            margin: 1rem;
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    }
+
+.historial-section {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h3 {
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .historial-table {
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        overflow: hidden;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th, td {
+                padding: 1rem;
+                text-align: left;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            th {
+                background-color: #f8f9fa;
+                font-weight: 600;
+                color: #374151;
+            }
+
+            td {
+                color: #4b5563;
+
+                &.fecha-column {
+                    width: 200px;
+                    white-space: nowrap;
+                    color: #6b7280;
+                    font-size: 0.9rem;
+                }
+
+                &.cambio-column {
+                    font-size: 0.95rem;
+                    line-height: 1.5;
+                }
+            }
+
+            tr {
+                &:hover {
+                    background-color: #f9fafb;
+                }
+
+                &:last-child {
+                    td {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        margin: 1rem 0;
+        padding: 1rem;
+
+        .historial-table {
+            overflow-x: auto;
+
+            table {
+                td.fecha-column {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+.checkbox-container {
+    margin-top: 1rem;
+
+    .custom-checkbox {
+        display: inline-flex;
+        align-items: center;
+        background-color: #f8fafc;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: #3b82f6;
+            background-color: #f0f9ff;
+        }
+
+        input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.25rem;
+            cursor: pointer;
+
+            &:checked {
+                background-color: #3b82f6;
+                border-color: #3b82f6;
+            }
+        }
+
+        label {
+            color: #374151;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
         }
     }
 }

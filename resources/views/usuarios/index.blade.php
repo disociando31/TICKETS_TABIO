@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-y@section('content')
+@section('content')
 <div class="usuarios-container">
     <div class="usuarios-header">
         <h1 class="usuarios-title">Listado de Usuarios</h1>
