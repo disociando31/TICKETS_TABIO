@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Eliminar estas líneas ya que están en app.blade.php -->
+{{-- @include('partials.gov') --}}
+{{-- @include('partials.breadcrumbs') --}}
+
 <div class="usuarios-container">
     <div class="usuarios-header">
         <h1>Listado de Equipos</h1>
@@ -82,6 +86,17 @@
                                    class="btn-tickets">
                                     <i class="fas fa-ticket-alt"></i> Tickets
                                 </a>
+
+                                <form action="{{ route('equipos.destroy', $equipo->idEquipo) }}" 
+                                      method="POST" 
+                                      class="delete-form"
+                                      onsubmit="return confirm('¿Está seguro de eliminar este equipo?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-eliminar">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -90,3 +105,4 @@
         </table>
     </div>
 </div>
+@endsection

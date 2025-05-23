@@ -130,4 +130,19 @@ class EquipoController extends Controller
 
     return redirect()->route('equipos.index')->with('success', 'Equipo actualizado exitosamente.');
     }
+
+    public function destroy($id)
+    {
+        $equipo = Equipo::findOrFail($id);
+
+        $equipo->hardware()->delete();
+        $equipo->software_instalados()->delete();
+        if ($equipo->configRed) {
+            $equipo->configRed()->delete();
+        }
+
+        $equipo->delete();
+
+        return redirect()->route('equipos.index')->with('success', 'Equipo eliminado.');
     }
+}

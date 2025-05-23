@@ -45,70 +45,17 @@
                                 <label>Dirección IP:</label>
                                 <span class="valor">{{ $config->IP }}</span>
                             </div>
-                            <div class="actions">
-                                <button type="button" 
-                                        class="btn-edit"
-                                        onclick="editConfigRed('{{ $config->MAC }}', '{{ $config->IP }}', {{ $config->id }})">
-                                    Editar
-                                </button>
-                                <form action="{{ route('configRed.destroy', $config->id) }}" 
-                                      method="POST" 
-                                      class="delete-form"
-                                      onsubmit="return confirm('¿Está seguro de eliminar esta configuración?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-delete">Eliminar</button>
-                                </form>
-                            </div>
                         </div>
                     @endforeach
                 </div>
             @endif
-
-            <button type="button" class="btn-add" onclick="showAddForm()">
-                + Agregar Nueva Configuración
-            </button>
         </div>
-    </div>
-
-    <!-- Formulario Modal para Agregar/Editar -->
-    <div id="configRedModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h3 id="modalTitle">Agregar Configuración de Red</h3>
-            <form id="configRedForm" method="POST">
-                @csrf
-                <input type="hidden" id="configId" name="configId">
-                <div class="form-group">
-                    <label for="MAC">Dirección MAC:</label>
-                    <input type="text" id="MAC" name="MAC" required>
-                </div>
-                <div class="form-group">
-                    <label for="IP">Dirección IP:</label>
-                    <input type="text" id="IP" name="IP" required>
-                </div>
-                <div class="buttons-container">
-                    <button type="submit" class="btn-submit">Guardar</button>
-                    <button type="button" class="btn-cancel" onclick="hideModal()">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="buttons-container">
-        <a href="{{ route('equipos.show', $equipo->idEquipo) }}" class="btn-back">
-            Volver al Equipo
-        </a>
     </div>
 </div>
 
+    <!-- Modificar el script -->
 <script>
-function showAddForm() {
-    document.getElementById('modalTitle').textContent = 'Agregar Configuración de Red';
-    document.getElementById('configRedForm').reset();
-    document.getElementById('configRedForm').action = "{{ route('configRed.store', $equipo->idEquipo) }}";
-    document.getElementById('configRedModal').style.display = 'block';
-}
-
+// Eliminar la función showAddForm
 function editConfigRed(mac, ip, id) {
     document.getElementById('modalTitle').textContent = 'Editar Configuración de Red';
     document.getElementById('MAC').value = mac;
