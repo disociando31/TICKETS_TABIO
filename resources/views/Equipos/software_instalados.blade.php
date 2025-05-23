@@ -6,7 +6,7 @@
         <h1 class="usuarios-title">Software Instalado - {{ $equipo->NombreEquipo }}</h1>
         @can('gestionar_equipos')
             
-                <i class="fas fa-plus"></i> Agregar Software
+               
             </a>
         @endcan
     </div>
