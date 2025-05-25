@@ -115,7 +115,7 @@ class TicketController extends Controller
         // Si es usuario regular, solo actualiza tipo y prioridad
         if (Auth::user()->hasRole('Usuario')) {
             $ticket->Tipo = $request->Tipo;
-            $ticket->Prioridad = $request->Prioridad;
+            $ticket->Descripcion = $request->Descripcion;
         } else {
             // Admin o Trabajador actualiza todo
             $ticket->fill($request->validated());

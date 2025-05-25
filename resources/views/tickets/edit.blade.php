@@ -41,6 +41,7 @@
             @enderror
         </div>
 
+        @if(auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Trabajador'))
         <div class="form-group">
             <label for="Prioridad">Prioridad:</label>
             <select name="Prioridad" id="Prioridad" class="@error('Prioridad') is-invalid @enderror" required>
@@ -52,8 +53,7 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-
-        @if(auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Trabajador'))
+        
         <div class="form-group">
             <label for="Estado">Estado:</label>
             <select name="Estado" id="Estado" class="@error('Estado') is-invalid @enderror" required>

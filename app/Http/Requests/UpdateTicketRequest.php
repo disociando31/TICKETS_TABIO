@@ -25,7 +25,7 @@ class UpdateTicketRequest extends FormRequest
         // Reglas diferentes según el rol
         if ($user->hasRole('Usuario')) {
             return [
-                'Prioridad' => 'required|in:Prioritario,Urgente,Regular',
+                'Descripcion' => 'required|string|max:255',
                 'Tipo' => 'required|in:Solicitud de servicio,Soporte',
                 'action' => 'nullable|string|in:save,continue_soporte,continue_solicitud', // Agregado
             ];
