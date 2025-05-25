@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container solicitud-edit">
     <div class="row mb-4">
         <div class="col-md-12">
             <h1>Editar Solicitud #{{ $solicitud->idSolicitud }}</h1>
