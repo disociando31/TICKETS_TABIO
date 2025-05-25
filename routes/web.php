@@ -95,3 +95,16 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->prefix('api')->group(function () {
     Route::post('/gestion-tickets', [GestionTicketController::class, 'store'])->name('api.gestion-tickets.store');
 });
+
+// Rutas de redirección para breadcrumbs
+Route::middleware(['auth'])->group(function () {
+    // Redireccionar /soportes a /tickets
+    Route::get('/soportes', function() {
+        return redirect()->route('tickets.index');
+    })->name('soportes.index');
+    
+    // Redireccionar /solicitudes a /tickets  
+    Route::get('/solicitudes', function() {
+        return redirect()->route('tickets.index');
+    })->name('solicitudes.index');
+});

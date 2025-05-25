@@ -46,6 +46,37 @@ class TicketController extends Controller
         
         return view('tickets.index', compact('tickets'));
     }
+    /**
+     * Display the specified resource (redirect to appropriate detail view).
+     */
+    public function show(Ticket $ticket)
+    {
+        // Cargar las relaciones necesarias
+        $ticket->load(['soporte', 'solicitud']);
+        
+        // Redirigir según el tipo de ticket y si tiene detalles
+        if ($ticket->Tipo === Ticket::TIPO_SOPORTE) {
+            if ($ticket->soporte) {
+                return redirect()->route('soportes.show', $ticket->soporte);
+            } else {
+                // Si no tiene soporte creado, redirigir a crear
+                return redirect()->route('soportes.create', $ticket)
+                    ->with('info', 'Complete los detalles del soporte para este ticket.');
+            }
+        } elseif ($ticket->Tipo === Ticket::TIPO_SOLICITUD) {
+            if ($ticket->solicitud) {
+                return redirect()->route('solicitudes.show', $ticket->solicitud);
+            } else {
+                // Si no tiene solicitud creada, redirigir a crear
+                return redirect()->route('solicitudes.create', $ticket)
+                    ->with('info', 'Complete los detalles de la solicitud para este ticket.');
+            }
+        }
+        
+        // Fallback: redirigir al listado si algo sale mal
+        return redirect()->route('tickets.index')
+            ->with('error', 'No se pudo determinar el tipo de ticket.');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -79,15 +110,6 @@ class TicketController extends Controller
         
         // Redireccionar según el tipo de ticket
         return $this->redirectToTypeForm($ticket);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Ticket $ticket)
-    {
-        $ticket->load(['usuario', 'gestor', 'gestiones']);
-        return view('tickets.show', compact('ticket'));
     }
 
     /**
