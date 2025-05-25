@@ -1,0 +1,183 @@
+// Estilos para la vista de detalles de solicitud
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h1 {
+        color: #3366cc;
+        margin-bottom: 0.5rem;
+    }
+
+    h5 {
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+}
+
+// Estilos para los botones de acción
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        
+        &.btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #000;
+            
+            &:hover {
+                background-color: darken(#ffc107, 10%);
+                border-color: darken(#ffc107, 10%);
+            }
+        }
+
+        &.btn-primary {
+            background-color: #3366cc;
+            border-color: #3366cc;
+            
+            &:hover {
+                background-color: darken(#3366cc, 10%);
+                border-color: darken(#3366cc, 10%);
+            }
+        }
+
+        &.btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            
+            &:hover {
+                background-color: darken(#6c757d, 10%);
+                border-color: darken(#6c757d, 10%);
+            }
+        }
+    }
+}
+
+// Estilos para las tarjetas
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        padding: 1rem;
+        font-weight: 600;
+        color: #3366cc;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+
+        .row.mb-2 {
+            margin-bottom: 1rem !important;
+            
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        .font-weight-bold {
+            font-weight: 600;
+            color: #495057;
+        }
+    }
+}
+
+// Estilos para los badges
+.badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+
+    &.bg-success {
+        background-color: #28a745 !important;
+    }
+
+    &.bg-secondary {
+        background-color: #6c757d !important;
+    }
+
+    &.bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    &.bg-warning {
+        background-color: #ffc107 !important;
+        color: #000;
+    }
+
+    &.bg-info {
+        background-color: #17a2b8 !important;
+    }
+}
+
+// Estilos para el historial de cambios
+.alert-info {
+    background-color: #e8f4f8;
+    border-color: #bee5eb;
+    color: #0c5460;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    .text-muted {
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+// Estilos para el formulario de cambios
+#add-cambio-form {
+    .form-group {
+        margin-bottom: 1rem;
+
+        label {
+            color: #495057;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+
+            &:focus {
+                border-color: #3366cc;
+                box-shadow: 0 0 0 0.2rem rgba(51, 102, 204, 0.25);
+            }
+        }
+    }
+
+    .btn-primary {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+
+        .btn {
+            width: 100%;
+            margin: 0.25rem 0;
+        }
+    }
+
+    .row {
+        .col-md-4, .col-md-8 {
+            padding: 0.5rem 15px;
+        }
+    }
+}
