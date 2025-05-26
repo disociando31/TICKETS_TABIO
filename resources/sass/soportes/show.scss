@@ -28,10 +28,31 @@
         display: flex;
         gap: 0.5rem;
         justify-content: flex-end;
+        align-items: center; // Añadido para alinear verticalmente
 
         .btn {
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0; // Elimina cualquier margen
+            
+            &.btn-warning, &.btn-secondary, &.btn-primary {
+                width: 200px;
+                flex: 0 0 200px;
+                align-self: center; // Asegura alineación vertical
+            }
+
+            text-align: center;
+            white-space: nowrap;
             
             &.btn-warning {
                 background-color: #ffc107;
@@ -47,6 +68,7 @@
             &.btn-primary {
                 background-color: #3366cc;
                 border-color: #3366cc;
+                color: #ffffff;
                 
                 &:hover {
                     background-color: darken(#3366cc, 10%);
@@ -57,6 +79,7 @@
             &.btn-secondary {
                 background-color: #6c757d;
                 border-color: #6c757d;
+                color: #ffffff;
                 
                 &:hover {
                     background-color: darken(#6c757d, 10%);
