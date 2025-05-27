@@ -13,20 +13,20 @@ class EquipoController extends Controller
     public function index()
     {
         $equipos = Equipo::with(['dependencia', 'configRed', 'hardware', 'software_instalados'])->get();
-        return view('equipos.index', compact('equipos'));
+        return view('Equipos.index', compact('equipos'));
     }
 
     public function create()
     {
         $dependencias = Dependencia::where('Estado', 'A')->get();
-        return view('equipos.create', compact('dependencias'));
+        return view('Equipos.create', compact('dependencias'));
     }
     
     public function edit($id)
     {
         $equipo = Equipo::with(['dependencia', 'configRed', 'hardware', 'software_instalados'])->findOrFail($id);
         $dependencias = Dependencia::where('Estado', 'A')->get();
-        return view('equipos.edit', compact('equipo', 'dependencias'));
+        return view('Equipos.edit', compact('equipo', 'dependencias'));
     }
     public function store(Request $request)
     {
@@ -48,37 +48,37 @@ class EquipoController extends Controller
             $equipo->software_instalados()->createMany($request->input('software_instalados'));
         }
 
-        return redirect()->route('equipos.index')->with('success', 'Equipo creado exitosamente.');
+        return redirect()->route('Equipos.index')->with('success', 'Equipo creado exitosamente.');
     }
 
     public function configRed($id)
     {
         $equipo = Equipo::with('configRed')->findOrFail($id);
-        return view('equipos.configRed', compact('equipo'));
+        return view('Equipos.configRed', compact('equipo'));
     }
 
     public function hardware($id)
     {
         $equipo = Equipo::with('hardware')->findOrFail($id);
-        return view('equipos.hardware', compact('equipo'));
+        return view('Equipos.hardware', compact('equipo'));
     }
 
     public function software_instalados($id)
     {
         $equipo = Equipo::with('software_instalados')->findOrFail($id);
-        return view('equipos.software_instalados', compact('equipo'));
+        return view('Equipos.software_instalados', compact('equipo'));
     }
 
     public function tickets($id)
     {
         $equipo = Equipo::with('tickets')->findOrFail($id);
-        return view('equipos.tickets', compact('equipo'));
+        return view('Equipos.tickets', compact('equipo'));
     }
 
     public function show($id)
     {
         $equipo = Equipo::with(['dependencia', 'configRed', 'hardware', 'software_instalados'])->findOrFail($id);
-        return view('equipos.show', compact('equipo'));
+        return view('Equipos.show', compact('equipo'));
     }
 
     public function update(Request $request, $id)
@@ -128,7 +128,7 @@ class EquipoController extends Controller
         }
     }
 
-    return redirect()->route('equipos.index')->with('success', 'Equipo actualizado exitosamente.');
+    return redirect()->route('Equipos.index')->with('success', 'Equipo actualizado exitosamente.');
     }
 
     public function destroy($id)
@@ -143,6 +143,6 @@ class EquipoController extends Controller
 
         $equipo->delete();
 
-        return redirect()->route('equipos.index')->with('success', 'Equipo eliminado.');
+        return redirect()->route('Equipos.index')->with('success', 'Equipo eliminado.');
     }
 }

@@ -36,7 +36,6 @@ class SoporteController extends Controller
         return view('soportes.create', compact('ticket', 'equipos'));
     }
 
-
     /**
      * Store a newly created resource in storage.
      */
@@ -48,6 +47,7 @@ class SoporteController extends Controller
         // Crear el soporte
         $soporte = new Soporte();
         $soporte->idTicket = $ticket->idTicket;
+        $soporte->idEquipo = $request->idEquipo; // Agregar esta línea
         $soporte->TipoEquipo = $request->TipoEquipo;
         $soporte->TipoSoporte = $request->TipoSoporte;
         $soporte->TipoMantenimiento = $request->TipoMantenimiento;
@@ -58,8 +58,15 @@ class SoporteController extends Controller
         if (($user->hasRole('Administrador') || $user->hasRole('Trabajador'))) {
             $prefijo = "[{$user->idUsuario}] {$user->nombre}: ";
             
+            // Incluir información del equipo si se asignó uno
+            $equipoInfo = '';
+            if ($soporte->idEquipo) {
+                $equipo = Equipo::find($soporte->idEquipo);
+                $equipoInfo = " - Equipo: {$equipo->NombreEquipo}";
+            }
+            
             // Registrar creación del soporte
-            $ticket->registrarCambio($prefijo . "Soporte creado: {$soporte->TipoSoporte} / {$soporte->TipoMantenimiento}");
+            $ticket->registrarCambio($prefijo . "Soporte creado: {$soporte->TipoSoporte} / {$soporte->TipoMantenimiento}" . $equipoInfo);
             
             // Registrar comentario personalizado si existe
             if ($request->filled('Cambios')) {
@@ -81,7 +88,8 @@ class SoporteController extends Controller
             'ticket', 
             'ticket.usuario', 
             'ticket.usuario.dependencia',
-            'ticket.gestiones'
+            'ticket.gestiones',
+            'equipo' // Agregar esta relación
         ]);
         
         return view('soportes.show', compact('soporte'));
@@ -93,9 +101,12 @@ class SoporteController extends Controller
     public function edit(Soporte $soporte)
     {
         // Cargar el ticket y sus relaciones
-        $soporte->load('ticket');
+        $soporte->load(['ticket', 'equipo']);
         
-        return view('soportes.edit', compact('soporte'));
+        // Consultar equipos disponibles para el formulario de edición
+        $equipos = Equipo::all();
+        
+        return view('soportes.edit', compact('soporte', 'equipos'));
     }
 
     /**
@@ -106,11 +117,13 @@ class SoporteController extends Controller
         $ticket = $soporte->ticket;
         
         // Guardar valores originales para detectar cambios
+        $oldIdEquipo = $soporte->idEquipo;
         $oldTipoEquipo = $soporte->TipoEquipo;
         $oldTipoSoporte = $soporte->TipoSoporte;
         $oldTipoMantenimiento = $soporte->TipoMantenimiento;
         
         // Actualizar soporte
+        $soporte->idEquipo = $request->idEquipo; // Agregar esta línea
         $soporte->TipoEquipo = $request->TipoEquipo;
         $soporte->TipoSoporte = $request->TipoSoporte;
         $soporte->TipoMantenimiento = $request->TipoMantenimiento;
@@ -122,17 +135,24 @@ class SoporteController extends Controller
             $prefijo = "[{$user->idUsuario}] {$user->nombre}: ";
             $cambios = [];
             
+            // Registrar cambio de equipo
+            if ($oldIdEquipo != $soporte->idEquipo) {
+                $oldEquipoNombre = $oldIdEquipo ? Equipo::find($oldIdEquipo)?->NombreEquipo : 'Ninguno';
+                $newEquipoNombre = $soporte->idEquipo ? Equipo::find($soporte->idEquipo)?->NombreEquipo : 'Ninguno';
+                $cambios[] = "Equipo: {$oldEquipoNombre} -> {$newEquipoNombre}";
+            }
+            
             // Registrar cambios en los tipos
             if ($oldTipoEquipo != $soporte->TipoEquipo) {
-                $cambios[] = "Equipo: {$oldTipoEquipo} -> {$soporte->TipoEquipo}";
+                $cambios[] = "Tipo Equipo: {$oldTipoEquipo} -> {$soporte->TipoEquipo}";
             }
             
             if ($oldTipoSoporte != $soporte->TipoSoporte) {
-                $cambios[] = "Soporte: {$oldTipoSoporte} -> {$soporte->TipoSoporte}";
+                $cambios[] = "Tipo Soporte: {$oldTipoSoporte} -> {$soporte->TipoSoporte}";
             }
             
             if ($oldTipoMantenimiento != $soporte->TipoMantenimiento) {
-                $cambios[] = "Mantenimiento: {$oldTipoMantenimiento} -> {$soporte->TipoMantenimiento}";
+                $cambios[] = "Tipo Mantenimiento: {$oldTipoMantenimiento} -> {$soporte->TipoMantenimiento}";
             }
             
             // Registrar cambios detectados

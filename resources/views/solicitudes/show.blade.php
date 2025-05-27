@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container solicitud-show">
+<div class="container soporte-container">
     <div class="row mb-4">
         <div class="col-md-6">
             <h1>Solicitud de Servicio #{{ $solicitud->idSolicitud }}</h1>

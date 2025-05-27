@@ -23,7 +23,7 @@ class DependenciaController extends Controller
     public function index()
     {
         $dependencias = Dependencia::all();
-        return view('dependencias.index', compact('dependencias'));
+        return view('Dependencias.index', compact('dependencias'));
     }
 
     /**
@@ -33,7 +33,7 @@ class DependenciaController extends Controller
      */
     public function create()
     {
-        return view('dependencias.create');
+        return view('Dependencias.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class DependenciaController extends Controller
     public function show($id)
     {
         $dependencia = Dependencia::findOrFail($id);
-        return view('dependencias.show', compact('dependencia'));
+        return view('Dependencias.show', compact('dependencia'));
     }
 
     /**
@@ -79,7 +79,7 @@ class DependenciaController extends Controller
     public function edit($id)
     {
         $dependencia = Dependencia::findOrFail($id);
-        return view('dependencias.edit', compact('dependencia'));
+        return view('Dependencias.edit', compact('dependencia'));
     }
 
     /**
@@ -108,7 +108,7 @@ class DependenciaController extends Controller
             'Estado' => $request->Estado
         ]);
 
-        return redirect()->route('dependencias.index')
+        return redirect()->route('Dependencias.index')
             ->with('success', 'Dependencia actualizada correctamente.');
     }
 
@@ -157,7 +157,7 @@ class DependenciaController extends Controller
         
         $dependencia->delete();
 
-        return redirect()->route('dependencias.index')
+        return redirect()->route('Dependencias.index')
             ->with('success', 'Dependencia eliminada correctamente.');
     }
 }

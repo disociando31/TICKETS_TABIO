@@ -87,6 +87,12 @@
             <div class="card mb-4">
                 <div class="card-header">Detalles del Soporte</div>
                 <div class="card-body">
+                    @if($soporte->equipo)
+                    <div class="row mb-2">
+                        <div class="col-md-4 font-weight-bold">Equipo Asignado:</div>
+                        <div class="col-md-8">{{ $soporte->equipo->NombreEquipo }}</div>
+                    </div>
+                    @endif
                     <div class="row mb-2">
                         <div class="col-md-4 font-weight-bold">Tipo de Equipo:</div>
                         <div class="col-md-8">{{ $soporte->TipoEquipo }}</div>

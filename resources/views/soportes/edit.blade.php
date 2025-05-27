@@ -50,6 +50,26 @@
         </div>
 
         <div class="form-group">
+            <label for="idEquipo">Equipo (Opcional)</label>
+            <select name="idEquipo" id="idEquipo" class="@error('idEquipo') is-invalid @enderror">
+                <option value="">Ninguno</option>
+                @foreach($equipos as $equipo)
+                    <option value="{{ $equipo->idEquipo }}" {{ $soporte->idEquipo == $equipo->idEquipo ? 'selected' : '' }}>
+                        {{ $equipo->NombreEquipo }} ({{ $equipo->dependencia->Dependencia ?? 'Sin dependencia' }})
+                    </option>
+                @endforeach
+            </select>
+            <small class="form-text text-muted">Seleccione un equipo específico si el soporte está relacionado a uno.</small>
+            @error('idEquipo')
+                <div class="error-container">
+                    <ul>
+                        <li>{{ $message }}</li>
+                    </ul>
+                </div>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label for="TipoSoporte">Tipo de Soporte</label>
             <select name="TipoSoporte" id="TipoSoporte" class="@error('TipoSoporte') is-invalid @enderror" required>
                 <option value="Solicitud" {{ $soporte->TipoSoporte == 'Solicitud' ? 'selected' : '' }}>Solicitud</option>
