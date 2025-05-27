@@ -4,9 +4,7 @@
 <div class="usuarios-container">
     <div class="usuarios-header">
         <h1>Listado de Roles</h1>
-        @can('gestionar_roles')
-            <a href="{{ route('roles.create') }}" class="btn-crear-usuario">Crear Nuevo Rol</a>
-        @endcan
+        {{-- Botón de crear removido ya que la funcionalidad está deshabilitada --}}
     </div>
     
     @if(session('success'))
@@ -56,10 +54,7 @@
                                     Ver
                                 </a>
                                 @can('gestionar_roles')
-                                    <a href="{{ route('roles.edit', $rol->id) }}" 
-                                       class="btn-editar">
-                                        Editar
-                                    </a>
+                                    {{-- Botón de editar removido ya que la funcionalidad está deshabilitada --}}
                                     <form action="{{ route('roles.toggle-estado', $rol->id) }}" 
                                           method="POST" 
                                           class="form-inline">

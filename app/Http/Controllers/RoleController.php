@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -18,6 +16,7 @@ class RoleController extends Controller
         $this->middleware('auth');
         $this->middleware('permission.active:gestionar_roles');
     }
+
     /**
      * Muestra un listado de los roles.
      *
@@ -31,51 +30,27 @@ class RoleController extends Controller
 
     /**
      * Muestra el formulario para crear un nuevo rol.
+     * DESHABILITADO - No se pueden crear nuevos roles.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $permisos = Permission::all();
-        return view('roles.create', compact('permisos'));
+        return redirect()->route('roles.index')
+            ->with('error', 'La creación de nuevos roles está deshabilitada.');
     }
 
-        /**
+    /**
      * Almacena un rol recién creado.
+     * DESHABILITADO - No se pueden crear nuevos roles.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name',
-            'permisos' => 'required|array',
-            'permisos.*' => 'exists:permissions,id'
-        ]);
-
-        DB::beginTransaction();
-        try {
-            // Crear el rol con el estado activo
-            $rol = Role::create([
-                'name' => $request->name,
-                'guard_name' => 'web',
-                'estado' => true
-            ]);
-
-            // Obtener los nombres de permisos a partir de los IDs
-            $permissionNames = Permission::whereIn('id', $request->permisos)->pluck('name')->toArray();
-            
-            // Asignar permisos
-            $rol->syncPermissions($permissionNames);
-            
-            DB::commit();
-            return redirect()->route('roles.index')
-                ->with('success', 'Rol creado correctamente.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->withErrors(['error' => 'Error al crear el rol: ' . $e->getMessage()]);
-        }
+        return redirect()->route('roles.index')
+            ->with('error', 'La creación de nuevos roles está deshabilitada.');
     }
 
     /**
@@ -94,21 +69,20 @@ class RoleController extends Controller
 
     /**
      * Muestra el formulario para editar un rol.
+     * DESHABILITADO - No se pueden editar roles.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $rol = Role::findOrFail($id);
-        $permisos = Permission::all();
-        $rolPermisos = $rol->permissions->pluck('id')->toArray();
-        
-        return view('roles.edit', compact('rol', 'permisos', 'rolPermisos'));
+        return redirect()->route('roles.index')
+            ->with('error', 'La edición de roles está deshabilitada. Solo puede activar/desactivar roles.');
     }
 
     /**
      * Actualiza el rol específico.
+     * DESHABILITADO - No se pueden editar roles.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -116,39 +90,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rol = Role::findOrFail($id);
-        
-        $request->validate([
-            'name' => [
-                'required', 
-                'string', 
-                'max:255',
-                Rule::unique('roles', 'name')->ignore($id)
-            ],
-            'permisos' => 'required|array',
-            'permisos.*' => 'exists:permissions,id'
-        ]);
-
-        DB::beginTransaction();
-        try {
-            // Actualizar el rol
-            $rol->name = $request->name;
-            $rol->save();
-
-            // Sincronizar permisos
-            $rol->syncPermissions($request->permisos);
-            
-            DB::commit();
-            return redirect()->route('roles.index')
-                ->with('success', 'Rol actualizado correctamente.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->withErrors(['error' => 'Error al actualizar el rol: ' . $e->getMessage()]);
-        }
+        return redirect()->route('roles.index')
+            ->with('error', 'La edición de roles está deshabilitada. Solo puede activar/desactivar roles.');
     }
 
     /**
      * Cambia el estado del rol (activar/desactivar).
+     * ÚNICA FUNCIONALIDAD PERMITIDA
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -176,7 +124,7 @@ class RoleController extends Controller
     }
 
     /**
-     * No permitimos eliminar roles, solo desactivarlos.
+     * No permitimos eliminar roles.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

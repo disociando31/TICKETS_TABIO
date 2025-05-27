@@ -33,7 +33,6 @@
                     @endif
                     @if(auth()->user()->hasPermissionTo('gestionar_roles'))
                         <li><a href="{{ route('roles.index') }}">Gestionar Roles</a></li>
-                        <li><a href="{{ route('roles.create') }}">Crear Rol</a></li>
                         <li><a href="{{ route('dependencias.index') }}">Gestionar Dependencias</a></li>
                         <li><a href="{{ route('dependencias.create') }}">Crear Dependencia</a></li>
                     @endif
