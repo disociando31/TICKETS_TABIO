@@ -3,111 +3,165 @@
 namespace App\Http\Controllers;
 
 use App\Models\Solicitud;
-use Illuminate\Http\Request;
-
-// If the model file does not exist, create it with:
-// php artisan make:model Solicitud
+use App\Models\Ticket;
+use App\Models\Tiposasistencia;
+use App\Http\Requests\StoreSolicitudRequest;
+use App\Http\Requests\UpdateSolicitudRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SolicitudController extends Controller
 {
-    /**
-     * Display a listing of the solicitudes.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        $solicitudes = Solicitud::with(['ticket', 'tipoAsistencia'])->get(); // Eager load relationships
-        return view('solicitudes.index', compact('solicitudes'));
+        $this->middleware('auth');
+        $this->authorizeResource(Solicitud::class, 'solicitud');
     }
 
     /**
-     * Show the form for creating a new solicitud.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Ticket $ticket)
     {
-        $tickets = \App\Models\Ticket::all(); // Get all tickets for the dropdown
-        $tiposAsistencia = \App\Models\TipoAsistencia::all(); // Get all tiposAsistencia
-        return view('solicitudes.create', compact('tickets', 'tiposAsistencia'));
+        $this->authorize('update', $ticket);
+        
+        // Verificar que el ticket sea de tipo Solicitud de servicio
+        if ($ticket->Tipo !== Ticket::TIPO_SOLICITUD) {
+            return redirect()->route('tickets.edit', $ticket)
+                ->with('error', 'Este ticket no es de tipo Solicitud de servicio.');
+        }
+        
+        // Obtener tipos de asistencia para el formulario
+        $tiposAsistencia = Tiposasistencia::where('Estado', 'A')->get();
+        
+        return view('solicitudes.create', compact('ticket', 'tiposAsistencia'));
     }
 
     /**
-     * Store a newly created solicitud in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSolicitudRequest $request)
     {
-        $request->validate([
-            'idTicket' => 'required|exists:tickets,idTicket',
-            'idTipoAsistencia' => 'required|exists:tiposasistencia,idTipoAsistencia',
-            'Aplicacion' => 'required',
-            'ElementosAfectados' => 'required',
-        ]);
-
-        Solicitud::create($request->all());
-
-        return redirect()->route('solicitudes.index')->with('success', 'Solicitud creada exitosamente.');
+        $ticket = Ticket::findOrFail($request->idTicket);
+        $this->authorize('update', $ticket);
+        
+        // Crear la solicitud
+        $solicitud = new Solicitud();
+        $solicitud->idTicket = $ticket->idTicket;
+        $solicitud->idTipoAsistencia = $request->idTipoAsistencia;
+        $solicitud->Aplicacion = $request->Aplicacion;
+        $solicitud->ElementosAfectados = $request->ElementosAfectados;
+        $solicitud->save();
+        
+        // Obtener el tipo de asistencia para el registro
+        $tipoAsistencia = Tiposasistencia::find($solicitud->idTipoAsistencia);
+        $tipoAsistenciaText = $tipoAsistencia ? $tipoAsistencia->TipoAsistencia : 'Desconocido';
+        
+        // Registrar la creación en la gestión del ticket
+        $user = Auth::user();
+        if (($user->hasRole('Administrador') || $user->hasRole('Trabajador'))) {
+            $prefijo = "[{$user->idUsuario}] {$user->nombre}: ";
+            
+            // Registrar creación de la solicitud
+            $ticket->registrarCambio($prefijo . "Solicitud creada: {$tipoAsistenciaText}");
+            
+            // Registrar comentario personalizado si existe
+            if ($request->filled('Cambios')) {
+                $ticket->registrarCambio($prefijo . $request->Cambios);
+            }
+        }
+        
+        return redirect()->route('solicitudes.show', $solicitud)
+                       ->with('success', 'Solicitud creada correctamente.');
     }
 
     /**
-     * Display the specified solicitud.
-     *
-     * @param  \App\Models\Solicitud  $solicitud
-     * @return \Illuminate\Http\Response
+     * Display the specified resource.
      */
     public function show(Solicitud $solicitud)
     {
-        $solicitud->load(['ticket', 'tipoAsistencia']); // Load relationships
+        // Cargar relaciones necesarias
+        $solicitud->load([
+            'ticket', 
+            'ticket.usuario', 
+            'ticket.usuario.dependencia', 
+            'tipoasistencia',
+            'ticket.gestiones'
+        ]);
+        
         return view('solicitudes.show', compact('solicitud'));
     }
 
     /**
-     * Show the form for editing the specified solicitud.
-     *
-     * @param  \App\Models\Solicitud  $solicitud
-     * @return \Illuminate\Http\Response
+     * Show the form for editing the specified resource.
      */
     public function edit(Solicitud $solicitud)
     {
-        $tickets = \App\Models\Ticket::all();
-        $tiposAsistencia = \App\Models\Tipoasistencia::all();
-        return view('solicitudes.edit', compact('solicitud', 'tickets', 'tiposAsistencia'));
+        // Cargar el ticket y sus relaciones
+        $solicitud->load(['ticket', 'tipoasistencia']);
+        
+        // Obtener tipos de asistencia para el formulario
+        $tiposAsistencia = Tiposasistencia::where('Estado', 'A')->get();
+        
+        return view('solicitudes.edit', compact('solicitud', 'tiposAsistencia'));
     }
 
     /**
-     * Update the specified solicitud in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Solicitud  $solicitud
-     * @return \Illuminate\Http\Response
+     * Update the specified resource in storage.
      */
-    public function update(Request $request, Solicitud $solicitud)
+    public function update(UpdateSolicitudRequest $request, Solicitud $solicitud)
     {
-        $request->validate([
-            'idTicket' => 'required|exists:tickets,idTicket',
-            'idTipoAsistencia' => 'required|exists:tiposasistencia,idTipoAsistencia',
-            'Aplicacion' => 'required',
-            'ElementosAfectados' => 'required',
-        ]);
-
-        $solicitud->update($request->all());
-
-        return redirect()->route('solicitudes.index')->with('success', 'Solicitud actualizada exitosamente.');
-    }
-
-    /**
-     * Remove the specified solicitud from storage.
-     *
-     * @param  \App\Models\Solicitud  $solicitud
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Solicitud $solicitud)
-    {
-        $solicitud->delete();
-        return redirect()->route('solicitudes.index')->with('success', 'Solicitud eliminada exitosamente.');
+        $ticket = $solicitud->ticket;
+        
+        // Guardar valores originales para detectar cambios
+        $oldTipoAsistenciaId = $solicitud->idTipoAsistencia;
+        $oldAplicacion = $solicitud->Aplicacion;
+        $oldElementosAfectados = $solicitud->ElementosAfectados;
+        
+        // Actualizar solicitud
+        $solicitud->idTipoAsistencia = $request->idTipoAsistencia;
+        $solicitud->Aplicacion = $request->Aplicacion;
+        $solicitud->ElementosAfectados = $request->ElementosAfectados;
+        $solicitud->save();
+        
+        // Registrar cambios en la gestión del ticket
+        $user = Auth::user();
+        if (($user->hasRole('Administrador') || $user->hasRole('Trabajador'))) {
+            $prefijo = "[{$user->idUsuario}] {$user->nombre}: ";
+            $cambios = [];
+            
+            // Registrar cambio de tipo de asistencia
+            if ($oldTipoAsistenciaId != $solicitud->idTipoAsistencia) {
+                $oldTipoAsistencia = Tiposasistencia::find($oldTipoAsistenciaId);
+                $newTipoAsistencia = Tiposasistencia::find($solicitud->idTipoAsistencia);
+                
+                $oldText = $oldTipoAsistencia ? $oldTipoAsistencia->TipoAsistencia : 'Desconocido';
+                $newText = $newTipoAsistencia ? $newTipoAsistencia->TipoAsistencia : 'Desconocido';
+                
+                $cambios[] = "Tipo de asistencia: {$oldText} -> {$newText}";
+            }
+            
+            // Registrar cambio de aplicación si es significativo
+            if ($oldAplicacion != $solicitud->Aplicacion) {
+                $cambios[] = "Aplicación actualizada";
+            }
+            
+            // Registrar cambio de elementos afectados si es significativo
+            if ($oldElementosAfectados != $solicitud->ElementosAfectados) {
+                $cambios[] = "Elementos afectados actualizados";
+            }
+            
+            // Registrar cambios detectados
+            if (!empty($cambios)) {
+                $ticket->registrarCambio($prefijo . "Actualización de solicitud: " . implode(', ', $cambios));
+            }
+            
+            // Registrar comentario personalizado si existe
+            if ($request->filled('Cambios')) {
+                $ticket->registrarCambio($prefijo . $request->Cambios);
+            }
+        }
+        
+        return redirect()->route('solicitudes.show', $solicitud)
+                       ->with('success', 'Solicitud actualizada correctamente.');
     }
 }

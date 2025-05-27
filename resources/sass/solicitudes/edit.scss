@@ -1,0 +1,74 @@
+.solicitud-edit {
+    .card {
+        width: 100%;
+        max-width: none;
+        margin: 0 0 1.5rem;
+        padding: 0;
+        background: #ffffff;
+        text-align: left;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem;
+            font-size: 1.1rem;
+            color: #3366cc;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+
+        &.bg-success { background-color: #28a745 !important; }
+        &.bg-secondary { background-color: #6c757d !important; }
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+
+        .form-control {
+            &:focus {
+                border-color: #3366cc;
+                box-shadow: 0 0 0 0.2rem rgba(51, 102, 204, 0.25);
+            }
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+    }
+
+    .form-check {
+        margin-top: 1rem;
+    }
+
+    .btn {
+        &.btn-primary {
+            background-color: #3366cc;
+            border-color: #3366cc;
+            
+            &:hover {
+                background-color: darken(#3366cc, 10%);
+                border-color: darken(#3366cc, 10%);
+            }
+        }
+
+        &.btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            margin-left: 0.5rem;
+            
+            &:hover {
+                background-color: darken(#6c757d, 10%);
+                border-color: darken(#6c757d, 10%);
+            }
+        }
+    }
+}

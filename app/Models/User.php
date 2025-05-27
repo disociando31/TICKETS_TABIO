@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Collection;
 
 class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
-    protected $table = 'users';
-    protected $primaryKey = 'idUsuario';
-    public $timestamps = false; // Igual que en Usuario
+    protected $table        = 'users';
+    protected $primaryKey   = 'idUsuario';
+    public    $incrementing = true;
+    public    $timestamps   = false;
+    protected $keyType      = 'int';
 
     protected $fillable = [
         'nombre',
@@ -29,32 +30,25 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'idUsuario' => 'int',
-        'idDependencia' => 'int'
+        'idUsuario'      => 'int',
+        'idDependencia'  => 'int',
     ];
 
-    public $incrementing = true;
-    protected $keyType = 'int';
-
-    // Relaciones
-
+    /** La dependencia/área a la que pertenece */
     public function dependencia()
     {
         return $this->belongsTo(Dependencia::class, 'idDependencia');
     }
 
-    public function gestion_solicitudes()
+    /** Tickets que este usuario ha creado */
+    public function ticketsCreados()
     {
-        return $this->hasMany(GestionSolicitude::class, 'idUsuario');
+        return $this->hasMany(Ticket::class, 'idUsuario', 'idUsuario');
     }
 
-    public function gestion_soportes()
+    /** Tickets que este usuario gestiona/soluciona */
+    public function ticketsGestionados()
     {
-        return $this->hasMany(GestionSoporte::class, 'idUsuario');
-    }
-
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class, 'idUsuario');
+        return $this->hasMany(Ticket::class, 'idGestor', 'idUsuario');
     }
 }

@@ -11,10 +11,76 @@ html {
 }
 
 .barra-superior-govco {
-  background-color: #3366cc;
-  width: 100%;
-  height: 3rem;
-  padding-left: 4.375rem;
+    position: relative;
+    width: 100%;
+    background-color: #3366CC;
+    padding: 8px 0;
+    text-align: center;
+    height: 48px; // Altura fija para la barra
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        height: 100%; // Asegura que el contenedor ocupe toda la altura
+    }
+
+    .btn-link {
+        font-size: 14px;
+        padding: 8px 16px;
+        color: #ffffff;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        margin: 0 auto;
+        
+        &:hover {
+            opacity: 0.8;
+            color: #ffffff;
+        }
+    }
+}
+
+// Estilos específicos para el dashboard
+.dashboard {
+    .barra-superior-govco {
+        padding: 8px 0;
+        height: 48px; // Altura fija igual que las otras vistas
+        
+        .container {
+            justify-content: center;
+            width: 100%;
+            align-items: center; // Centra verticalmente
+            height: 100%;
+        }
+
+        .btn-link {
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+    }
+}
+
+// Asegurarse de que otros estilos no afecten
+.solicitud-show,
+.solicitud-edit,
+.solicitud-create,
+.soporte-container {
+    .barra-superior-govco {
+        .container {
+            justify-content: center;
+        }
+        
+        .btn-link {
+            margin: 0 auto;
+        }
+    }
 }
 
 .barra-superior-govco a {

@@ -23,10 +23,10 @@ class UsersSeeder extends Seeder
             'telefono' => '3001234567',
             'idDependencia' => 1, // Asegúrate de que este ID exista en la tabla dependencias
         ]);
-        
+
         // Asignar rol de Administrador
         $admin->assignRole('Administrador');
-        
+
         // Crear usuario Trabajador
         $trabajador = User::create([
             'nombre' => 'Trabajador',
@@ -35,10 +35,10 @@ class UsersSeeder extends Seeder
             'telefono' => '3007654321',
             'idDependencia' => 1, // Asegúrate de que este ID exista en la tabla dependencias
         ]);
-        
+
         // Asignar rol de Trabajador
         $trabajador->assignRole('Trabajador');
-        
+
         // Crear usuario básico
         $usuario = User::create([
             'nombre' => 'Usuario',
@@ -47,8 +47,10 @@ class UsersSeeder extends Seeder
             'telefono' => '3009876543',
             'idDependencia' => 1, // Asegúrate de que este ID exista en la tabla dependencias
         ]);
-        
+
+
         // Asignar rol de Usuario
         $usuario->assignRole('Usuario');
+
     }
 }

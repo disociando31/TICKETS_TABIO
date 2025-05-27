@@ -1,0 +1,106 @@
+.solicitud-show {
+    .card {
+        width: 100%;
+        max-width: none;
+        margin: 0 0 1.5rem;
+        padding: 0;
+        background: #ffffff;
+        text-align: left;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem;
+            font-size: 1.1rem;
+            color: #3366cc;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+
+        .btn {
+            &.btn-warning {
+                background-color: #ffc107;
+                border-color: #ffc107;
+                color: #000;
+                
+                &:hover {
+                    background-color: darken(#ffc107, 10%);
+                    border-color: darken(#ffc107, 10%);
+                }
+            }
+
+            &.btn-primary {
+                background-color: #3366cc;
+                border-color: #3366cc;
+                
+                &:hover {
+                    background-color: darken(#3366cc, 10%);
+                    border-color: darken(#3366cc, 10%);
+                }
+            }
+
+            &.btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+                
+                &:hover {
+                    background-color: darken(#6c757d, 10%);
+                    border-color: darken(#6c757d, 10%);
+                }
+            }
+        }
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+
+        &.bg-success { background-color: #28a745 !important; }
+        &.bg-secondary { background-color: #6c757d !important; }
+        &.bg-danger { background-color: #dc3545 !important; }
+        &.bg-warning { 
+            background-color: #ffc107 !important;
+            color: #000;
+        }
+        &.bg-info { background-color: #17a2b8 !important; }
+    }
+
+    .alert-info {
+        background-color: #e8f4f8;
+        border-color: #bee5eb;
+        color: #0c5460;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    #add-cambio-form {
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-primary {
+            margin-top: 0.5rem;
+            background-color: #3366cc;
+            border-color: #3366cc;
+            
+            &:hover {
+                background-color: darken(#3366cc, 10%);
+                border-color: darken(#3366cc, 10%);
+            }
+        }
+    }
+}

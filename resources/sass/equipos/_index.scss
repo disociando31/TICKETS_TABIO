@@ -1,0 +1,97 @@
+.usuarios-container {
+    .acciones-grupo {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .btn-ver,
+        .btn-editar,
+        .btn-config,
+        .btn-hardware,
+        .btn-software,
+        .btn-tickets,
+        .btn-eliminar {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+
+            i {
+                font-size: 1rem;
+            }
+        }
+
+        .btn-ver { 
+            background: #17a2b8;
+            color: white;
+            &:hover { background: darken(#17a2b8, 10%); }
+        }
+
+        .btn-editar {
+            background: #ffc107;
+            color: #000;
+            &:hover { background: darken(#ffc107, 10%); }
+        }
+
+        .btn-config {
+            background: #6610f2;
+            color: white;
+            &:hover { background: darken(#6610f2, 10%); }
+        }
+
+        .btn-hardware {
+            background: #fd7e14;
+            color: white;
+            &:hover { background: darken(#fd7e14, 10%); }
+        }
+
+        .btn-software {
+            background: #20c997;
+            color: white;
+            &:hover { background: darken(#20c997, 10%); }
+        }
+
+        .btn-tickets {
+            background: #6f42c1;
+            color: white;
+            &:hover { background: darken(#6f42c1, 10%); }
+        }
+
+        .btn-eliminar {
+            background: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            &:hover { background: darken(#dc3545, 10%); }
+        }
+
+        .delete-form {
+            margin: 0;
+            padding: 0;
+            display: inline;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .acciones-grupo {
+            flex-direction: column;
+            align-items: stretch;
+            
+            .btn-ver,
+            .btn-editar,
+            .btn-config,
+            .btn-hardware,
+            .btn-software,
+            .btn-tickets,
+            .btn-eliminar {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    }
+}

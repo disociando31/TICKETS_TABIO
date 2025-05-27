@@ -52,6 +52,6 @@ class Equipo extends Model
 
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class, 'idEquipo');
+        return $this->hasMany(Soporte::class, 'idEquipo');
     }
 }

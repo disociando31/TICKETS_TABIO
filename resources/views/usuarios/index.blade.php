@@ -3,15 +3,21 @@
 @section('content')
 <div class="usuarios-container">
     <div class="usuarios-header">
-        <h1>Listado de Usuarios</h1>
+        <h1 class="usuarios-title">Listado de Usuarios</h1>
         @can('gestionar_usuarios')
-            <a href="{{ route('usuarios.create') }}" class="btn-crear-usuario">Crear Usuario</a>
+            <a href="{{ route('usuarios.create') }}" class="btn-crear">Crear Usuario</a>
         @endcan
     </div>
 
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
+    @if(session('success'))
+        <div class="alert alert-success">
             {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-error">
+            {{ session('error') }}
         </div>
     @endif
 
@@ -56,46 +62,56 @@
     </div>
 
     <!-- Tabla de usuarios -->
-    <table class="usuarios-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Username</th>
-                <th>Dependencia</th>
-                <th>Rol</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($usuarios as $usuario)
-            <tr>
-                <td>{{ $usuario->idUsuario }}</td>
-                <td>{{ $usuario->nombre }}</td>
-                <td>{{ $usuario->username }}</td>
-                <td>{{ $usuario->dependencia->Dependencia ?? 'N/A' }}</td>
-                <td>
-                    @foreach($usuario->roles as $role)
-                        <span class="badge-role">{{ $role->name }}</span>
-                    @endforeach
-                </td>
-                <td class="usuario-actions">
-                    <a href="{{ route('usuarios.show', $usuario->idUsuario) }}" class="btn-editar">Ver</a>
-                    
-                    @can('gestionar_usuarios')
-                    <a href="{{ route('usuarios.edit', $usuario->idUsuario) }}" class="btn-editar">Editar</a>
-                    
-                    <form action="{{ route('usuarios.destroy', $usuario->idUsuario) }}" method="POST" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn-eliminar" onclick="return confirm('¿Está seguro de eliminar este usuario?')">Eliminar</button>
-                    </form>
-                    @endcan
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="usuarios-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Username</th>
+                    <th>Dependencia</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($usuarios as $usuario)
+                <tr>
+                    <td>{{ $usuario->idUsuario }}</td>
+                    <td>{{ $usuario->nombre }}</td>
+                    <td>{{ $usuario->username }}</td>
+                    <td>{{ $usuario->dependencia->Dependencia ?? 'N/A' }}</td>
+                    <td>
+                        @foreach($usuario->roles as $role)
+                            <span class="badge-role">{{ $role->name }}</span>
+                        @endforeach
+                    </td>
+                    <td>
+                        <div class="acciones-grupo">
+                            <a href="{{ route('usuarios.show', $usuario->idUsuario) }}" class="btn-ver">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                            
+                            @can('gestionar_usuarios')
+                            <a href="{{ route('usuarios.edit', $usuario->idUsuario) }}" class="btn-editar">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            
+                            <form action="{{ route('usuarios.destroy', $usuario->idUsuario) }}" method="POST" class="form-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-eliminar" onclick="return confirm('¿Está seguro de eliminar este usuario?')">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </form>
+                            @endcan
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     
     <!-- Paginación -->
     <div class="d-flex justify-content-center mt-4">

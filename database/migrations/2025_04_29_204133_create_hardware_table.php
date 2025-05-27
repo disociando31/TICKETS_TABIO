@@ -14,18 +14,19 @@ return new class extends Migration
         Schema::create('hardware', function (Blueprint $table) {
             $table->increments('idHardware');
             $table->unsignedInteger('idEquipo')->index('fk_hardware_equipos');
-            $table->string('NumeroPlaca');
+            $table->string('NumeroPlaca')->nullable();
             $table->string('ModeloCPU');
             $table->string('SerialCPU');
             $table->string('Procesador');
             $table->string('RAM');
             $table->string('HDD');
-            $table->string('Monitor');
-            $table->string('SerialMonitor');
-            $table->string('Teclado');
-            $table->string('SerialTeclado');
-            $table->string('Mouse');
-            $table->string('SerialMouse');
+            $table->string('Monitor')->nullable();
+            $table->string('SerialMonitor')->nullable();
+            $table->string('Teclado')->nullable();
+            $table->string('SerialTeclado')->nullable();
+            $table->string('Mouse')->nullable();
+            $table->string('SerialMouse')->nullable()
+            ;
         });
     }
 

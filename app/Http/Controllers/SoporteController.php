@@ -3,126 +3,150 @@
 namespace App\Http\Controllers;
 
 use App\Models\Soporte;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
+use App\Models\Ticket;
+use App\Models\Equipo;
+use App\Http\Requests\StoreSoporteRequest;
+use App\Http\Requests\UpdateSoporteRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SoporteController extends Controller
 {
-    /**
-     * Muestra una lista de todos los soportes.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        $soportes = Soporte::all();
-        return view('soportes.index', compact('soportes')); // Asume que tienes una vista en 'resources/views/soportes/index.blade.php'
+        $this->middleware('auth');
+        $this->authorizeResource(Soporte::class, 'soporte');
     }
 
     /**
-     * Muestra el formulario para crear un nuevo soporte.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Ticket $ticket)
     {
-        // Aquí podrías pasar datos necesarios para el formulario, como listas de selección.
-        return view('soportes.create'); // Asume que tienes una vista en 'resources/views/soportes/create.blade.php'
-    }
-
-    /**
-     * Guarda un nuevo soporte en la base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        try {
-            $request->validate([
-                'idTicket' => 'nullable|integer|exists:tickets,idTicket',
-                'TipoEquipo' => 'required|in:Impresora,Scanner,Monitor,CPU,Otro',
-                'TipoSoporte' => 'required|in:Solicitud,Diagnostico,Baja,Otro',
-                'TipoMantenimiento' => 'required|in:Preventivo,Correctivo',
-            ]);
-
-            Soporte::create($request->all());
-
-            return redirect()->route('soportes.index')->with('success', 'Soporte creado exitosamente.');
-        } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->validator)->withInput();
-        } catch (\Exception $e) {
-            Log::error('Error al crear soporte: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Ocurrió un error al crear el soporte.');
+        $this->authorize('update', $ticket);
+        
+        // Verificar que el ticket sea de tipo Soporte
+        if ($ticket->Tipo !== Ticket::TIPO_SOPORTE) {
+            return redirect()->route('tickets.edit', $ticket)
+                ->with('error', 'Este ticket no es de tipo Soporte.');
         }
+        
+        // Consultar equipos disponibles
+        $equipos = Equipo::all();
+        
+        return view('soportes.create', compact('ticket', 'equipos'));
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreSoporteRequest $request)
+    {
+        $ticket = Ticket::findOrFail($request->idTicket);
+        $this->authorize('update', $ticket);
+        
+        // Crear el soporte
+        $soporte = new Soporte();
+        $soporte->idTicket = $ticket->idTicket;
+        $soporte->TipoEquipo = $request->TipoEquipo;
+        $soporte->TipoSoporte = $request->TipoSoporte;
+        $soporte->TipoMantenimiento = $request->TipoMantenimiento;
+        $soporte->save();
+        
+        // Registrar la creación en la gestión del ticket
+        $user = Auth::user();
+        if (($user->hasRole('Administrador') || $user->hasRole('Trabajador'))) {
+            $prefijo = "[{$user->idUsuario}] {$user->nombre}: ";
+            
+            // Registrar creación del soporte
+            $ticket->registrarCambio($prefijo . "Soporte creado: {$soporte->TipoSoporte} / {$soporte->TipoMantenimiento}");
+            
+            // Registrar comentario personalizado si existe
+            if ($request->filled('Cambios')) {
+                $ticket->registrarCambio($prefijo . $request->Cambios);
+            }
+        }
+        
+        return redirect()->route('soportes.show', $soporte)
+                       ->with('success', 'Soporte creado correctamente.');
     }
 
     /**
-     * Muestra los detalles de un soporte específico.
-     *
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
+     * Display the specified resource.
      */
     public function show(Soporte $soporte)
     {
-        return view('soportes.show', compact('soporte')); // Asume que tienes una vista en 'resources/views/soportes/show.blade.php'
+        // Cargar relaciones necesarias
+        $soporte->load([
+            'ticket', 
+            'ticket.usuario', 
+            'ticket.usuario.dependencia',
+            'ticket.gestiones'
+        ]);
+        
+        return view('soportes.show', compact('soporte'));
     }
 
     /**
-     * Muestra el formulario para editar un soporte existente.
-     *
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
+     * Show the form for editing the specified resource.
      */
     public function edit(Soporte $soporte)
     {
-        // Aquí podrías pasar datos necesarios para el formulario de edición.
-        return view('soportes.edit', compact('soporte')); // Asume que tienes una vista en 'resources/views/soportes/edit.blade.php'
+        // Cargar el ticket y sus relaciones
+        $soporte->load('ticket');
+        
+        return view('soportes.edit', compact('soporte'));
     }
 
     /**
-     * Actualiza un soporte existente en la base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
+     * Update the specified resource in storage.
      */
-    public function update(Request $request, Soporte $soporte)
+    public function update(UpdateSoporteRequest $request, Soporte $soporte)
     {
-        try {
-            $request->validate([
-                'idTicket' => 'nullable|integer|exists:tickets,idTicket',
-                'TipoEquipo' => 'required|in:Impresora,Scanner,Monitor,CPU,Otro',
-                'TipoSoporte' => 'required|in:Solicitud,Diagnostico,Baja,Otro',
-                'TipoMantenimiento' => 'required|in:Preventivo,Correctivo',
-            ]);
-
-            $soporte->update($request->all());
-
-            return redirect()->route('soportes.index')->with('success', 'Soporte actualizado exitosamente.');
-        } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->validator)->withInput();
-        } catch (\Exception $e) {
-            Log::error('Error al actualizar soporte: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Ocurrió un error al actualizar el soporte.');
+        $ticket = $soporte->ticket;
+        
+        // Guardar valores originales para detectar cambios
+        $oldTipoEquipo = $soporte->TipoEquipo;
+        $oldTipoSoporte = $soporte->TipoSoporte;
+        $oldTipoMantenimiento = $soporte->TipoMantenimiento;
+        
+        // Actualizar soporte
+        $soporte->TipoEquipo = $request->TipoEquipo;
+        $soporte->TipoSoporte = $request->TipoSoporte;
+        $soporte->TipoMantenimiento = $request->TipoMantenimiento;
+        $soporte->save();
+        
+        // Registrar cambios en la gestión del ticket
+        $user = Auth::user();
+        if (($user->hasRole('Administrador') || $user->hasRole('Trabajador'))) {
+            $prefijo = "[{$user->idUsuario}] {$user->nombre}: ";
+            $cambios = [];
+            
+            // Registrar cambios en los tipos
+            if ($oldTipoEquipo != $soporte->TipoEquipo) {
+                $cambios[] = "Equipo: {$oldTipoEquipo} -> {$soporte->TipoEquipo}";
+            }
+            
+            if ($oldTipoSoporte != $soporte->TipoSoporte) {
+                $cambios[] = "Soporte: {$oldTipoSoporte} -> {$soporte->TipoSoporte}";
+            }
+            
+            if ($oldTipoMantenimiento != $soporte->TipoMantenimiento) {
+                $cambios[] = "Mantenimiento: {$oldTipoMantenimiento} -> {$soporte->TipoMantenimiento}";
+            }
+            
+            // Registrar cambios detectados
+            if (!empty($cambios)) {
+                $ticket->registrarCambio($prefijo . "Actualización de soporte: " . implode(', ', $cambios));
+            }
+            
+            // Registrar comentario personalizado si existe
+            if ($request->filled('Cambios')) {
+                $ticket->registrarCambio($prefijo . $request->Cambios);
+            }
         }
-    }
-
-    /**
-     * Elimina un soporte de la base de datos.
-     *
-     * @param  \App\Models\Soporte  $soporte
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Soporte $soporte)
-    {
-        try {
-            $soporte->delete();
-            return redirect()->route('soportes.index')->with('success', 'Soporte eliminado exitosamente.');
-        } catch (\Exception $e) {
-            Log::error('Error al eliminar soporte: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Ocurrió un error al eliminar el soporte.');
-        }
+        
+        return redirect()->route('soportes.show', $soporte)
+                       ->with('success', 'Soporte actualizado correctamente.');
     }
 }

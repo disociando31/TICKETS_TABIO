@@ -1,0 +1,168 @@
+.crear-equipo-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    .header {
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        padding: 2rem;
+        margin: 0;
+        border-radius: 0;
+        
+        h1 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+    }
+
+    form {
+        padding: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+            display: block;
+            color: #374151;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+   }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            
+            &:focus {
+                outline: none;
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            }
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+    }
+
+    .error-container {
+        background-color: #fee2e2;
+        border-left: 4px solid #ef4444;
+        color: #991b1b;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+        animation: slideIn 0.3s ease-out;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin-bottom: 0.5rem;
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .buttons-container {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+
+        button, a {
+            width: 300px;
+            padding: 0.875rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            
+            i {
+                margin-right: 0.5rem;
+            }
+
+            &.btn-primary {
+                background-color: #2563eb;
+                color: white;
+                
+                &:hover {
+                    background-color: #1d4ed8;
+                    transform: translateY(-2px);
+                }
+            }
+
+            &.btn-secondary {
+                background-color: #dc3545;
+                color: white;
+                text-decoration: none;
+                
+                &:hover {
+                    background-color: #bb2d3b;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+    }
+
+    a {
+            background-color: #64748b;
+            color: white;
+            text-decoration: none;
+            
+            &:hover {
+                background-color: #475569;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        
+
+        .buttons-container {
+            flex-direction: column;
+            
+            button, a {
+                width: 100%;
+            }
+        }
+    }

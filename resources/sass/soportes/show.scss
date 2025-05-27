@@ -1,0 +1,158 @@
+// Estilos específicos para la vista de soportes
+.soporte-container {
+    .card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: none;
+        background: #ffffff;
+        padding: 0;
+        text-align: left;
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem;
+            font-size: 1.1rem;
+            color: #3366cc;
+            margin-bottom: 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        align-items: center; // Añadido para alinear verticalmente
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0; // Elimina cualquier margen
+            
+            &.btn-warning, &.btn-secondary, &.btn-primary {
+                width: 200px;
+                flex: 0 0 200px;
+                align-self: center; // Asegura alineación vertical
+            }
+
+            text-align: center;
+            white-space: nowrap;
+            
+            &.btn-warning {
+                background-color: #ffc107;
+                border-color: #ffc107;
+                color: #000;
+                
+                &:hover {
+                    background-color: darken(#ffc107, 10%);
+                    border-color: darken(#ffc107, 10%);
+                }
+            }
+
+            &.btn-primary {
+                background-color: #3366cc;
+                border-color: #3366cc;
+                color: #ffffff;
+                
+                &:hover {
+                    background-color: darken(#3366cc, 10%);
+                    border-color: darken(#3366cc, 10%);
+                }
+            }
+
+            &.btn-secondary {
+                background-color: #6c757d;
+                border-color: #6c757d;
+                color: #ffffff;
+                
+                &:hover {
+                    background-color: darken(#6c757d, 10%);
+                    border-color: darken(#6c757d, 10%);
+                }
+            }
+        }
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+
+        &.bg-success {
+            background-color: #28a745 !important;
+        }
+
+        &.bg-secondary {
+            background-color: #6c757d !important;
+        }
+
+        &.bg-danger {
+            background-color: #dc3545 !important;
+        }
+
+        &.bg-warning {
+            background-color: #ffc107 !important;
+            color: #000;
+        }
+
+        &.bg-info {
+            background-color: #17a2b8 !important;
+        }
+    }
+
+    .font-weight-bold {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .alert-info {
+        background-color: #e8f4f8;
+        border-color: #bee5eb;
+        color: #0c5460;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        .text-muted {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    #add-cambio-form {
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 0.5rem;
+            background-color: #3366cc;
+            border-color: #3366cc;
+            
+            &:hover {
+                background-color: darken(#3366cc, 10%);
+                border-color: darken(#3366cc, 10%);
+            }
+        }
+    }
+}

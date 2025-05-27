@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DependenciaController;
-
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\SoporteController;
+use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\Api\GestionSoporteController;
+use App\Http\Controllers\Api\GestionTicketController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,4 +66,45 @@ Route::middleware(['auth', 'role.active:Administrador'])->group(function () {
     Route::resource('dependencias', DependenciaController::class);
     Route::patch('/dependencias/{id}/toggle-estado', [DependenciaController::class, 'toggleEstado'])
          ->name('dependencias.toggle-estado');
+});
+
+// Rutas para tickets
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tickets', TicketController::class);
+});
+
+// Rutas para Soporte
+Route::middleware(['auth'])->group(function () {
+    Route::get('/soportes/create/{ticket}', [SoporteController::class, 'create'])->name('soportes.create');
+    Route::post('/soportes', [SoporteController::class, 'store'])->name('soportes.store');
+    Route::get('/soportes/{soporte}', [SoporteController::class, 'show'])->name('soportes.show');
+    Route::get('/soportes/{soporte}/edit', [SoporteController::class, 'edit'])->name('soportes.edit');
+    Route::put('/soportes/{soporte}', [SoporteController::class, 'update'])->name('soportes.update');
+});
+
+// Rutas para Solicitud
+Route::middleware(['auth'])->group(function () {
+    Route::get('/solicitudes/create/{ticket}', [SolicitudController::class, 'create'])->name('solicitudes.create');
+    Route::post('/solicitudes', [SolicitudController::class, 'store'])->name('solicitudes.store');
+    Route::get('/solicitudes/{solicitud}', [SolicitudController::class, 'show'])->name('solicitudes.show');
+    Route::get('/solicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->name('solicitudes.edit');
+    Route::put('/solicitudes/{solicitud}', [SolicitudController::class, 'update'])->name('solicitudes.update');
+});
+
+// Rutas para API Gestión de Tickets
+Route::middleware(['auth'])->prefix('api')->group(function () {
+    Route::post('/gestion-tickets', [GestionTicketController::class, 'store'])->name('api.gestion-tickets.store');
+});
+
+// Rutas de redirección para breadcrumbs
+Route::middleware(['auth'])->group(function () {
+    // Redireccionar /soportes a /tickets
+    Route::get('/soportes', function() {
+        return redirect()->route('tickets.index');
+    })->name('soportes.index');
+    
+    // Redireccionar /solicitudes a /tickets  
+    Route::get('/solicitudes', function() {
+        return redirect()->route('tickets.index');
+    })->name('solicitudes.index');
 });

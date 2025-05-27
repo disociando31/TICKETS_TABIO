@@ -1,0 +1,71 @@
+services:
+  app:
+    build:
+      context: .          # Laravel app is here
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/usr/share/nginx/html/storage:rw
+      - ./public:/usr/share/nginx/html/public:rw
+
+  queue-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: php artisan queue:work
+    environment:
+      IS_WORKER: "true"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./storage:/usr/share/nginx/html/storage:rw
+      - ./public:/usr/share/nginx/html/public:rw
+
+  nginx:
+    image: nginx:1-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./storage:/usr/share/nginx/html/storage:ro
+      - ./public:/usr/share/nginx/html/public:ro
+
+  db:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=tickets_db
+      - MYSQL_USER=tickets_user
+      - MYSQL_PASSWORD=tickets_password
+      - MYSQL_ROOT_PASSWORD=your_root_password_here
+
+  redis:
+    image: bitnami/redis:7.2
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - redis-data:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=redis
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+
+volumes:
+  db-data:
+  redis-data:
