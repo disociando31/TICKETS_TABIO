@@ -52,25 +52,5 @@ class UsersSeeder extends Seeder
         // Asignar rol de Usuario
         $usuario->assignRole('Usuario');
 
-        $usuario2 = User::create([
-            'nombre' => 'Carlos Perez',
-            'username' => 'Carlos',
-            'password' => Hash::make('usuario456'),
-            'telefono' => '3004567890',
-            'idDependencia' => 1,
-        ]);
-
-        $usuario2->assignRole('Usuario');
-
-        
-        $usuario3 = User::create([
-            'nombre' => 'Valeria Martinez',
-            'username' => 'valeria',
-            'password' => Hash::make('usuario789'),
-            'telefono' => '3001122334',
-            'idDependencia' => 1,
-        ]);
-        $usuario3->assignRole('Usuario');
-
     }
 }

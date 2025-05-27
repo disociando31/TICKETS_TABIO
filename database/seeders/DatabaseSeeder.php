@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RolesYPermisosSeeder::class,      
             UsersSeeder::class,   
             EquipoSeeder::class,
+            TiposAsistenciaSeeder::class,
         ]);
     }
 }
