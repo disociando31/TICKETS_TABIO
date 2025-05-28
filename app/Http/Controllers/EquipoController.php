@@ -200,6 +200,6 @@ class EquipoController extends Controller
 
         $equipo->delete();
 
-        return redirect()->route('Equipos.index')->with('success', 'Equipo eliminado.');
+        return redirect()->route('equipos.index')->with('success', 'Equipo eliminado.');
     }
 }

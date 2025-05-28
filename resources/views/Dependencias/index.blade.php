@@ -65,18 +65,6 @@
                                         {{ $dependencia->Estado == 'A' ? 'Desactivar' : 'Activar' }}
                                     </button>
                                 </form>
-
-                                <form action="{{ route('dependencias.destroy', $dependencia->idDependencia) }}" 
-                                      method="POST" 
-                                      style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                            class="btn-eliminar"
-                                            onclick="return confirm('¿Está seguro de eliminar esta dependencia?')">
-                                        <i class="fas fa-trash"></i> Eliminar
-                                    </button>
-                                </form>
                             </div>
                         </td>
                     </tr>

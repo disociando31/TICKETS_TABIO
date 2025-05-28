@@ -137,27 +137,15 @@ class DependenciaController extends Controller
 
     /**
      * Elimina la dependencia específica.
+     * DESHABILITADO - No se pueden eliminar dependencias.
      *
      * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $dependencia = Dependencia::findOrFail($id);
-        
-        // Verificar si hay usuarios asociados
-        if ($dependencia->usuarios()->count() > 0) {
-            return back()->withErrors(['error' => 'No se puede eliminar esta dependencia porque hay usuarios asociados.']);
-        }
-        
-        // Verificar si hay equipos asociados
-        if ($dependencia->equipos()->count() > 0) {
-            return back()->withErrors(['error' => 'No se puede eliminar esta dependencia porque hay equipos asociados.']);
-        }
-        
-        $dependencia->delete();
-
-        return redirect()->route('Dependencias.index')
-            ->with('success', 'Dependencia eliminada correctamente.');
+        return redirect()->route('dependencias.index')
+            ->with('error', 'La eliminación de dependencias está deshabilitada por seguridad del sistema.');
     }
+
 }

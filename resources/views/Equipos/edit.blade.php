@@ -62,138 +62,261 @@
         <div class="form-section">
             <h3>Configuración de Red</h3>
             <div id="configRed-container">
-                @forelse($equipo->configRed as $index => $config)
+                @php
+                    $configRedReciente = $equipo->configRed->sortByDesc('idConfigRed')->first();
+                @endphp
+                @if($configRedReciente)
                     <div class="config-red-item">
-                        <input type="text" 
-                               name="configRed[{{ $index }}][MAC]" 
-                               placeholder="Dirección MAC" 
-                               value="{{ old('configRed.'.$index.'.MAC', $config->MAC) }}">
-                        <input type="text" 
-                               name="configRed[{{ $index }}][IP]" 
-                               placeholder="Dirección IP" 
-                               value="{{ old('configRed.'.$index.'.IP', $config->IP) }}">
+                        <div class="field-group">
+                            <label>Dirección MAC:</label>
+                            <input type="text" 
+                                   name="configRed[0][MAC]" 
+                                   placeholder="Dirección MAC" 
+                                   value="{{ old('configRed.0.MAC', $configRedReciente->MAC) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Dirección IP:</label>
+                            <input type="text" 
+                                   name="configRed[0][IP]" 
+                                   placeholder="Dirección IP" 
+                                   value="{{ old('configRed.0.IP', $configRedReciente->IP) }}">
+                        </div>
                     </div>
-                @empty
+                @else
                     <div class="config-red-item">
-                        <input type="text" name="configRed[0][MAC]" placeholder="Dirección MAC">
-                        <input type="text" name="configRed[0][IP]" placeholder="Dirección IP">
+                        <div class="field-group">
+                            <label>Dirección MAC:</label>
+                            <input type="text" name="configRed[0][MAC]" placeholder="Dirección MAC">
+                        </div>
+                        <div class="field-group">
+                            <label>Dirección IP:</label>
+                            <input type="text" name="configRed[0][IP]" placeholder="Dirección IP">
+                        </div>
                     </div>
-                @endforelse
+                @endif
             </div>
-            <button type="button" onclick="addConfigRed()" class="btn-add">+ Agregar Configuración de Red</button>
+            <button type="button" onclick="addConfigRed()" class="btn-add">+ Agregar Nueva Configuración de Red</button>
         </div>
 
         <div class="form-section">
             <h3>Hardware</h3>
             <div id="hardware-container">
-                @forelse($equipo->hardware as $index => $hw)
+                @php
+                    $hardwareReciente = $equipo->hardware->sortByDesc('idHardware')->first();
+                @endphp
+                @if($hardwareReciente)
                     <div class="hardware-item">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][NumeroPlaca]" 
-                               placeholder="Número de Placa" 
-                               value="{{ old('hardware.'.$index.'.NumeroPlaca', $hw->NumeroPlaca) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][ModeloCPU]" 
-                               placeholder="Modelo CPU" 
-                               value="{{ old('hardware.'.$index.'.ModeloCPU', $hw->ModeloCPU) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][SerialCPU]" 
-                               placeholder="Serial CPU" 
-                               value="{{ old('hardware.'.$index.'.SerialCPU', $hw->SerialCPU) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][Procesador]" 
-                               placeholder="Procesador" 
-                               value="{{ old('hardware.'.$index.'.Procesador', $hw->Procesador) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][RAM]" 
-                               placeholder="RAM" 
-                               value="{{ old('hardware.'.$index.'.RAM', $hw->RAM) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][HDD]" 
-                               placeholder="Disco Duro" 
-                               value="{{ old('hardware.'.$index.'.HDD', $hw->HDD) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][Monitor]" 
-                               placeholder="Monitor" 
-                               value="{{ old('hardware.'.$index.'.Monitor', $hw->Monitor) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][SerialMonitor]" 
-                               placeholder="Serial Monitor" 
-                               value="{{ old('hardware.'.$index.'.SerialMonitor', $hw->SerialMonitor) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][Teclado]" 
-                               placeholder="Teclado" 
-                               value="{{ old('hardware.'.$index.'.Teclado', $hw->Teclado) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][SerialTeclado]" 
-                               placeholder="Serial Teclado" 
-                               value="{{ old('hardware.'.$index.'.SerialTeclado', $hw->SerialTeclado) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][Mouse]" 
-                               placeholder="Mouse" 
-                               value="{{ old('hardware.'.$index.'.Mouse', $hw->Mouse) }}">
-                        <input type="text" 
-                               name="hardware[{{ $index }}][SerialMouse]" 
-                               placeholder="Serial Mouse" 
-                               value="{{ old('hardware.'.$index.'.SerialMouse', $hw->SerialMouse) }}">
+                        <div class="field-group">
+                            <label>Número de Placa:</label>
+                            <input type="text" 
+                                   name="hardware[0][NumeroPlaca]" 
+                                   placeholder="Número de Placa" 
+                                   value="{{ old('hardware.0.NumeroPlaca', $hardwareReciente->NumeroPlaca) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Modelo CPU:</label>
+                            <input type="text" 
+                                   name="hardware[0][ModeloCPU]" 
+                                   placeholder="Modelo CPU" 
+                                   value="{{ old('hardware.0.ModeloCPU', $hardwareReciente->ModeloCPU) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial CPU:</label>
+                            <input type="text" 
+                                   name="hardware[0][SerialCPU]" 
+                                   placeholder="Serial CPU" 
+                                   value="{{ old('hardware.0.SerialCPU', $hardwareReciente->SerialCPU) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Procesador:</label>
+                            <input type="text" 
+                                   name="hardware[0][Procesador]" 
+                                   placeholder="Procesador" 
+                                   value="{{ old('hardware.0.Procesador', $hardwareReciente->Procesador) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>RAM:</label>
+                            <input type="text" 
+                                   name="hardware[0][RAM]" 
+                                   placeholder="RAM" 
+                                   value="{{ old('hardware.0.RAM', $hardwareReciente->RAM) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Disco Duro:</label>
+                            <input type="text" 
+                                   name="hardware[0][HDD]" 
+                                   placeholder="Disco Duro" 
+                                   value="{{ old('hardware.0.HDD', $hardwareReciente->HDD) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Monitor:</label>
+                            <input type="text" 
+                                   name="hardware[0][Monitor]" 
+                                   placeholder="Monitor" 
+                                   value="{{ old('hardware.0.Monitor', $hardwareReciente->Monitor) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial Monitor:</label>
+                            <input type="text" 
+                                   name="hardware[0][SerialMonitor]" 
+                                   placeholder="Serial Monitor" 
+                                   value="{{ old('hardware.0.SerialMonitor', $hardwareReciente->SerialMonitor) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Teclado:</label>
+                            <input type="text" 
+                                   name="hardware[0][Teclado]" 
+                                   placeholder="Teclado" 
+                                   value="{{ old('hardware.0.Teclado', $hardwareReciente->Teclado) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial Teclado:</label>
+                            <input type="text" 
+                                   name="hardware[0][SerialTeclado]" 
+                                   placeholder="Serial Teclado" 
+                                   value="{{ old('hardware.0.SerialTeclado', $hardwareReciente->SerialTeclado) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Mouse:</label>
+                            <input type="text" 
+                                   name="hardware[0][Mouse]" 
+                                   placeholder="Mouse" 
+                                   value="{{ old('hardware.0.Mouse', $hardwareReciente->Mouse) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial Mouse:</label>
+                            <input type="text" 
+                                   name="hardware[0][SerialMouse]" 
+                                   placeholder="Serial Mouse" 
+                                   value="{{ old('hardware.0.SerialMouse', $hardwareReciente->SerialMouse) }}">
+                        </div>
                     </div>
-                @empty
+                @else
                     <div class="hardware-item">
-                        <input type="text" name="hardware[0][NumeroPlaca]" placeholder="Número de Placa">
-                        <input type="text" name="hardware[0][ModeloCPU]" placeholder="Modelo CPU">
-                        <input type="text" name="hardware[0][SerialCPU]" placeholder="Serial CPU">
-                        <input type="text" name="hardware[0][Procesador]" placeholder="Procesador">
-                        <input type="text" name="hardware[0][RAM]" placeholder="RAM">
-                        <input type="text" name="hardware[0][HDD]" placeholder="Disco Duro">
-                        <input type="text" name="hardware[0][Monitor]" placeholder="Monitor">
-                        <input type="text" name="hardware[0][SerialMonitor]" placeholder="Serial Monitor">
-                        <input type="text" name="hardware[0][Teclado]" placeholder="Teclado">
-                        <input type="text" name="hardware[0][SerialTeclado]" placeholder="Serial Teclado">
-                        <input type="text" name="hardware[0][Mouse]" placeholder="Mouse">
-                        <input type="text" name="hardware[0][SerialMouse]" placeholder="Serial Mouse">
+                        <div class="field-group">
+                            <label>Número de Placa:</label>
+                            <input type="text" name="hardware[0][NumeroPlaca]" placeholder="Número de Placa">
+                        </div>
+                        <div class="field-group">
+                            <label>Modelo CPU:</label>
+                            <input type="text" name="hardware[0][ModeloCPU]" placeholder="Modelo CPU">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial CPU:</label>
+                            <input type="text" name="hardware[0][SerialCPU]" placeholder="Serial CPU">
+                        </div>
+                        <div class="field-group">
+                            <label>Procesador:</label>
+                            <input type="text" name="hardware[0][Procesador]" placeholder="Procesador">
+                        </div>
+                        <div class="field-group">
+                            <label>RAM:</label>
+                            <input type="text" name="hardware[0][RAM]" placeholder="RAM">
+                        </div>
+                        <div class="field-group">
+                            <label>Disco Duro:</label>
+                            <input type="text" name="hardware[0][HDD]" placeholder="Disco Duro">
+                        </div>
+                        <div class="field-group">
+                            <label>Monitor:</label>
+                            <input type="text" name="hardware[0][Monitor]" placeholder="Monitor">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial Monitor:</label>
+                            <input type="text" name="hardware[0][SerialMonitor]" placeholder="Serial Monitor">
+                        </div>
+                        <div class="field-group">
+                            <label>Teclado:</label>
+                            <input type="text" name="hardware[0][Teclado]" placeholder="Teclado">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial Teclado:</label>
+                            <input type="text" name="hardware[0][SerialTeclado]" placeholder="Serial Teclado">
+                        </div>
+                        <div class="field-group">
+                            <label>Mouse:</label>
+                            <input type="text" name="hardware[0][Mouse]" placeholder="Mouse">
+                        </div>
+                        <div class="field-group">
+                            <label>Serial Mouse:</label>
+                            <input type="text" name="hardware[0][SerialMouse]" placeholder="Serial Mouse">
+                        </div>
                     </div>
-                @endforelse
+                @endif
             </div>
-            <button type="button" onclick="addHardware()" class="btn-add">+ Agregar Hardware</button>
+            <button type="button" onclick="addHardware()" class="btn-add">+ Agregar Nueva Configuración de Hardware</button>
         </div>
 
         <div class="form-section">
             <h3>Software Instalado</h3>
             <div id="software-container">
-                @forelse($equipo->software_instalados as $index => $software)
+                @php
+                    $softwareReciente = $equipo->software_instalados->sortByDesc('idSoftwareInstalado')->first();
+                @endphp
+                @if($softwareReciente)
                     <div class="software-item">
-                        <input type="text" 
-                               name="software_instalados[{{ $index }}][SistemaOperativo]" 
-                               placeholder="Sistema Operativo" 
-                               value="{{ old('software_instalados.'.$index.'.SistemaOperativo', $software->SistemaOperativo) }}">
-                        <input type="text" 
-                               name="software_instalados[{{ $index }}][LicSuiteOfimatica]" 
-                               placeholder="Licencia Suite Ofimática" 
-                               value="{{ old('software_instalados.'.$index.'.LicSuiteOfimatica', $software->LicSuiteOfimatica) }}">
-                        <input type="text" 
-                               name="software_instalados[{{ $index }}][SuiteOfimatica]" 
-                               placeholder="Suite Ofimática" 
-                               value="{{ old('software_instalados.'.$index.'.SuiteOfimatica', $software->SuiteOfimatica) }}">
-                        <input type="text" 
-                               name="software_instalados[{{ $index }}][LicAntivirus]" 
-                               placeholder="Licencia Antivirus" 
-                               value="{{ old('software_instalados.'.$index.'.LicAntivirus', $software->LicAntivirus) }}">
-                        <input type="text" 
-                               name="software_instalados[{{ $index }}][Antivirus]" 
-                               placeholder="Antivirus" 
-                               value="{{ old('software_instalados.'.$index.'.Antivirus', $software->Antivirus) }}">
+                        <div class="field-group">
+                            <label>Sistema Operativo:</label>
+                            <input type="text" 
+                                   name="software_instalados[0][SistemaOperativo]" 
+                                   placeholder="Sistema Operativo" 
+                                   value="{{ old('software_instalados.0.SistemaOperativo', $softwareReciente->SistemaOperativo) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Suite Ofimática:</label>
+                            <input type="text" 
+                                   name="software_instalados[0][SuiteOfimatica]" 
+                                   placeholder="Suite Ofimática" 
+                                   value="{{ old('software_instalados.0.SuiteOfimatica', $softwareReciente->SuiteOfimatica) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Licencia Suite Ofimática:</label>
+                            <input type="text" 
+                                   name="software_instalados[0][LicSuiteOfimatica]" 
+                                   placeholder="Licencia Suite Ofimática" 
+                                   value="{{ old('software_instalados.0.LicSuiteOfimatica', $softwareReciente->LicSuiteOfimatica) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Antivirus:</label>
+                            <input type="text" 
+                                   name="software_instalados[0][Antivirus]" 
+                                   placeholder="Antivirus" 
+                                   value="{{ old('software_instalados.0.Antivirus', $softwareReciente->Antivirus) }}">
+                        </div>
+                        <div class="field-group">
+                            <label>Licencia Antivirus:</label>
+                            <input type="text" 
+                                   name="software_instalados[0][LicAntivirus]" 
+                                   placeholder="Licencia Antivirus" 
+                                   value="{{ old('software_instalados.0.LicAntivirus', $softwareReciente->LicAntivirus) }}">
+                        </div>
                     </div>
-                @empty
+                @else
                     <div class="software-item">
-                        <input type="text" name="software_instalados[0][SistemaOperativo]" placeholder="Sistema Operativo">
-                        <input type="text" name="software_instalados[0][LicSuiteOfimatica]" placeholder="Licencia Suite Ofimática">
-                        <input type="text" name="software_instalados[0][SuiteOfimatica]" placeholder="Suite Ofimática">
-                        <input type="text" name="software_instalados[0][LicAntivirus]" placeholder="Licencia Antivirus">
-                        <input type="text" name="software_instalados[0][Antivirus]" placeholder="Antivirus">
+                        <div class="field-group">
+                            <label>Sistema Operativo:</label>
+                            <input type="text" name="software_instalados[0][SistemaOperativo]" placeholder="Sistema Operativo">
+                        </div>
+                        <div class="field-group">
+                            <label>Suite Ofimática:</label>
+                            <input type="text" name="software_instalados[0][SuiteOfimatica]" placeholder="Suite Ofimática">
+                        </div>
+                        <div class="field-group">
+                            <label>Licencia Suite Ofimática:</label>
+                            <input type="text" name="software_instalados[0][LicSuiteOfimatica]" placeholder="Licencia Suite Ofimática">
+                        </div>
+                        <div class="field-group">
+                            <label>Antivirus:</label>
+                            <input type="text" name="software_instalados[0][Antivirus]" placeholder="Antivirus">
+                        </div>
+                        <div class="field-group">
+                            <label>Licencia Antivirus:</label>
+                            <input type="text" name="software_instalados[0][LicAntivirus]" placeholder="Licencia Antivirus">
+                        </div>
                     </div>
-                @endforelse
+                @endif
             </div>
-            <button type="button" onclick="addSoftware()" class="btn-add">+ Agregar Software</button>
+            <button type="button" onclick="addSoftware()" class="btn-add">+ Agregar Nueva Configuración de Software</button>
         </div>
 
         <div class="buttons-container">
@@ -204,17 +327,29 @@
 </div>
 
 <script>
-let configRedCount = {{ count($equipo->configRed) }};
-let hardwareCount = {{ count($equipo->hardware) }};
-let softwareCount = {{ count($equipo->software_instalados) }};
+let configRedCount = 1;
+let hardwareCount = 1;
+let softwareCount = 1;
 
 function addConfigRed() {
     const container = document.getElementById('configRed-container');
+    const lastItem = container.querySelector('.config-red-item:last-child');
+    
+    // Obtener valores del último formulario para copiarlos
+    const lastMAC = lastItem ? lastItem.querySelector('input[name$="[MAC]"]').value : '';
+    const lastIP = lastItem ? lastItem.querySelector('input[name$="[IP]"]').value : '';
+    
     const newItem = document.createElement('div');
     newItem.className = 'config-red-item';
     newItem.innerHTML = `
-        <input type="text" name="configRed[${configRedCount}][MAC]" placeholder="Dirección MAC">
-        <input type="text" name="configRed[${configRedCount}][IP]" placeholder="Dirección IP">
+        <div class="field-group">
+            <label>Dirección MAC:</label>
+            <input type="text" name="configRed[${configRedCount}][MAC]" placeholder="Dirección MAC" value="${lastMAC}">
+        </div>
+        <div class="field-group">
+            <label>Dirección IP:</label>
+            <input type="text" name="configRed[${configRedCount}][IP]" placeholder="Dirección IP" value="${lastIP}">
+        </div>
     `;
     container.appendChild(newItem);
     configRedCount++;
@@ -222,21 +357,69 @@ function addConfigRed() {
 
 function addHardware() {
     const container = document.getElementById('hardware-container');
+    const lastItem = container.querySelector('.hardware-item:last-child');
+    
+    // Obtener valores del último formulario para copiarlos
+    const values = {};
+    if (lastItem) {
+        const inputs = lastItem.querySelectorAll('input');
+        inputs.forEach(input => {
+            const fieldName = input.name.match(/\[(\w+)\]$/)[1];
+            values[fieldName] = input.value;
+        });
+    }
+    
     const newItem = document.createElement('div');
     newItem.className = 'hardware-item';
     newItem.innerHTML = `
-        <input type="text" name="hardware[${hardwareCount}][NumeroPlaca]" placeholder="Número de Placa">
-        <input type="text" name="hardware[${hardwareCount}][ModeloCPU]" placeholder="Modelo CPU">
-        <input type="text" name="hardware[${hardwareCount}][SerialCPU]" placeholder="Serial CPU">
-        <input type="text" name="hardware[${hardwareCount}][Procesador]" placeholder="Procesador">
-        <input type="text" name="hardware[${hardwareCount}][RAM]" placeholder="RAM">
-        <input type="text" name="hardware[${hardwareCount}][HDD]" placeholder="Disco Duro">
-        <input type="text" name="hardware[${hardwareCount}][Monitor]" placeholder="Monitor">
-        <input type="text" name="hardware[${hardwareCount}][SerialMonitor]" placeholder="Serial Monitor">
-        <input type="text" name="hardware[${hardwareCount}][Teclado]" placeholder="Teclado">
-        <input type="text" name="hardware[${hardwareCount}][SerialTeclado]" placeholder="Serial Teclado">
-        <input type="text" name="hardware[${hardwareCount}][Mouse]" placeholder="Mouse">
-        <input type="text" name="hardware[${hardwareCount}][SerialMouse]" placeholder="Serial Mouse">
+        <div class="field-group">
+            <label>Número de Placa:</label>
+            <input type="text" name="hardware[${hardwareCount}][NumeroPlaca]" placeholder="Número de Placa" value="${values.NumeroPlaca || ''}">
+        </div>
+        <div class="field-group">
+            <label>Modelo CPU:</label>
+            <input type="text" name="hardware[${hardwareCount}][ModeloCPU]" placeholder="Modelo CPU" value="${values.ModeloCPU || ''}">
+        </div>
+        <div class="field-group">
+            <label>Serial CPU:</label>
+            <input type="text" name="hardware[${hardwareCount}][SerialCPU]" placeholder="Serial CPU" value="${values.SerialCPU || ''}">
+        </div>
+        <div class="field-group">
+            <label>Procesador:</label>
+            <input type="text" name="hardware[${hardwareCount}][Procesador]" placeholder="Procesador" value="${values.Procesador || ''}">
+        </div>
+        <div class="field-group">
+            <label>RAM:</label>
+            <input type="text" name="hardware[${hardwareCount}][RAM]" placeholder="RAM" value="${values.RAM || ''}">
+        </div>
+        <div class="field-group">
+            <label>Disco Duro:</label>
+            <input type="text" name="hardware[${hardwareCount}][HDD]" placeholder="Disco Duro" value="${values.HDD || ''}">
+        </div>
+        <div class="field-group">
+            <label>Monitor:</label>
+            <input type="text" name="hardware[${hardwareCount}][Monitor]" placeholder="Monitor" value="${values.Monitor || ''}">
+        </div>
+        <div class="field-group">
+            <label>Serial Monitor:</label>
+            <input type="text" name="hardware[${hardwareCount}][SerialMonitor]" placeholder="Serial Monitor" value="${values.SerialMonitor || ''}">
+        </div>
+        <div class="field-group">
+            <label>Teclado:</label>
+            <input type="text" name="hardware[${hardwareCount}][Teclado]" placeholder="Teclado" value="${values.Teclado || ''}">
+        </div>
+        <div class="field-group">
+            <label>Serial Teclado:</label>
+            <input type="text" name="hardware[${hardwareCount}][SerialTeclado]" placeholder="Serial Teclado" value="${values.SerialTeclado || ''}">
+        </div>
+        <div class="field-group">
+            <label>Mouse:</label>
+            <input type="text" name="hardware[${hardwareCount}][Mouse]" placeholder="Mouse" value="${values.Mouse || ''}">
+        </div>
+        <div class="field-group">
+            <label>Serial Mouse:</label>
+            <input type="text" name="hardware[${hardwareCount}][SerialMouse]" placeholder="Serial Mouse" value="${values.SerialMouse || ''}">
+        </div>
     `;
     container.appendChild(newItem);
     hardwareCount++;
@@ -244,17 +427,65 @@ function addHardware() {
 
 function addSoftware() {
     const container = document.getElementById('software-container');
+    const lastItem = container.querySelector('.software-item:last-child');
+    
+    // Obtener valores del último formulario para copiarlos
+    const values = {};
+    if (lastItem) {
+        const inputs = lastItem.querySelectorAll('input');
+        inputs.forEach(input => {
+            const fieldName = input.name.match(/\[(\w+)\]$/)[1];
+            values[fieldName] = input.value;
+        });
+    }
+    
     const newItem = document.createElement('div');
     newItem.className = 'software-item';
     newItem.innerHTML = `
-        <input type="text" name="software_instalados[${softwareCount}][SistemaOperativo]" placeholder="Sistema Operativo">
-        <input type="text" name="software_instalados[${softwareCount}][LicSuiteOfimatica]" placeholder="Licencia Suite Ofimática">
-        <input type="text" name="software_instalados[${softwareCount}][SuiteOfimatica]" placeholder="Suite Ofimática">
-        <input type="text" name="software_instalados[${softwareCount}][LicAntivirus]" placeholder="Licencia Antivirus">
-        <input type="text" name="software_instalados[${softwareCount}][Antivirus]" placeholder="Antivirus">
+        <div class="field-group">
+            <label>Sistema Operativo:</label>
+            <input type="text" name="software_instalados[${softwareCount}][SistemaOperativo]" placeholder="Sistema Operativo" value="${values.SistemaOperativo || ''}">
+        </div>
+        <div class="field-group">
+            <label>Suite Ofimática:</label>
+            <input type="text" name="software_instalados[${softwareCount}][SuiteOfimatica]" placeholder="Suite Ofimática" value="${values.SuiteOfimatica || ''}">
+        </div>
+        <div class="field-group">
+            <label>Licencia Suite Ofimática:</label>
+            <input type="text" name="software_instalados[${softwareCount}][LicSuiteOfimatica]" placeholder="Licencia Suite Ofimática" value="${values.LicSuiteOfimatica || ''}">
+        </div>
+        <div class="field-group">
+            <label>Antivirus:</label>
+            <input type="text" name="software_instalados[${softwareCount}][Antivirus]" placeholder="Antivirus" value="${values.Antivirus || ''}">
+        </div>
+        <div class="field-group">
+            <label>Licencia Antivirus:</label>
+            <input type="text" name="software_instalados[${softwareCount}][LicAntivirus]" placeholder="Licencia Antivirus" value="${values.LicAntivirus || ''}">
+        </div>
     `;
     container.appendChild(newItem);
     softwareCount++;
 }
 </script>
+
+<style>
+.field-group {
+    margin-bottom: 10px;
+}
+
+.field-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.config-red-item, .hardware-item, .software-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+</style>
 @endsection
