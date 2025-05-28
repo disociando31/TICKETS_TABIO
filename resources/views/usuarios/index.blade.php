@@ -96,14 +96,6 @@
                             <a href="{{ route('usuarios.edit', $usuario->idUsuario) }}" class="btn-editar">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            
-                            <form action="{{ route('usuarios.destroy', $usuario->idUsuario) }}" method="POST" class="form-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-eliminar" onclick="return confirm('¿Está seguro de eliminar este usuario?')">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
-                            </form>
                             @endcan
                         </div>
                     </td>

@@ -158,7 +158,7 @@ class UserController extends Controller
         return view('usuarios.edit', compact('usuario', 'dependencias', 'roles', 'userRoles'));
     }
 
-    /**
+        /**
      * Actualiza el usuario específico en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -167,76 +167,59 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-    $usuario = User::findOrFail($id);
-    
-    // Validación
-    $request->validate([
-        'nombre' => 'required|string|max:255',
-        'username' => [
-            'required',
-            'string',
-            'max:255',
-            Rule::unique('users', 'username')->ignore($id, 'idUsuario')
-        ],
-        'password' => 'nullable|string|min:8|confirmed',
-        'telefono' => 'nullable|string|max:20',
-        'idDependencia' => 'required|exists:dependencias,idDependencia',
-        'rol' => [
-            'required',
-            Rule::exists('roles', 'name')->where(function ($query) {
-                $query->where('estado', true); // Verificar que el rol esté activo
-            }),
-        ]
-    ]);
-
-    // Verificar si se está quitando el rol de administrador al último admin
-    if ($usuario->hasRole('Administrador') && $request->rol !== 'Administrador') {
-        $adminCount = User::role('Administrador')->count();
-        if ($adminCount <= 1) {
-            return back()->withErrors(['rol' => 'Debe haber al menos un administrador en el sistema.'])
-                        ->withInput();
-        }
-    }
-
-    // Actualizar usuario
-    $usuario->nombre = $request->nombre;
-    $usuario->username = $request->username;
-    $usuario->telefono = $request->telefono;
-    $usuario->idDependencia = $request->idDependencia;
-    
-    // Actualizar contraseña solo si se proporciona
-    if ($request->filled('password')) {
-        $usuario->password = Hash::make($request->password);
-    }
-    
-    $usuario->save();
-
-    // Sincronizar roles (quitar todos los roles anteriores y asignar el nuevo)
-    $usuario->syncRoles([$request->rol]);
-
-    return redirect()->route('usuarios.index')
-        ->with('success', 'Usuario actualizado correctamente.');
-    }
-
-    /**
-     * Elimina el usuario específico de la base de datos.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        // Evitar que se elimine a sí mismo
-        if (Auth::id() == $id) {
-            return redirect()->route('usuarios.index')
-                ->with('error', 'No puede eliminar su propio usuario.');
-        }
-
         $usuario = User::findOrFail($id);
-        $usuario->delete();
+        
+        // Validación
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users', 'username')->ignore($id, 'idUsuario')
+            ],
+            'password' => 'nullable|string|min:8|confirmed',
+            'telefono' => 'nullable|string|max:20',
+            'idDependencia' => 'required|exists:dependencias,idDependencia',
+            'rol' => [
+                'nullable', // Cambiado de 'required' a 'nullable'
+                Rule::exists('roles', 'name')->where(function ($query) {
+                    $query->where('estado', true);
+                }),
+            ]
+        ]);
+
+        // Verificar si se está quitando el rol de administrador al último admin
+        if ($usuario->hasRole('Administrador') && $request->rol !== 'Administrador') {
+            $adminCount = User::role('Administrador')->count();
+            if ($adminCount <= 1) {
+                return back()->withErrors(['rol' => 'Debe haber al menos un administrador en el sistema.'])
+                            ->withInput();
+            }
+        }
+
+        // Actualizar usuario
+        $usuario->nombre = $request->nombre;
+        $usuario->username = $request->username;
+        $usuario->telefono = $request->telefono;
+        $usuario->idDependencia = $request->idDependencia;
+        
+        // Actualizar contraseña solo si se proporciona
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
+        
+        $usuario->save();
+
+        // Sincronizar roles - Si no se selecciona rol, quitar todos los roles
+        if ($request->filled('rol')) {
+            $usuario->syncRoles([$request->rol]);
+        } else {
+            $usuario->syncRoles([]); // Quitar todos los roles
+        }
 
         return redirect()->route('usuarios.index')
-            ->with('success', 'Usuario eliminado correctamente.');
+            ->with('success', 'Usuario actualizado correctamente.');
     }
     
     /**
