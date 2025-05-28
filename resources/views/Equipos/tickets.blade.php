@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @include('partials.accessibility')
+
 @section('content')
 <div class="usuarios-container">
     <div class="usuarios-header">
         <h1 class="usuarios-title">Tickets - {{ $equipo->NombreEquipo }}</h1>
     </div>
-
+    
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -15,13 +16,13 @@
             </ul>
         </div>
     @endif
-
+    
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-
+    
     @if(session('error'))
         <div class="alert alert-error">
             {{ session('error') }}
@@ -41,10 +42,10 @@
                     <span class="valor">{{ $equipo->dependencia->Dependencia }}</span>
                 </div>
             </div>
-
+            
             <div class="info-section">
                 <h3>Historial de Tickets</h3>
-                @if($equipo->tickets->isEmpty())
+                @if(!$equipo->tickets || $equipo->tickets->isEmpty())
                     <p class="no-data">No hay tickets registrados para este equipo.</p>
                 @else
                     <table class="usuarios-table">
@@ -54,27 +55,33 @@
                                 <th>Fecha</th>
                                 <th>Descripción</th>
                                 <th>Estado</th>
+                                <th>Dependencia</th>
+                                <th>Tipo Soporte</th>
+                                <th>Tipo Mantenimiento</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($equipo->tickets as $ticket)
+                            @foreach($equipo->tickets as $soporte)
                                 <tr>
-                                    <td>{{ $ticket->idTicket }}</td>
-                                    <td>{{ $ticket->FechaCreacion }}</td>
-                                    <td>{{ $ticket->Descripcion }}</td>
+                                    <td>{{ $soporte->ticket->idTicket }}</td>
+                                    <td>{{ $soporte->ticket->FechaCreacion->format('d/m/Y') }}</td>
+                                    <td>{{ Str::limit($soporte->ticket->Descripcion, 50) }}</td>
                                     <td>
-                                        <span class="usuario-estado {{ $ticket->Estado == 'A' ? 'activo' : 'inactivo' }}">
-                                            {{ $ticket->Estado }}
+                                        <span class="usuario-estado {{ $soporte->ticket->Estado == 'Abierto' ? 'activo' : 'inactivo' }}">
+                                            {{ $soporte->ticket->Estado }}
                                         </span>
                                     </td>
+                                    <td>{{ $soporte->ticket->usuario->dependencia->Dependencia ?? 'N/A' }}</td>
+                                    <td>{{ $soporte->TipoSoporte }}</td>
+                                    <td>{{ $soporte->TipoMantenimiento }}</td>
                                     <td>
                                         <div class="acciones-grupo">
-                                            <a href="{{ route('tickets.show', $ticket->idTicket) }}" class="btn-editar">
+                                            <a href="{{ route('soportes.show', $soporte->idSoporte) }}" class="btn-editar">
                                                 <i class="fas fa-eye"></i> Ver
                                             </a>
-                                            @if($ticket->Estado != 'Cerrado')
-                                                <a href="{{ route('tickets.edit', $ticket->idTicket) }}" class="btn-editar">
+                                            @if($soporte->ticket->Estado != 'Cerrado' && auth()->user()->can('update', $soporte))
+                                                <a href="{{ route('soportes.edit', $soporte->idSoporte) }}" class="btn-editar">
                                                     <i class="fas fa-edit"></i> Editar
                                                 </a>
                                             @endif
@@ -95,5 +102,4 @@
         </a>
     </div>
 </div>
-
 @endsection

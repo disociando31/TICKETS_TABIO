@@ -12,7 +12,7 @@ class EquipoController extends Controller
 {
     public function index()
     {
-        $equipos = Equipo::with(['dependencia', 'configRed', 'hardware', 'software_instalados'])->get();
+        $equipos = Equipo::all();
         return view('Equipos.index', compact('equipos'));
     }
 
@@ -48,36 +48,93 @@ class EquipoController extends Controller
             $equipo->software_instalados()->createMany($request->input('software_instalados'));
         }
 
-        return redirect()->route('Equipos.index')->with('success', 'Equipo creado exitosamente.');
+        return redirect()->route('equipos.index')->with('success', 'Equipo creado exitosamente.');
     }
 
     public function configRed($id)
     {
-        $equipo = Equipo::with('configRed')->findOrFail($id);
-        return view('Equipos.configRed', compact('equipo'));
+        $equipo = Equipo::with([
+            'configRed' => function($query) {
+                $query->orderBy('idConfigRed', 'desc');
+            }
+        ])->findOrFail($id);
+        
+        // Separar configuración actual (más reciente) del historial
+        $configActual = $equipo->configRed->first(); // El primero es el más reciente
+        $historialConfig = $equipo->configRed->skip(1); // El resto es historial
+        
+        return view('Equipos.configRed', compact('equipo', 'configActual', 'historialConfig'));
     }
 
     public function hardware($id)
     {
-        $equipo = Equipo::with('hardware')->findOrFail($id);
-        return view('Equipos.hardware', compact('equipo'));
+        $equipo = Equipo::with([
+            'hardware' => function($query) {
+                $query->orderBy('idHardware', 'desc');
+            }
+        ])->findOrFail($id);
+        
+        // Separar configuración actual (más reciente) del historial
+        $hardwareActual = $equipo->hardware->first(); // El primero es el más reciente
+        $historialHardware = $equipo->hardware->skip(1); // El resto es historial
+        
+        return view('Equipos.hardware', compact('equipo', 'hardwareActual', 'historialHardware'));
     }
 
     public function software_instalados($id)
     {
-        $equipo = Equipo::with('software_instalados')->findOrFail($id);
-        return view('Equipos.software_instalados', compact('equipo'));
+        $equipo = Equipo::with([
+            'software_instalados' => function($query) {
+                $query->orderBy('idSoftwareInstalado', 'desc');
+            }
+        ])->findOrFail($id);
+        
+        // Separar configuración actual (más reciente) del historial
+        $softwareActual = $equipo->software_instalados->first(); // El primero es el más reciente
+        $historialSoftware = $equipo->software_instalados->skip(1); // El resto es historial
+        
+        return view('Equipos.software_instalados', compact('equipo', 'softwareActual', 'historialSoftware'));
     }
 
     public function tickets($id)
     {
-        $equipo = Equipo::with('tickets')->findOrFail($id);
+        $equipo = Equipo::with([
+            // Cargar los soportes asociados al equipo
+            'tickets' => function($query) {
+                $query->orderBy('idSoporte', 'desc');
+            },
+            // Cargar el ticket asociado a cada soporte
+            'tickets.ticket' => function($query) {
+                $query->select('idTicket', 'Estado', 'FechaCreacion', 'idUsuario', 'idGestor', 'Descripcion', 'Prioridad', 'Tipo');
+            },
+            // Cargar información del usuario creador del ticket
+            'tickets.ticket.usuario' => function($query) {
+                $query->select('idUsuario', 'nombre', 'idDependencia');
+            }
+        
+        ])->findOrFail($id);
+
         return view('Equipos.tickets', compact('equipo'));
     }
-
+    
     public function show($id)
     {
-        $equipo = Equipo::with(['dependencia', 'configRed', 'hardware', 'software_instalados'])->findOrFail($id);
+        $equipo = Equipo::with([
+            'dependencia',
+            // Cargar solo la configuración de red más reciente
+            'configRed' => function($query) {
+                $query->orderBy('idConfigRed', 'desc')->limit(1);
+            },
+            // Cargar solo el hardware más reciente
+            'hardware' => function($query) {
+                $query->orderBy('idHardware', 'desc')->limit(1);
+            },
+            // Cargar solo el software más reciente
+            'software_instalados' => function($query) {
+                $query->orderBy('idSoftwareInstalado', 'desc')->limit(1);
+            }
+        ])->findOrFail($id);
+        
         return view('Equipos.show', compact('equipo'));
     }
 
@@ -128,7 +185,7 @@ class EquipoController extends Controller
         }
     }
 
-    return redirect()->route('Equipos.index')->with('success', 'Equipo actualizado exitosamente.');
+    return redirect()->route('equipos.index')->with('success', 'Equipo actualizado exitosamente.');
     }
 
     public function destroy($id)

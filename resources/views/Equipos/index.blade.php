@@ -33,7 +33,6 @@
                     <th>Nombre Equipo</th>
                     <th>Dependencia</th>
                     <th>Fecha Adquisición</th>
-                    <th>Hardware</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -44,17 +43,6 @@
                         <td>{{ $equipo->NombreEquipo }}</td>
                         <td>{{ $equipo->dependencia->Dependencia ?? 'No asignada' }}</td>
                         <td>{{ $equipo->FechaAdquisicion }}</td>
-                        <td>
-                            @if($equipo->hardware && $equipo->hardware->count() > 0)
-                                @foreach($equipo->hardware as $hw)
-                                    <div class="hardware-info">
-                                        <small>{{ $hw->Procesador ?? 'No especificado' }}</small>
-                                    </div>
-                                @endforeach
-                            @else
-                                <span class="no-data">Sin hardware registrado</span>
-                            @endif
-                        </td>
                         <td>
                             <div class="acciones-grupo">
                                 <a href="{{ route('equipos.show', $equipo->idEquipo) }}" 
@@ -105,3 +93,4 @@
         </table>
     </div>
 </div>
+@endsection

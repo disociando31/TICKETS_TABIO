@@ -5,15 +5,15 @@
     <div class="header">
         <h1>Configuración de Red - {{ $equipo->NombreEquipo }}</h1>
     </div>
-
+    
     @if ($errors->any())
-        <div class="error-container">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="error-container">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <div class="info-card">
@@ -29,31 +29,51 @@
             </div>
         </div>
 
+        <!-- Configuración Actual -->
         <div class="config-red-section">
-            <h3>Configuraciones de Red</h3>
-            @if($equipo->configRed->isEmpty())
-                <p class="no-data">No hay configuraciones de red registradas.</p>
-            @else
+            <h3>Configuración Actual</h3>
+            @if($configActual)
                 <div class="config-red-list">
-                    @foreach($equipo->configRed as $config)
-                        <div class="config-red-item">
-                            <div class="detalle-item">
-                                <label>Dirección MAC:</label>
-                                <span class="valor">{{ $config->MAC }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Dirección IP:</label>
-                                <span class="valor">{{ $config->IP }}</span>
-                            </div>
+                    <div class="config-red-item">
+                        <div class="detalle-item">
+                            <label>Dirección MAC:</label>
+                            <span class="valor">{{ $configActual->MAC }}</span>
                         </div>
-                    @endforeach
+                        <div class="detalle-item">
+                            <label>Dirección IP:</label>
+                            <span class="valor">{{ $configActual->IP }}</span>
+                        </div>
+                    </div>
                 </div>
+            @else
+                <p class="no-data">No hay configuración de red actual registrada.</p>
             @endif
         </div>
+
+        <!-- Historial de Configuraciones -->
+        @if($historialConfig->isNotEmpty())
+        <div class="config-red-section">
+            <h3>Historial de Configuraciones</h3>
+            <div class="config-red-list">
+                @foreach($historialConfig as $config)
+                    <div class="config-red-item">
+                        <div class="detalle-item">
+                            <label>Dirección MAC:</label>
+                            <span class="valor">{{ $config->MAC }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Dirección IP:</label>
+                            <span class="valor">{{ $config->IP }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 
-    <!-- Modificar el script -->
+<!-- Modificar el script -->
 <script>
 // Eliminar la función showAddForm
 function editConfigRed(mac, ip, id) {

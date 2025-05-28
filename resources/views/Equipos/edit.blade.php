@@ -53,7 +53,10 @@
             <input type="date" 
                    id="FechaAdquisicion" 
                    name="FechaAdquisicion" 
-                   value="{{ old('FechaAdquisicion', $equipo->FechaAdquisicion ? date('Y-m-d', strtotime($equipo->FechaAdquisicion)) : '') }}">
+                   value="{{ old('FechaAdquisicion', $equipo->FechaAdquisicion ? date('Y-m-d', strtotime($equipo->FechaAdquisicion)) : '') }}"
+                   required
+                   oninvalid="this.setCustomValidity('La fecha de adquisición es obligatoria')"
+                   oninput="this.setCustomValidity('')">
         </div>
 
         <div class="form-section">
@@ -69,7 +72,6 @@
                                name="configRed[{{ $index }}][IP]" 
                                placeholder="Dirección IP" 
                                value="{{ old('configRed.'.$index.'.IP', $config->IP) }}">
-                        <button type="button" onclick="this.parentElement.remove()" class="btn-remove">Eliminar</button>
                     </div>
                 @empty
                     <div class="config-red-item">
@@ -89,68 +91,66 @@
                         <input type="text" 
                                name="hardware[{{ $index }}][NumeroPlaca]" 
                                placeholder="Número de Placa" 
-                               value="{{ old('hardware.'.$index.'.NumeroPlaca', $hw->NumeroPlaca) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.NumeroPlaca', $hw->NumeroPlaca) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][ModeloCPU]" 
                                placeholder="Modelo CPU" 
-                               value="{{ old('hardware.'.$index.'.ModeloCPU', $hw->ModeloCPU) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.ModeloCPU', $hw->ModeloCPU) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][SerialCPU]" 
                                placeholder="Serial CPU" 
-                               value="{{ old('hardware.'.$index.'.SerialCPU', $hw->SerialCPU) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.SerialCPU', $hw->SerialCPU) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][Procesador]" 
                                placeholder="Procesador" 
-                               value="{{ old('hardware.'.$index.'.Procesador', $hw->Procesador) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.Procesador', $hw->Procesador) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][RAM]" 
                                placeholder="RAM" 
-                               value="{{ old('hardware.'.$index.'.RAM', $hw->RAM) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.RAM', $hw->RAM) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][HDD]" 
                                placeholder="Disco Duro" 
-                               value="{{ old('hardware.'.$index.'.HDD', $hw->HDD) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.HDD', $hw->HDD) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][Monitor]" 
                                placeholder="Monitor" 
-                               value="{{ old('hardware.'.$index.'.Monitor', $hw->Monitor) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.Monitor', $hw->Monitor) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][SerialMonitor]" 
                                placeholder="Serial Monitor" 
-                               value="{{ old('hardware.'.$index.'.SerialMonitor', $hw->SerialMonitor) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.SerialMonitor', $hw->SerialMonitor) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][Teclado]" 
                                placeholder="Teclado" 
-                               value="{{ old('hardware.'.$index.'.Teclado', $hw->Teclado) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.Teclado', $hw->Teclado) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][SerialTeclado]" 
                                placeholder="Serial Teclado" 
-                               value="{{ old('hardware.'.$index.'.SerialTeclado', $hw->SerialTeclado) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.SerialTeclado', $hw->SerialTeclado) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][Mouse]" 
                                placeholder="Mouse" 
-                               value="{{ old('hardware.'.$index.'.Mouse', $hw->Mouse) }}"
-                               required>
+                               value="{{ old('hardware.'.$index.'.Mouse', $hw->Mouse) }}">
                         <input type="text" 
                                name="hardware[{{ $index }}][SerialMouse]" 
                                placeholder="Serial Mouse" 
-                               value="{{ old('hardware.'.$index.'.SerialMouse', $hw->SerialMouse) }}"
-                               required>
-                        <button type="button" onclick="this.parentElement.remove()" class="btn-remove">Eliminar</button>
+                               value="{{ old('hardware.'.$index.'.SerialMouse', $hw->SerialMouse) }}">
                     </div>
                 @empty
                     <div class="hardware-item">
-                        <!-- Mismos campos que arriba pero sin valores -->
+                        <input type="text" name="hardware[0][NumeroPlaca]" placeholder="Número de Placa">
+                        <input type="text" name="hardware[0][ModeloCPU]" placeholder="Modelo CPU">
+                        <input type="text" name="hardware[0][SerialCPU]" placeholder="Serial CPU">
+                        <input type="text" name="hardware[0][Procesador]" placeholder="Procesador">
+                        <input type="text" name="hardware[0][RAM]" placeholder="RAM">
+                        <input type="text" name="hardware[0][HDD]" placeholder="Disco Duro">
+                        <input type="text" name="hardware[0][Monitor]" placeholder="Monitor">
+                        <input type="text" name="hardware[0][SerialMonitor]" placeholder="Serial Monitor">
+                        <input type="text" name="hardware[0][Teclado]" placeholder="Teclado">
+                        <input type="text" name="hardware[0][SerialTeclado]" placeholder="Serial Teclado">
+                        <input type="text" name="hardware[0][Mouse]" placeholder="Mouse">
+                        <input type="text" name="hardware[0][SerialMouse]" placeholder="Serial Mouse">
                     </div>
                 @endforelse
             </div>
@@ -182,11 +182,14 @@
                                name="software_instalados[{{ $index }}][Antivirus]" 
                                placeholder="Antivirus" 
                                value="{{ old('software_instalados.'.$index.'.Antivirus', $software->Antivirus) }}">
-                        <button type="button" onclick="this.parentElement.remove()" class="btn-remove">Eliminar</button>
                     </div>
                 @empty
                     <div class="software-item">
-                        <!-- Mismos campos que arriba pero sin valores -->
+                        <input type="text" name="software_instalados[0][SistemaOperativo]" placeholder="Sistema Operativo">
+                        <input type="text" name="software_instalados[0][LicSuiteOfimatica]" placeholder="Licencia Suite Ofimática">
+                        <input type="text" name="software_instalados[0][SuiteOfimatica]" placeholder="Suite Ofimática">
+                        <input type="text" name="software_instalados[0][LicAntivirus]" placeholder="Licencia Antivirus">
+                        <input type="text" name="software_instalados[0][Antivirus]" placeholder="Antivirus">
                     </div>
                 @endforelse
             </div>
@@ -212,7 +215,6 @@ function addConfigRed() {
     newItem.innerHTML = `
         <input type="text" name="configRed[${configRedCount}][MAC]" placeholder="Dirección MAC">
         <input type="text" name="configRed[${configRedCount}][IP]" placeholder="Dirección IP">
-        <button type="button" onclick="this.parentElement.remove()" class="btn-remove">Eliminar</button>
     `;
     container.appendChild(newItem);
     configRedCount++;
@@ -223,19 +225,18 @@ function addHardware() {
     const newItem = document.createElement('div');
     newItem.className = 'hardware-item';
     newItem.innerHTML = `
-        <input type="text" name="hardware[${hardwareCount}][NumeroPlaca]" placeholder="Número de Placa" required>
-        <input type="text" name="hardware[${hardwareCount}][ModeloCPU]" placeholder="Modelo CPU" required>
-        <input type="text" name="hardware[${hardwareCount}][SerialCPU]" placeholder="Serial CPU" required>
-        <input type="text" name="hardware[${hardwareCount}][Procesador]" placeholder="Procesador" required>
-        <input type="text" name="hardware[${hardwareCount}][RAM]" placeholder="RAM" required>
-        <input type="text" name="hardware[${hardwareCount}][HDD]" placeholder="Disco Duro" required>
-        <input type="text" name="hardware[${hardwareCount}][Monitor]" placeholder="Monitor" required>
-        <input type="text" name="hardware[${hardwareCount}][SerialMonitor]" placeholder="Serial Monitor" required>
-        <input type="text" name="hardware[${hardwareCount}][Teclado]" placeholder="Teclado" required>
-        <input type="text" name="hardware[${hardwareCount}][SerialTeclado]" placeholder="Serial Teclado" required>
-        <input type="text" name="hardware[${hardwareCount}][Mouse]" placeholder="Mouse" required>
-        <input type="text" name="hardware[${hardwareCount}][SerialMouse]" placeholder="Serial Mouse" required>
-        <button type="button" onclick="this.parentElement.remove()" class="btn-remove">Eliminar</button>
+        <input type="text" name="hardware[${hardwareCount}][NumeroPlaca]" placeholder="Número de Placa">
+        <input type="text" name="hardware[${hardwareCount}][ModeloCPU]" placeholder="Modelo CPU">
+        <input type="text" name="hardware[${hardwareCount}][SerialCPU]" placeholder="Serial CPU">
+        <input type="text" name="hardware[${hardwareCount}][Procesador]" placeholder="Procesador">
+        <input type="text" name="hardware[${hardwareCount}][RAM]" placeholder="RAM">
+        <input type="text" name="hardware[${hardwareCount}][HDD]" placeholder="Disco Duro">
+        <input type="text" name="hardware[${hardwareCount}][Monitor]" placeholder="Monitor">
+        <input type="text" name="hardware[${hardwareCount}][SerialMonitor]" placeholder="Serial Monitor">
+        <input type="text" name="hardware[${hardwareCount}][Teclado]" placeholder="Teclado">
+        <input type="text" name="hardware[${hardwareCount}][SerialTeclado]" placeholder="Serial Teclado">
+        <input type="text" name="hardware[${hardwareCount}][Mouse]" placeholder="Mouse">
+        <input type="text" name="hardware[${hardwareCount}][SerialMouse]" placeholder="Serial Mouse">
     `;
     container.appendChild(newItem);
     hardwareCount++;
@@ -251,7 +252,6 @@ function addSoftware() {
         <input type="text" name="software_instalados[${softwareCount}][SuiteOfimatica]" placeholder="Suite Ofimática">
         <input type="text" name="software_instalados[${softwareCount}][LicAntivirus]" placeholder="Licencia Antivirus">
         <input type="text" name="software_instalados[${softwareCount}][Antivirus]" placeholder="Antivirus">
-        <button type="button" onclick="this.parentElement.remove()" class="btn-remove">Eliminar</button>
     `;
     container.appendChild(newItem);
     softwareCount++;

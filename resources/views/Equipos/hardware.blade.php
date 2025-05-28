@@ -29,67 +29,127 @@
             </div>
         </div>
 
+        <!-- Configuración Actual -->
         <div class="hardware-section">
-            <h3>Componentes de Hardware</h3>
-            @if($equipo->hardware->isEmpty())
-                <p class="no-data">No hay componentes de hardware registrados.</p>
-            @else
+            <h3>Configuración Actual</h3>
+            @if($hardwareActual)
                 <div class="hardware-list">
-                    @foreach($equipo->hardware as $hw)
-                        <div class="hardware-item">
-                            <div class="detalle-item">
-                                <label>Número de Placa:</label>
-                                <span class="valor">{{ $hw->NumeroPlaca }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Modelo CPU:</label>
-                                <span class="valor">{{ $hw->ModeloCPU }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Serial CPU:</label>
-                                <span class="valor">{{ $hw->SerialCPU }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Procesador:</label>
-                                <span class="valor">{{ $hw->Procesador }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>RAM:</label>
-                                <span class="valor">{{ $hw->RAM }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>HDD:</label>
-                                <span class="valor">{{ $hw->HDD }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Monitor:</label>
-                                <span class="valor">{{ $hw->Monitor }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Serial Monitor:</label>
-                                <span class="valor">{{ $hw->SerialMonitor }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Teclado:</label>
-                                <span class="valor">{{ $hw->Teclado }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Serial Teclado:</label>
-                                <span class="valor">{{ $hw->SerialTeclado }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Mouse:</label>
-                                <span class="valor">{{ $hw->Mouse }}</span>
-                            </div>
-                            <div class="detalle-item">
-                                <label>Serial Mouse:</label>
-                                <span class="valor">{{ $hw->SerialMouse }}</span>
-                            </div>
+                    <div class="hardware-item">
+                        <div class="detalle-item">
+                            <label>Número de Placa:</label>
+                            <span class="valor">{{ $hardwareActual->NumeroPlaca }}</span>
                         </div>
-                    @endforeach
+                        <div class="detalle-item">
+                            <label>Modelo CPU:</label>
+                            <span class="valor">{{ $hardwareActual->ModeloCPU }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial CPU:</label>
+                            <span class="valor">{{ $hardwareActual->SerialCPU }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Procesador:</label>
+                            <span class="valor">{{ $hardwareActual->Procesador }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>RAM:</label>
+                            <span class="valor">{{ $hardwareActual->RAM }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>HDD:</label>
+                            <span class="valor">{{ $hardwareActual->HDD }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Monitor:</label>
+                            <span class="valor">{{ $hardwareActual->Monitor }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial Monitor:</label>
+                            <span class="valor">{{ $hardwareActual->SerialMonitor }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Teclado:</label>
+                            <span class="valor">{{ $hardwareActual->Teclado }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial Teclado:</label>
+                            <span class="valor">{{ $hardwareActual->SerialTeclado }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Mouse:</label>
+                            <span class="valor">{{ $hardwareActual->Mouse }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial Mouse:</label>
+                            <span class="valor">{{ $hardwareActual->SerialMouse }}</span>
+                        </div>
+                    </div>
                 </div>
+            @else
+                <p class="no-data">No hay configuración de hardware actual registrada.</p>
             @endif
         </div>
+
+        <!-- Historial de Configuraciones -->
+        @if($historialHardware->isNotEmpty())
+        <div class="hardware-section">
+            <h3>Historial de Configuraciones</h3>
+            <div class="hardware-list">
+                @foreach($historialHardware as $hw)
+                    <div class="hardware-item">
+                        <div class="detalle-item">
+                            <label>Número de Placa:</label>
+                            <span class="valor">{{ $hw->NumeroPlaca }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Modelo CPU:</label>
+                            <span class="valor">{{ $hw->ModeloCPU }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial CPU:</label>
+                            <span class="valor">{{ $hw->SerialCPU }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Procesador:</label>
+                            <span class="valor">{{ $hw->Procesador }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>RAM:</label>
+                            <span class="valor">{{ $hw->RAM }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>HDD:</label>
+                            <span class="valor">{{ $hw->HDD }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Monitor:</label>
+                            <span class="valor">{{ $hw->Monitor }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial Monitor:</label>
+                            <span class="valor">{{ $hw->SerialMonitor }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Teclado:</label>
+                            <span class="valor">{{ $hw->Teclado }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial Teclado:</label>
+                            <span class="valor">{{ $hw->SerialTeclado }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Mouse:</label>
+                            <span class="valor">{{ $hw->Mouse }}</span>
+                        </div>
+                        <div class="detalle-item">
+                            <label>Serial Mouse:</label>
+                            <span class="valor">{{ $hw->SerialMouse }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 
